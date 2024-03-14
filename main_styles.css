@@ -1,0 +1,193 @@
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    margin-right: 465px;
+    margin-left: 20px;
+}
+
+.logo img {
+    max-width: 25%;
+}
+
+header {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: linear-gradient(to right, #f7f4fa, #8b7c9e); /* Change the color codes as needed */
+    color: #000000;
+    display: flex; /* Use flexbox layout */
+    align-items: center;
+    width: 100%; /* Change width to 100% */
+    position: fixed; /* Fix the header position */
+    top: 0; /* Place header at the top */
+    z-index: 1000; /* Ensure header stays on top */
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #000000;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.sidebar {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #ffffff;
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 170px;
+    z-index: 999;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 20; /* Reset padding to zero */
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px; /* Reduce margin between list items */
+}
+
+.sidebar ul li a {
+    color: #333;
+    text-decoration: none;
+    padding: 10px; /* Adjust padding around links */
+    display: block; /* Ensure links take up full width of sidebar */
+}
+
+.content {
+    margin-left: 220px; /* Adjust margin-left to match sidebar width */
+    padding: 20px;
+    padding-top: 15px; /* Ensure content starts below header */
+    text-align: left; /* Center text inside the content */
+    overflow-y: auto; /* Enable vertical scrollbar when content overflows */
+    max-height: calc(420px); /* Set maximum height for content (viewport height - footer height) */
+}
+
+.sub-heading{
+    margin-left: 220px; 
+    padding: 20px;
+    padding-top: 15px;
+}
+
+.container {
+    display: flex; /* Use flexbox layout */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.video-container {
+    display: flex; /* Use flexbox layout */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.shadow-line {
+    position: fixed;
+    top: 30%;
+    left: 14%; /* Adjust the left position of the line */
+    transform: translateX(50%); /* Adjust the position to center it precisely */
+    width: 3px; /* Adjust the width of the line */
+    height: 40vh; /* Make the line span the height of the viewport */
+    background-color: rgba(0, 0, 0, 0.1); /* Adjust the color and transparency of the shadow */
+    content: "";
+    z-index: 9999; /* Ensure the line stays above other elements */
+}
+
+
+.footer {
+    width: 100%;
+    height: 110px; /* Adjust height as needed */
+    background-color: #331A53;
+    position: fixed; /* Positioning */
+    bottom: 0; /* Align to the bottom */
+    z-index: 10009; /* Ensure the footer stays above the sidebar */
+}
+
+.title {
+    display: flex;
+    margin-top: 100px;
+    margin-left: 250px;
+}
+
+.highlight{
+    color: #a865ff;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .hidden {
+    display: none;
+  }
+
+  #circle-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 20px auto;
+  }
+  
+  .png-image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .png-image.selected {
+    border: 2px solid green;
+  }
+
+  .dpp-pretest {
+    max-width: 700px;
+    margin-left: 300px;
+    padding-right: 260px;
+    z-index: 10;
+}
+
+.dpp-posttest {
+    max-width: 700px;
+    margin-left: 300px;
+    padding-right: 260px;
+    z-index: 10;
+}
+
+.difficulty {
+    margin-left: 90px;
+    margin-bottom: 20px;
+}
+
+.answers {
+    margin-left: 20px;
+}
+
+#result-container {
+    margin-top: 20px;
+    text-align: center;
+    z-index: 10;
+}

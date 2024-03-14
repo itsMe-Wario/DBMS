@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dining Philosophers - Concept</title>
+    <link rel="stylesheet" href="main_styles.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="#">
+        <img src="srm_logo-removebg2.png" alt="Logo">
+    </a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="simulations.html">Simulations</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="sidebar">
+    <ul>
+        <li><a href="aim.html"><b>Aim</b></a></li>
+        <li><a href="overview.html"><b>Overview</b></a></li>
+        <li><a href="recap.html"><b>Recap</b></a></li>
+        <li><a href="pretest.html"><b>Pretest</b></a></li>
+        <li><a href="concept.html"><b><div class="highlight">Concept</div></b></a></li>
+        <li><a href="demo.html"><b>Demo</b></a></li>
+        <li><a href="practice.html"><b>Practice</b></a></li>
+        <li><a href="quiz.html"><b>Post Quiz</b></a></li>
+    </ul>
+</div>
+<div class="title">
+    <h1>Concept:</h1>
+</div>
+<div class="content">
+    <div class="container">
+        <p><b>Ideal Condition Visualization of Dining Philosopher</b></p><br><br>
+    </div>
+    <div class="video-container">
+        <video width="640" height="360" controls autoplay muted loop id="original-video">
+            <source src="normal.mp4" type="video/mp4" >
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="container">
+        <br>
+            From the above video we can understand that once a philosopher is eating, the philosopher adjacent to him will not be able to eat. 
+            However, the philosopher after that will be able to eat as he does not have any fork in common with the philosopher eating. 
+            Once they both finish eating, the philosopher in the middle will be able to eat. This is very important in operating system for 
+            resource location at a particular time instant.
+    </div>  
+    
+    <div class="container">
+        <b>Concept of a deadlock:</b><br><br>
+    </div>
+    <div class="video-container">
+        <video width="640" height="360" controls autoplay muted loop id="original-video">
+            <source src="deadlock.mp4" type="video/mp4" >
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="container">
+        <br>
+        Deadlock occurs when all philosophers transition from thinking state to eating state simultaneously hece each acquire one fork. 
+        This leads to a situation where no philosopher obtains both forks, preventing anyone from eating. 
+        Now lets discuss how would we can address this.<br><br><br>
+    </div>   
+    
+</div>
+<div class="shadow-line"></div>
+
+<div class="footer"></div> <!-- Footer -->
+</div>
+</body>
+</html>

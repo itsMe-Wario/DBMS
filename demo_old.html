@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dining Philosophers - Demo</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="#">
+        <img src="srm_logo-removebg2.png" alt="Logo">
+    </a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="simulations.html">Simulations</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="sidebar">
+    <ul>
+        <li><a href="aim.html"><b>Aim</b></a></li>
+        <li><a href="overview.html"><b>Overview</b></a></li>
+        <li><a href="recap.html"><b>Recap</b></a></li>
+        <li><a href="pretest.html"><b>Pretest</b></a></li>
+        <li><a href="concept.html"><b>Concept</b></a></li>
+        <li><a href="demo.html"><b><div class="highlight">Demo</div></b></a></li>
+        <li><a href="practice.html"><b>Practice</b></a></li>
+        <li><a href="quiz.html"><b>Post Quiz</b></a></li>
+    </ul>
+</div>
+<div class="title">
+    <h1>Demo:</h1>
+</div>
+<div class="content">
+    <div class="container">
+        <b>Demo of a deadlock:</b><br><br>
+    </div>
+    <div class="video-container">
+        <video width="640" height="360" controls autoplay muted loop id="original-video">
+            <source src="deadlock.mp4" type="video/mp4" >
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="container">
+        <br>
+        Deadlock occurs when all philosophers transition from thinking state to eating state simultaneously hece each acquire one fork. 
+        This leads to a situation where no philosopher obtains both forks, preventing anyone from eating. 
+        Now lets discuss how would we can address this.<br><br><br>
+    </div>   
+    <div class="sub_heading">
+        <h2>Solutions to the deadlock:</h2><br><br><br>
+    </div>
+    <div class="container">
+        <b>Resource Hierarchy Solution:</b><br>(Odd-Even Method)<br><br>
+    </div>
+    <div class="video-container">
+        <video width="640" height="360" controls autoplay muted loop id="original-video">
+            <source src="deadlock_sol.mp4" type="video/mp4" >
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="container">
+        <br>
+        We resolve the deadlock while using the Resource Hierarchy Solution by instructing even-numbered Philosophers (2 and 4) to pick up 
+        the Fork to their left, while odd-numbered Philosophers (1, 3, and 5) pick up the Fork to their right. Let's revisit the 
+        previous scenario where all Philosophers transition from the thinking to the eating state simultaneously. Since only one Philosopher 
+        can use a single Fork at a time, when Philosopher 1 and 2 both aim for the same Fork (Fork 2), Philosopher 2 reverts to the thinking 
+        stage. The same occurs for Philosopher 3 and 4.<br> Now Philosopher 4 and 5 again aim for the same Fork (Fork 1), resulting in Philosopher 
+        4 reverting to the thinking stage while Philosopher 5 can eat since he has obtained both Forks. Upon finishing his meal, he returns the Fork, 
+        allowing the other Philosopher to continue eating.<br><br>
+    </div>    
+    <div class="container">
+        <b>2. Solution to the Deadlock with Semaphores</b><br><br><br>
+    </div>
+    <div class="video-container">
+        <video width="640" height="360" controls autoplay muted loop id="original-video">
+            <source src="deadlock_sol.mp4" type="video/mp4" >
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="container">
+        <br>Semaphores can be used to solve the dining philosophers problem by representing the chopsticks as semaphores.
+         Before a philosopher picks up a chopstick, they must acquire the corresponding semaphore (using wait). If the semaphore is not available, 
+         they wait until it becomes available. Once they finish using the chopstick, they release it (using signal).<br><br>
+    </div> 
+   
+</div>
+<div class="shadow-line"></div>
+
+<div class="footer"></div> <!-- Footer -->
+</div>
+</body>
+</html>
