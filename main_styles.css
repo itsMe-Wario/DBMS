@@ -191,3 +191,12 @@ table {
     text-align: center;
     z-index: 10;
 }
+
+.background-image-container {
+    background-image: url('maya.JPG'); /* Replace 'path_to_your_image.jpg' with the actual path to your image */
+    background-size: cover; /* This ensures the image covers the entire container */
+    background-position: center; /* This centers the image within the container */
+    width: 100%; /* Set width to fill the container */
+    height: 100vh; /* Set height to fill the viewport (100% of the viewport height) */
+    /* Additional styles as needed */
+}
