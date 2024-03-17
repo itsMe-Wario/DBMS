@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MongoDB Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .item-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .item-info {
+            margin-left: 20px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>MongoDB Data</h1>
+    <ul>
+        <% data.forEach(item => { %>
+            <li>
+                <div class="item-title">Flight Number: <%= item.flightNumber %></div>
+                <div class="item-info">
+                    <p>Origin: <%= item.origin %></p>
+                    <p>Scheduled Arrival Time: <%= item.scheduledArrivalTime %></p>
+                    <p>Estimated Arrival Time: <%= item.estimatedArrivalTime %></p>
+                    <p>Status: <%= item.status %></p>
+                    <p>Gate: <%= item.gate %></p>
+                    <p>Baggage Claim: <%= item.baggageClaim %></p>
+                    <p>Airline: <%= item.airline %></p>
+                    <p>Terminal: <%= item.terminal %></p>
+                    <p>Remarks: <%= item.remarks %></p>
+                </div>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
