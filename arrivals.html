@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arivals</title>
+  <title>Arrivals</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,7 +15,7 @@
     <div class="search-box">
         <text>Flight.No / Ticket.No</text>
       <input type="text" placeholder="Search">
-      <button>Search</button>
+      <button onclick="fetchData()">Search</button>
     </div>
   </div>
 </header>
@@ -28,24 +28,37 @@
   </div>
 </nav>
 <ul id="dataList"></ul>
-<div class="background-image-container">
-  <script>
-    // Fetch data from the server
-    fetch('/')
-        .then(response => response.json())
-        .then(data => {
-            const dataList = document.getElementById('dataList');
-            // Iterate over the data and create list items dynamically
-            data.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.textContent = JSON.stringify(item);
-                dataList.appendChild(listItem);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-</script>
+<div class="background-image-container"></div>
 
+<script>
+  function fetchData() {
+    fetch('/data')
+      .then(response => response.json())
+      .then(data => {
+        const dataList = document.getElementById('dataList');
+        dataList.innerHTML = '';
+
+        data.forEach(item => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `
+            <div class="item-title">Flight Number: ${item.flightNumber}</div>
+            <div class="item-info">
+              <p>Origin: ${item.origin}</p>
+              <p>Scheduled Arrival Time: ${item.scheduledArrivalTime}</p>
+              <p>Estimated Arrival Time: ${item.estimatedArrivalTime}</p>
+              <p>Status: ${item.status}</p>
+              <p>Gate: ${item.gate}</p>
+              <p>Baggage Claim: ${item.baggageClaim}</p>
+              <p>Airline: ${item.airline}</p>
+              <p>Terminal: ${item.terminal}</p>
+              <p>Remarks: ${item.remarks}</p>
+            </div>
+          `;
+          dataList.appendChild(listItem);
+        });
+      })
+      .catch(error => console.error('Error fetching data:', error));
+  }
+</script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 // Import required modules
 const express = require('express');
+const path = require('path');
 const { MongoClient } = require('mongodb');
 
 // Create Express app
@@ -15,7 +16,10 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
 
-// Serve HTML file for the frontend
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Define route handler for the root URL ("/")
 app.get('/', async (req, res) => {
     try {
         // Connect to the MongoDB server
@@ -46,3 +50,4 @@ app.get('/', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
+
