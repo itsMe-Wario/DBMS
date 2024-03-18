@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const { MongoClient } = require('mongodb');
 const ejs = require('ejs'); // Import the ejs module
+const serveStatic = require('serve-static');
 
 // Create Express app
 const app = express();
@@ -18,7 +19,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 app.set('view engine', 'ejs');
 
 // Serve static files from the 'public' directory
-app.use(express.static(__dirname, 'public'));
+app.use(serveStatic(path.join(__dirname, 'public')));
 
 // Define route handler for the root URL ("/")
 app.get('/', async (req, res) => {
