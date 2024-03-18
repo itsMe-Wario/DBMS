@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MongoDB Data</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #f9f9f9;
-        }
-        .item-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .item-info {
-            margin-left: 20px;
-            font-size: 0.9em;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arrivals</title>
+  <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h1>MongoDB Data</h1>
-    <ul>
+<header>
+  <div class="header_container">
+    <div class="logo">
+      <img src="/images/logo_main.png" alt="Logo">
+    </div>
+    <div class="search-box">
+        <text>Flight.No / Ticket.No</text>
+      <input type="text" placeholder="Search">
+      <button onclick="fetchData()">Search</button>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="header_container">
+    <a href="#"><div class="highlight">Arrival</div></a>
+    <a href="#">Departure</a>
+    <a href="#">Terminal</a>
+    <a href="#">Gate</a>
+  </div>
+</nav>
+<ul id="dataList"></ul>
+<div class="background"></div>
+<div class="container">
+<div class="content">
+    <ul class="dta-list">
         <% data.forEach(item => { %>
-            <li>
+            <li class="data-item">
                 <div class="item-title">Flight Number: <%= item.flightNumber %></div>
                 <div class="item-info">
                     <p>Origin: <%= item.origin %></p>
@@ -53,5 +49,7 @@
             </li>
         <% }); %>
     </ul>
+</div>
+</div>
 </body>
 </html>

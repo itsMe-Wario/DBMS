@@ -2,6 +2,7 @@
 const express = require('express');
 const path = require('path');
 const { MongoClient } = require('mongodb');
+const ejs = require('ejs'); // Import the ejs module
 
 // Create Express app
 const app = express();
@@ -17,7 +18,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 app.set('view engine', 'ejs');
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname, 'public'));
 
 // Define route handler for the root URL ("/")
 app.get('/', async (req, res) => {
@@ -35,8 +36,11 @@ app.get('/', async (req, res) => {
         // Fetch data from the collection
         const data = await collection.find().toArray();
 
-        // Pass data to the HTML template for rendering
-        res.render('index', { data });
+        // Render the index.ejs template with the fetched data
+        const renderedHtml = await ejs.renderFile(path.join(__dirname, 'views', 'index.ejs'), { data });
+
+        // Send the rendered HTML to the client
+        res.send(renderedHtml);
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
         res.status(500).send('Error connecting to MongoDB');
@@ -50,4 +54,5 @@ app.get('/', async (req, res) => {
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });
+
 

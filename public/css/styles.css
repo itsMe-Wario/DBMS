@@ -4,6 +4,27 @@
     box-sizing: border-box;
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
+
+  .container {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 83vh; /* Set the height of the container to fill the viewport */
+    overflow-y: auto; /* Allow content to scroll */
+  }
+  
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/plane.jpeg'); /* Replace '/images/plane.jpeg' with the path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Ensure the background image stays behind the content */
+  }
   
   /* Style for header */
   header {
@@ -12,12 +33,21 @@
     padding: 5px 0;
   }
   
-  .container {
+  .header_container {
     width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .title {
+    width: 30%;
+    margin-top: 10px;
+    margin-left: 10px;
+    align-items: center;
+    background-color: #0D2137;
+    color: #fff;
   }
   
   /* Style for logo */
@@ -64,14 +94,9 @@
     background-color: #3b3baf;
   }
 
-  .background-image-container {
-    background-image: url('plane.jpeg'); /* Replace 'path_to_your_image.jpg' with the actual path to your image */
-    background-size: cover; /* This ensures the image covers the entire container */
-    background-position: center; /* This centers the image within the container */
-    width: 100%; /* Set width to fill the container */
-    height: 100vh; /* Set height to fill the viewport (100% of the viewport height) */
-    /* Additional styles as needed */
-}
+  .highlight{
+    color:#c02424 ;
+  }
 
 ul {
   list-style-type: none;
@@ -82,7 +107,7 @@ li {
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color: rgba(255, 255, 255, 0.5); 
 }
 .item-title {
   font-weight: bold;
@@ -92,4 +117,24 @@ li {
   margin-left: 20px;
   font-size: 0.9em;
 }
-  
+.data-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.data-item {
+  display: inline-block;
+  width: 30%; /* Adjust as needed */
+  vertical-align: top; /* Align items to the top */
+  margin-right: 10px; /* Add some space between items */
+}
+.content {
+  position: absolute;
+  top: 0; /* Threshold position */
+  z-index: 1; /* Set the z-index of the content container to 1 to ensure it's above the background */
+  padding: 20px;
+  color: #000000;
+  text-align: center;
+  height: 65px;
+  width: auto;
+}
