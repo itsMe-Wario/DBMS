@@ -13,10 +13,14 @@
       <img src="/images/logo_main.png" alt="Logo">
     </div>
     <div class="search-box">
-      <text>Flight.No</text>
-      <form action="/find" method="GET">
+      <span>Flight.No</span>
+      <form action="/search" method="GET">
         <input type="text"  id="query" name="query" placeholder="Search">
         <button type="submit">Search</button>
+      </form>
+      <form action="/" method="GET">
+        <button class="button-2" type="submit">Login</button>
+      </form>
     </div>
   </div>
 </header>
@@ -38,11 +42,11 @@
                 <div class="item-title">Flight Number: <%= item.flightNumber %></div>
                 <div class="item-info">
                     <p>Origin: <%= item.origin %></p>
-                    <p>Scheduled Arrival Time: <%= item.scheduledArrivalTime %></p>
-                    <p>Estimated Arrival Time: <%= item.estimatedArrivalTime %></p>
+                    <p>Scheduled Arrival Time: <%= item['scheduled Arrival Time'] %></p>
+                    <p>Estimated Arrival Time: <%= item['estimated Arrival Time'] %></p>
                     <p>Status: <%= item.status %></p>
                     <p>Gate: <%= item.gate %></p>
-                    <p>Baggage Claim: <%= item.baggageClaim %></p>
+                    <p>Baggage Claim: <%= item['baggage Claim'] %></p>
                     <p>Airline: <%= item.airline %></p>
                     <p>Terminal: <%= item.terminal %></p>
                     <p>Remarks: <%= item.remarks %></p>

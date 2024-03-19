@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404-Not_Found</title>
+  <link href="/css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+  <div class="header_container">
+    <div class="logo">
+      <img src="/images/logo_main.png" alt="Logo">
+    </div>
+    <div class="search-box">
+      <span>Flight.No</span>
+      <form action="/find" method="GET">
+        <input type="text"  id="query" name="query" placeholder="Search">
+        <button type="submit">Search</button>
+      </form>
+      <form action="/" method="GET">
+        <button class="button-2" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="header_container">
+    <a href="http://localhost:3000/">Home</a>
+    <a href="http://localhost:3000/database1">Arrival</a>
+    <a href="http://localhost:3000/database2">Departure</a>
+    <a href="#">Cargo</a>
+  </div>
+</nav>
+<ul id="data-list"></ul>
+<div class="background"><img src="/images/search_view.jpg" height="950" width="1600" alt="arrival_background"></div>
+<div class="container">
+  <div class="content">
+    <div class="high">No Account found.</div>
+
+</div>
+</div>
+</body>
+</html>

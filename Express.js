@@ -4,6 +4,7 @@ const path = require('path');
 const { MongoClient } = require('mongodb');
 const ejs = require('ejs'); // Import the ejs module
 const serveStatic = require('serve-static');
+const bodyParser = require('body-parser');
 
 // Create Express app
 const app = express();
@@ -21,6 +22,10 @@ app.set('view engine', 'ejs');
 // Serve static files from the 'public' directory
 app.use(serveStatic(path.join(__dirname, 'public')));
 
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
 async function connectToMongoDB() {
     try {
         await client.connect();
@@ -33,6 +38,10 @@ async function connectToMongoDB() {
 
 app.get('/', (req, res) => {
     res.render('home');
+});
+
+app.get('/signup', (req, res) => {
+    res.render('signup');
 });
 
 // Define route handler for the first database
@@ -63,7 +72,7 @@ app.get('/database1', async (req, res) => {
     }
 });
 
-app.get('/find', async (req, res) => {
+app.get('/search', async (req, res) => {
     const query = req.query.query;
     const capitalizedQuery = query.toUpperCase();
     try {
@@ -74,20 +83,26 @@ app.get('/find', async (req, res) => {
         // Use a specific database
         const database = client.db('airport_management');
         
-        // Use a specific collection
-        const collection = database.collection('arrival_list');
+        // Use specific collections
+        const arrivalCollection = database.collection('arrival_list');
+        const departureCollection = database.collection('departure_list');
 
-        // Perform search query
-        const data = await collection.find({ flightNumber: capitalizedQuery   }).toArray();
+        // Perform search queries on both collections
+        const arrivalData = await arrivalCollection.find({ flightNumber: capitalizedQuery }).toArray();
+        const departureData = await departureCollection.find({ flightNumber: capitalizedQuery }).toArray();
+
+        // Combine search results from both collections
+        const data = arrivalData.concat(departureData);
 
         // Render the arrival.ejs template with the search results
-        res.render('arrival_search', { data });
+        res.render('search', { data });
 
     } catch (error) {
         console.error('Error searching in MongoDB:', error);
         res.status(500).send('Error searching in MongoDB');
     }
 });
+
 
 // Define route handler for the second database
 app.get('/database2', async (req, res) => {
@@ -116,13 +131,11 @@ app.get('/database2', async (req, res) => {
         res.status(500).send('Error connecting to MongoDB (Database 2)');
     }
 });
-// Define route handler for search
-app.get('/search', async (req, res) => {
-    // Get the query parameter from the request and capitalize it
-    const query = req.query.query;
 
-    // Convert the query to uppercase
-    const capitalizedQuery = query.toUpperCase();
+const bcrypt = require('bcrypt');
+
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
     
     try {
         // Connect to the MongoDB server
@@ -133,21 +146,57 @@ app.get('/search', async (req, res) => {
         const database = client.db('airport_management');
         
         // Use a specific collection
-        const collection = database.collection('departure_list');
+        const collection = database.collection('client_account');
 
-        // Perform search query with the capitalized query
-        const data = await collection.find({ flightNumber: capitalizedQuery }).toArray();
+        // Find user with the given email
+        const user = await collection.findOne({ email: email });
 
-        // Render the departure_search.ejs template with the search results
-        res.render('departure_search', { data });
+        // Check if user exists
+        if (!user) {
+            // Render no_account.ejs if user doesn't exist
+            res.render('no_account');
+            return;
+        }
 
+        // Compare passwords
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        if (passwordMatch) {
+            // Render account.ejs if passwords match
+            res.render('client_acc_page');
+        } else {
+            // Render no_account.ejs if passwords don't match
+            res.render('no_account');
+        }
     } catch (error) {
         console.error('Error searching in MongoDB:', error);
         res.status(500).send('Error searching in MongoDB');
     }
 });
 
+app.post('/register', async (req, res) => {
+    const { name, email, password } = req.body;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('client_account');
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Insert the user data into the collection
+        const result = await collection.insertOne({ name, email, password: hashedPassword });
+        
+        res.render('home');
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).send('Error registering user');
+    }
+});
+
+
 // Start the server
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
