@@ -13,25 +13,26 @@
       <img src="/images/logo_main.png" alt="Logo">
     </div>
     <div class="search-box">
-        <text>Flight.No / Ticket.No</text>
-      <input type="text" placeholder="Search">
-      <button onclick="fetchData()">Search</button>
+      <text>Flight.No</text>
+      <form action="/find" method="GET">
+        <input type="text"  id="query" name="query" placeholder="Search">
+        <button type="submit">Search</button>
     </div>
   </div>
 </header>
 <nav>
   <div class="header_container">
-    <a href="#"><div class="highlight">Arrival</div></a>
-    <a href="#">Departure</a>
-    <a href="#">Terminal</a>
-    <a href="#">Gate</a>
+    <a href="#">Home</a>
+    <a href="http://localhost:3000/database1"><div class="highlight">Arrival</div></a>
+    <a href="http://localhost:3000/database2">Departure</a>
+    <a href="#">Cargo</a>
   </div>
 </nav>
-<ul id="dataList"></ul>
-<div class="background"></div>
+<ul id="data-list"></ul>
+<div class="background"><img src="/images/arrival_background.jpg" height="950" width="1600" alt="arrival_background"></div>
 <div class="container">
-<div class="content">
-    <ul class="dta-list">
+  <div class="content">
+    <ul class="data-list">
         <% data.forEach(item => { %>
             <li class="data-item">
                 <div class="item-title">Flight Number: <%= item.flightNumber %></div>
