@@ -5,6 +5,13 @@ const { MongoClient } = require('mongodb');
 const ejs = require('ejs'); // Import the ejs module
 const serveStatic = require('serve-static');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+
+const crypto = require('crypto');
+
+// Generate a random secret key
+const secretKey = crypto.randomBytes(32).toString('hex');
+console.log('Secret Key:', secretKey);
 
 // Create Express app
 const app = express();
@@ -39,6 +46,12 @@ async function connectToMongoDB() {
 app.get('/', (req, res) => {
     res.render('home');
 });
+
+app.use(session({
+    secret: secretKey,
+    resave: false,
+    saveUninitialized: false
+}));
 
 app.get('/signup', (req, res) => {
     res.render('signup');
@@ -162,8 +175,11 @@ app.post('/login', async (req, res) => {
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
-            // Render account.ejs if passwords match
-            res.render('client_acc_page');
+            // Store user information in session
+            req.session.user = user;
+
+            // Redirect to client account page
+            res.redirect('/client_acc_page');
         } else {
             // Render no_account.ejs if passwords don't match
             res.render('no_account');
@@ -173,6 +189,21 @@ app.post('/login', async (req, res) => {
         res.status(500).send('Error searching in MongoDB');
     }
 });
+
+app.get('/client_acc_page', (req, res) => {
+    // Retrieve user information from session
+    const user = req.session.user;
+
+    if (!user) {
+        // If user is not in session, redirect to login page
+        res.redirect('/login');
+        return;
+    }
+
+    // Render client_acc_page.ejs with user's information
+    res.render('client_acc_page', { user: user });
+});
+
 
 app.post('/register', async (req, res) => {
     const { name, email, password } = req.body;
