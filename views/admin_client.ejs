@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Departure Search</title>
+  <link href="/css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+  <div class="header_container">
+    <div class="logo">
+      <img src="/images/logo_main.png" alt="Logo">
+    </div>
+    <div class="text1"><h1>Admin</h1></div>
+  </div>
+</header>
+<nav>
+</nav>
+<ul id="data-list"></ul>
+<div class="background"><img src="/images/search_view.jpg" height="950" width="1600" alt="background"></div>
+<div class="container">
+  <div class="content">
+    <ul class="data-list">
+      <% data.forEach(item => { %>
+          <li class="data-item">
+              <div class="item-title">Email: <%= item.email %></div>
+              <div class="item-info">
+                  <p>Name: <%= item.name %></p>
+                  <p>Flight No: <%= item['flight'] %></p>
+              </div>
+          </li>
+      <% }); %>
+  </ul>
+  <div class="login_position">
+    <div class="login_position2">
+    <form action="/client_add" method="POST">
+        <input type="text" id="name" name="name" placeholder="Name" required><br>
+        <input type="email" id="email" name="email" placeholder="Email" required><br>
+        <input type="password" id="password" name="password" placeholder="Password" required><br><br>
+        <button type="submit">Add</button>
+    </form>
+  </div>
+    <div class="login_position3">
+      <form action="/client_delete" method="POST">
+          <input type="email" id="email" name="email" placeholder="Email" required><br>
+          <button type="submit">Delete</button>
+      </form>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

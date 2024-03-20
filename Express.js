@@ -145,6 +145,33 @@ app.get('/database2', async (req, res) => {
     }
 });
 
+app.get('/admin', async (req, res) => {
+    try {
+        // Create a new MongoClient for the second database
+        const client = new MongoClient(uri2, { useNewUrlParser: true, useUnifiedTopology: true });
+        
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use a specific collection
+        const collection = database.collection('client_account');
+
+        // Fetch data from the collection
+        const data = await collection.find().toArray();
+
+        // Render the arrival2.ejs template with the fetched data
+        res.render('admin_client', { data });
+
+    } catch (error) {
+        console.error('Error connecting to MongoDB (Database 2):', error);
+        res.status(500).send('Error connecting to MongoDB (Database 2)');
+    }
+});
+
 const bcrypt = require('bcrypt');
 
 app.post('/login', async (req, res) => {
@@ -190,7 +217,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-app.get('/client_acc_page', (req, res) => {
+app.get('/client_acc_page',  async (req, res) => {
     // Retrieve user information from session
     const user = req.session.user;
 
@@ -203,6 +230,50 @@ app.get('/client_acc_page', (req, res) => {
     // Render client_acc_page.ejs with user's information
     res.render('client_acc_page', { user: user });
 });
+
+app.get('/client_arrival', async (req, res) => {
+    // Retrieve user information from session
+    const user = req.session.user;
+
+    if (!user) {
+        // If user is not in session, redirect to login page
+        res.redirect('/login');
+        return;
+    }
+
+    try {
+        // Create a new MongoClient for the first database
+        const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
+        
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use a specific collection
+        const arrivalcollection = database.collection('arrival_list');
+        const usercollection = database.collection('client_account');
+        // Fetch data from the collection
+        const arrivalData = await arrivalcollection.find().toArray();
+        const userData = await usercollection.find().toArray();
+
+        // Combine arrival data and user data
+        const data = {
+            arrivalData: arrivalData,
+            userData: userData,
+            user: user  // Include user information
+        };
+
+        res.render('client_arrival', { data });
+
+    } catch (error) {
+        console.error('Error connecting to MongoDB (Database 1):', error);
+        res.status(500).send('Error connecting to MongoDB (Database 1)');
+    }
+});
+
 
 
 app.post('/register', async (req, res) => {
@@ -225,6 +296,84 @@ app.post('/register', async (req, res) => {
     }
 });
 
+app.post('/client_add', async (req, res) => {
+    const { name, email, password } = req.body;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('client_account');
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Insert the user data into the collection
+        const result = await collection.insertOne({ name, email, password: hashedPassword });
+        
+        res.redirect('/admin');
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).send('Error registering user');
+    }
+});
+
+app.post('/client_delete', async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('client_account');
+
+        // Delete the client account based on the email
+        const result = await collection.deleteOne({ email });
+        
+        if (result.deletedCount === 1) {
+            res.redirect('/admin');
+        } else {
+            res.status(404).send('Client account not found');
+        }
+    } catch (error) {
+        console.error('Error deleting client account:', error);
+        res.status(500).send('Error deleting client account');
+    }
+});
+
+app.post('/client_edit', async (req, res) => {
+    const { email, newName, newPassword } = req.body;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('client_account');
+
+        // Check if the email exists in the collection
+        const existingUser = await collection.findOne({ email });
+        if (!existingUser) {
+            return res.status(404).send('Client account not found');
+        }
+
+        // Prepare update fields
+        const updateFields = {};
+        if (newName) {
+            updateFields.name = newName;
+        }
+        if (newPassword) {
+            // Hash the new password
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            updateFields.password = hashedPassword;
+        }
+
+        // Update the client account
+        const result = await collection.updateOne({ email }, { $set: updateFields });
+        
+        if (result.modifiedCount === 1) {
+            res.redirect('/admin');
+        } else {
+            res.status(500).send('Error updating client account');
+        }
+    } catch (error) {
+        console.error('Error editing client account:', error);
+        res.status(500).send('Error editing client account');
+    }
+});
 
 // Start the server
 const PORT = process.env.PORT || 3000;
