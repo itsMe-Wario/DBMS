@@ -106,6 +106,7 @@
   }
 
   .login_position{
+    position: sticky;
     width: 250px;
     height: 167px;
     background-color: transparent;
@@ -119,35 +120,54 @@
   }
 
   .login_position2 {
-    margin-left:250px;
-    margin-top: -150px;
+    margin-left:700px;
+    margin-top: -50px;
 }
 
 .login_position3 {
-  margin-left:500px;
-  margin-top: -180px;
+  margin-left:900px;
+  margin-top: -162px;
 }
 
-  .login_position input[type="email"]{
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid black; /* Adding a black border */
-    border-radius: 4px;
-  }
+.login_position4 {
+  margin-left:1100px;
+  margin-top: -75px;
+}
 
-  .login_position input[type="text"]{
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid black; /* Adding a black border */
-    border-radius: 4px;
-  }
+.login_position5 {
+  margin-left:700px;
+  margin-top: -20px;
+}
 
-  .login_position input[type="password"]{
+.login_position6 {
+margin-left:900px;
+margin-top: -462px;
+}
+
+.login_position7 {
+margin-left:1100px;
+margin-top: -75px;
+}
+
+.login_position input[type="flightNumber"],
+.login_position input[type="origin"],
+.login_position input[type="scheduledArrivalTime"],
+.login_position input[type="estimatedArrivalTime"],
+.login_position input[type="status"],
+.login_position input[type="gate"],
+.login_position input[type="baggageClaim"],
+.login_position input[type="airline"],
+.login_position input[type="terminal"],
+.login_position input[type="remarks"],
+.login_position input[type="email"],
+.login_position input[type="text"],
+.login_position input[type="password"]
+{
     margin-bottom: 10px;
     padding: 8px;
     border: 1px solid black; /* Adding a black border */
     border-radius: 4px;
-  }
+}
 
   .login_position button {
     padding: 8px 16px;

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin_Client</title>
+  <link href="/css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+  <div class="header_container">
+    <div class="logo">
+      <img src="/images/logo_main.png" alt="Logo">
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="header_container">
+    <a href="#">Admin-Arrival</a>
+    <a href="#" id="client_acc_page_link">Client</a>
+    <a href="#" id="client_arrival_link">Arrival</a>
+    <a href="#">Departure</a>
+    <a href="#">Cargo</a>
+  </div>
+  <form id="client_acc_page_form" action="/admin" method="GET">
+    <button class="button-2" type="submit" style="display: none;">Home</button>
+  </form>
+  <form id="client_arrival_form" action="/admin_arrival" method="GET">
+    <button class="button-2" type="submit" style="display: none;">Arrival</button>
+  </form>
+</nav>
+<ul id="data-list"></ul>
+<div class="background"><img src="/images/search_view.jpg" height="950" width="1600" alt="background"></div>
+<div class="container">
+  <div class="content">
+    <ul class="data-list">
+      <% if (data && data.length > 0) { %>
+      <% data.forEach(item => { %>
+          <li class="data-box">
+              <div class="item-title">Flight Number: <%= item.flightNumber %></div>
+              <div class="item-info">
+                <% for (const key in item) { %>
+                  <% if (item.hasOwnProperty(key) && key !== '_id' && key !== 'flightNumber' && item[key]) { %>
+                      <p><%= key.charAt(0).toUpperCase() + key.slice(1) %>: <%= item[key] %></p>
+                  <% } %>
+              <% } %>
+          </div>
+      </li>
+  <% }); %>
+<% } else { %>
+  <div class="high">No Flights found.</div>
+<% } %>
+</ul>
+</div>
+</div>
+<div class="content">
+  <div class="login_position">
+    <div class="login_position5">
+    <form action="/arrival_add" method="POST">
+        <input type="flightNumber" id="flightNumber" name="flightNumber" placeholder="Flight Number" required><br>
+        <input type="text" id="origin" name="origin" placeholder="Origin" required><br>
+    <input type="scheduledArrivalTime" id="scheduledArrivalTime" name="scheduledArrivalTime" placeholder="Scheduled Arrival Time" required><br>
+    <input type="estimatedArrivalTime" id="estimatedArrivalTime" name="estimatedArrivalTime" placeholder="Estimated Arrival Time" required><br>
+    <input type="status" id="status" name="status" placeholder="Status" required><br>
+    <input type="gate" id="gate" name="gate" placeholder="Gate" required><br>
+    <input type="baggageClaim" id="baggageClaim" name="baggageClaim" placeholder="Baggage Claim" required><br>
+    <input type="airline" id="airline" name="airline" placeholder="Airline" required><br>
+    <input type="terminal" id="terminal" name="terminal" placeholder="Terminal" required><br>
+    <input type="remarks" id="remarks" name="remarks" placeholder="Remarks" required><br>
+        <button type="submit">Add</button>
+    </form>
+    </div>
+    <div class="login_position6">
+      <form action="/arrival_delete" method="POST">
+        <input type="flightNumber" id="flightNumber" name="flightNumber" placeholder="Flight Number" required><br>
+          <button type="submit">Delete</button>
+      </form>
+    </div>
+    <div class="login_position7">
+      <form action="/arrival_edit" method="POST">
+        <input type="flightNumber" id="flightNumber" name="flightNumber" placeholder="Flight Number" required><br>
+        <input type="text" id="origin" name="origin" placeholder="Origin"><br>
+    <input type="scheduledArrivalTime" id="scheduledArrivalTime" name="scheduledArrivalTime" placeholder="Scheduled Arrival Time" ><br>
+    <input type="estimatedArrivalTime" id="estimatedArrivalTime" name="estimatedArrivalTime" placeholder="Estimated Arrival Time" ><br>
+    <input type="status" id="status" name="status" placeholder="Status"><br>
+    <input type="gate" id="gate" name="gate" placeholder="Gate" ><br>
+    <input type="baggageClaim" id="baggageClaim" name="baggageClaim" placeholder="Baggage Claim" ><br>
+    <input type="airline" id="airline" name="airline" placeholder="Airline" ><br>
+    <input type="terminal" id="terminal" name="terminal" placeholder="Terminal" ><br>
+    <input type="remarks" id="remarks" name="remarks" placeholder="Remarks" ><br>
+          <button type="submit">Edit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_acc_page_form").submit(); // Submit the form
+  });
+
+    document.getElementById("client_arrival_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_arrival_form").submit(); // Submit the form
+  });
+</script>
+</body>
+</html>
