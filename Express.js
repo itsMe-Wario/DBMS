@@ -19,7 +19,6 @@ const port = 3000;
 
 // MongoDB connection URIs
 const uri1 = 'mongodb://localhost:27017/airport_management';
-const uri2 = 'mongodb://localhost:27017/airport_management2';
 
 const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -267,6 +266,9 @@ app.get('/client_acc_page',  async (req, res) => {
         const database = client.db('airport_management');
         
         // Use specific collections
+        const departureCollection = database.collection('departure_list');
+        const anotherdepartureCollection = database.collection('another_airport_departure');
+        const anotherarrivalCollection = database.collection('another_airport_arrival');
         const arrivalCollection = database.collection('arrival_list');
         const clientCollection = database.collection('client_account');
 
@@ -277,11 +279,16 @@ app.get('/client_acc_page',  async (req, res) => {
             return res.status(404).render('error', { error: 'Flight not found' });
         }
 
-        // Find arrival details from arrival_list collection
-        const arrivalDetails = await arrivalCollection.findOne({ flightNumber });
+        const arrivalDetails_1 = await arrivalCollection.findOne({ flightNumber });
+        const arrivalDetails_2 = await anotherarrivalCollection.findOne({ flightNumber });
 
-        // Render the client_acc_page.ejs template with the search results
-        res.render('client_acc_page',{ clientFlightDetails, arrivalDetails });
+        const departureDetails_1 = await departureCollection.findOne({ flightNumber });
+        const departureDetails_2 = await anotherdepartureCollection.findOne({ flightNumber });
+
+        const arrivalDetails = arrivalDetails_1 || arrivalDetails_2;
+        const departureDetails = departureDetails_1 || departureDetails_2;
+
+        res.render('client_acc_page',{ clientFlightDetails, arrivalDetails, departureDetails });
     } catch (error) {
         console.error('Error searching in MongoDB:', error);
         res.status(500).send('Error searching in MongoDB');
@@ -327,6 +334,49 @@ app.get('/client_arrival', async (req, res) => {
 
     } catch (error) {
         console.error('Error connecting to MongoDB (Database 1):', error);
+        res.status(500).send('Error connecting to MongoDB (Database 1)');
+    }
+});
+
+app.get('/client_departure', async (req, res) => {
+    // Retrieve user information from session
+    const user = req.session.user;
+
+    if (!user) {
+        // If user is not in session, redirect to login page
+        res.redirect('/login');
+        return;
+    }
+
+    try {
+        // Create a new MongoClient for the first database
+        const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
+        
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use a specific collection
+        const departurecollection = database.collection('departure_list');
+        const usercollection = database.collection('client_account');
+        // Fetch data from the collection
+        const departureData = await departurecollection.find().toArray();
+        const userData = await usercollection.find().toArray();
+
+        // Combine arrival data and user data
+        const data = {
+            departureData: departureData,
+            userData: userData,
+            user: user  // Include user information
+        };
+
+        res.render('client_departure', { data });
+
+    } catch (error) {
+        console.error('Error connecting to MongoDB (Database 2):', error);
         res.status(500).send('Error connecting to MongoDB (Database 1)');
     }
 });

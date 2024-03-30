@@ -32,7 +32,6 @@
     <a href="#">Cargo</a>
   </div>
 </nav>
-<ul id="data-list"></ul>
 <div class="background"><img src="/images/arrival_background.jpg" height="950" width="1600" alt="arrival_background"></div>
 <div class="container">
   <div class="content">
@@ -42,13 +41,19 @@
                 <div class="item-title">Flight Number: <%= item.flightNumber %></div>
                 <div class="item-info">
                     <p>Origin: <%= item.origin %></p>
-                    <p>Scheduled Arrival Time: <%= item['scheduled Arrival Time'] %></p>
-                    <p>Estimated Arrival Time: <%= item['estimated Arrival Time'] %></p>
-                    <p>Status: <%= item.status %></p>
-                    <p>Gate: <%= item.gate %></p>
-                    <p>Baggage Claim: <%= item['baggage Claim'] %></p>
                     <p>Airline: <%= item.airline %></p>
+                    <p>Status: <%= item.status %></p>
+                    <p>Date: <%= item['date'] %></p>
+                    <% if (item.status == "Landed") { %>
+                      <p>Arrival Time: <%= item['estimated Arrival Time'] %></p>
+                    <% } %>
+                    <% if (item.status !== "Landed") { %>
+                    <p>Scheduled Arrival Time: <%= item['arrival Time'] %></p>
+                    <p>Estimated Arrival Time: <%= item['estimated Arrival Time'] %></p>
+                    <% } %>
                     <p>Terminal: <%= item.terminal %></p>
+                    <p>Gate: <%= item.gate %></p>
+                    <p>Baggage Claim: Belt <%= item['baggage Claim Belt'] %></p>
                     <p>Remarks: <%= item.remarks %></p>
                 </div>
             </li>

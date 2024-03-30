@@ -1,0 +1,14 @@
+[
+    {
+        "flightNumber": "DEF789",
+        "destination": "Delhi",
+        "date": "2024-03-16",
+        "departure Time": "8:45",
+        "estimated Departure Time": "900",
+        "status": "Delayed",
+        "gate": "C2",
+        "airline": "Delta",
+        "terminal": "Terminal 3",
+        "remarks": "Due to weather conditions"
+      }
+]

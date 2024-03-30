@@ -1,0 +1,15 @@
+[
+    {
+        "flightNumber": "TDB123",
+        "origin": "Delhi",
+        "date": "2024-03-17",
+        "arrival Time": "08:00",
+        "estimated Arrival Time": "08:15",
+        "status": "Delayed",
+        "gate": "C1",
+        "airline": "Delta",
+        "baggage Claim Belt": 3,
+        "terminal": "Terminal 7",
+        "remarks": "Due to weather conditions"
+      }
+]

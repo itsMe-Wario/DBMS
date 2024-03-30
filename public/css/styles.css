@@ -23,6 +23,16 @@
     z-index: -1; /* Ensure the background image stays behind the content */
   }
 
+  .background_client {
+    position: fixed;
+    margin-top: 100;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Ensure the background image stays behind the content */
+  }
+
   .background_home {
     position: fixed;
     margin-top: 50;
@@ -244,6 +254,7 @@ li {
   width: 30%; /* Adjust as needed */
   vertical-align: top; /* Align items to the top */
   margin-right: 10px; /* Add some space between items */
+  background-color: rgba(255, 255, 255, 0.8); 
 }
 .content {
   position: absolute;
@@ -271,3 +282,54 @@ li {
   z-index: 10009; /* Ensure the footer stays above the sidebar */
 }
 
+.from_box {
+  margin-top: 237px;
+  padding-left: 200px;
+  display: inline-block;
+  height: 10px;
+  width: 800px; 
+  vertical-align: top; 
+  background-color: rgba(42, 155, 86, 0); 
+}
+
+.to_box {
+  margin-top: -163px;
+  padding-left: 1070px;
+  display: inline-block;
+  height: 10px;
+  width: 1500px; 
+  vertical-align: top; 
+  background-color: rgba(42, 155, 86, 0); 
+}
+
+.transparent_box {
+  margin-top: 300px;
+  margin-left: -750px;
+  display: inline-block;
+  height: 100px;
+  width: 400px; 
+  vertical-align: top; 
+  background-color: rgba(42, 155, 86, 0); 
+}
+
+.transparent_box_2 {
+  margin-top: -120px;
+  padding-left: 960px;
+  display: inline-block;
+  height: 100px;
+  width: 1500px; 
+  vertical-align: top; 
+  background-color: rgba(42, 155, 86, 0); 
+}
+.colourwhite {
+  color: rgb(0, 0, 0);
+}
+
+.largeletter {
+  font-family: cursive; /* Set the font-family to cursive */
+  font-size: 50px; /* Adjust the font-size as needed */
+  color: white; /* Set the color to white */
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 10px;
+}
