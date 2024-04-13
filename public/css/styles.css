@@ -42,6 +42,15 @@
     background-repeat: no-repeat;
     z-index: -1; /* Ensure the background image stays behind the content */
   }
+
+  .background_cargo {
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Ensure the background image stays behind the content */
+  }
+
   /* Style for header */
   header {
     background-color: #0D2137;
@@ -171,7 +180,8 @@ margin-top: -75px;
 .login_position input[type="remarks"],
 .login_position input[type="email"],
 .login_position input[type="text"],
-.login_position input[type="password"]
+.login_position input[type="password"],
+.login_position input[type="cargo_id"]
 {
     margin-bottom: 10px;
     padding: 8px;
@@ -282,45 +292,82 @@ li {
   z-index: 10009; /* Ensure the footer stays above the sidebar */
 }
 
+.delay_box {
+  margin-left: 100px;
+  margin-top: 148px;
+  white-space: nowrap;
+}
+
+.delay_box_2 {
+  margin-left: 100px;
+  margin-top: 148px;
+  color: transparent;
+  white-space: nowrap;
+}
+
+.transparent {
+  color: transparent;
+}
+
+
+.container_2 {
+  display: flex;
+  align-items: flex-start;
+}
+
+.from_box,
+.to_box {
+  flex: 0 0 auto;
+  margin-top: -183px;
+  height: 50px;
+  background-color: rgba(42, 155, 86, 0); /* Transparent background */
+}
+
 .from_box {
-  margin-top: 237px;
-  padding-left: 200px;
-  display: inline-block;
-  height: 10px;
-  width: 800px; 
-  vertical-align: top; 
-  background-color: rgba(42, 155, 86, 0); 
+  width: 500px;
+  margin-left: 150px;
 }
 
 .to_box {
-  margin-top: -163px;
-  padding-left: 1070px;
-  display: inline-block;
-  height: 10px;
-  width: 1500px; 
-  vertical-align: top; 
-  background-color: rgba(42, 155, 86, 0); 
+  width: 500px;
+  margin-left: 365px;
 }
 
-.transparent_box {
-  margin-top: 300px;
-  margin-left: -750px;
-  display: inline-block;
-  height: 100px;
-  width: 400px; 
-  vertical-align: top; 
-  background-color: rgba(42, 155, 86, 0); 
-}
-
+.transparent_box,
 .transparent_box_2 {
-  margin-top: -120px;
-  padding-left: 960px;
-  display: inline-block;
+  flex: 0 0 auto;
+  margin-top: -125px;
   height: 100px;
-  width: 1500px; 
-  vertical-align: top; 
-  background-color: rgba(42, 155, 86, 0); 
+  background-color: rgba(42, 155, 86, 0); /* Transparent background */
 }
+
+.transparent_box{
+  width: 650px;
+  margin-left: 50px;
+}
+
+.transparent_box_2{
+  width: 580px;
+  margin-left: 255px;
+}
+
+.logo_from img,
+.logo_to img {
+  height: auto; /* Preserve aspect ratio */
+  width: 90px; /* Set width */
+}
+
+.logo_from img {
+  margin-top: 335px; /* Adjust vertical position as needed */
+  margin-left: 170px; /* Adjust horizontal position as needed */
+}
+
+.logo_to img {
+  margin-top: 335px; /* Adjust vertical position as needed */
+  margin-left: 810px; /* Adjust horizontal position as needed */
+}
+
+
 .colourwhite {
   color: rgb(0, 0, 0);
 }

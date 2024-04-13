@@ -56,6 +56,10 @@ app.get('/signup', (req, res) => {
     res.render('signup');
 });
 
+app.get('/cargo', (req, res) => {
+    res.render('cargo');
+});
+
 // Define route handler for the first database
 app.get('/database1', async (req, res) => {
     try {
@@ -80,7 +84,7 @@ app.get('/database1', async (req, res) => {
 
     } catch (error) {
         console.error('Error connecting to MongoDB (Database 1):', error);
-        res.status(500).send('Error connecting to MongoDB (Database 1)');
+        res.render('error');
     }
 });
 
@@ -111,10 +115,71 @@ app.get('/search', async (req, res) => {
 
     } catch (error) {
         console.error('Error searching in MongoDB:', error);
-        res.status(500).send('Error searching in MongoDB');
+        res.render('error');
     }
 });
 
+app.get('/cargo_search', async (req, res) => {
+    const { email, cargo_id } = req.query; // Change req.body to req.query
+
+    try {
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use specific collections
+        const cargo = database.collection('cargo');
+        const cargo_client = database.collection('cargo_client');
+
+        const clientData = await cargo_client.findOne({ cargo_id, email });
+        if (!clientData) {
+            return res.status(404).render('error', { error: 'Email/Cargo not found' });
+        }
+        const cargoData = await cargo.findOne({ cargo_id });
+
+        // Render the arrival.ejs template with the search results
+        res.render('client_cargo', {clientData, cargoData });
+
+    } catch (error) {
+        console.error('Error searching in MongoDB:', error);
+        res.render('error');
+    }
+});
+
+
+app.post('/client_search', async (req, res) => {
+    const query = req.query.query;
+    const capitalizedQuery = query.toUpperCase();
+    try {
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use specific collections
+        const arrivalCollection = database.collection('arrival_list');
+        const departureCollection = database.collection('departure_list');
+
+        // Perform search queries on both collections
+        const arrivalData = await arrivalCollection.find({ flightNumber: capitalizedQuery }).toArray();
+        const departureData = await departureCollection.find({ flightNumber: capitalizedQuery }).toArray();
+
+        // Combine search results from both collections
+        const data = arrivalData.concat(departureData);
+
+        // Render the arrival.ejs template with the search results
+        res.render('client_search', { data });
+
+    } catch (error) {
+        console.error('Error searching in MongoDB:', error);
+        res.render('error');
+    }
+});
 
 // Define route handler for the second database
 app.get('/database2', async (req, res) => {
@@ -140,7 +205,7 @@ app.get('/database2', async (req, res) => {
 
     } catch (error) {
         console.error('Error connecting to MongoDB (Database 2):', error);
-        res.status(500).send('Error connecting to MongoDB (Database 2)');
+        res.render('error');
     }
 });
 
@@ -167,7 +232,7 @@ app.get('/admin', async (req, res) => {
 
     } catch (error) {
         console.error('Error connecting to MongoDB (Database 2):', error);
-        res.status(500).send('Error connecting to MongoDB (Database 2)');
+        res.render('error');
     }
 });
 
@@ -194,7 +259,7 @@ app.get('/admin_arrival', async (req, res) => {
 
     } catch (error) {
         console.error('Error connecting to MongoDB (Database 2):', error);
-        res.status(500).send('Error connecting to MongoDB (Database 2)');
+        res.render('error');
     }
 });
 
@@ -239,7 +304,7 @@ app.post('/login', async (req, res) => {
         }
     } catch (error) {
         console.error('Error searching in MongoDB:', error);
-        res.status(500).send('Error searching in MongoDB');
+        res.render('error');
     }
 });
 
@@ -291,7 +356,7 @@ app.get('/client_acc_page',  async (req, res) => {
         res.render('client_acc_page',{ clientFlightDetails, arrivalDetails, departureDetails });
     } catch (error) {
         console.error('Error searching in MongoDB:', error);
-        res.status(500).send('Error searching in MongoDB');
+        res.render('error');
     }
 });
 
@@ -334,7 +399,7 @@ app.get('/client_arrival', async (req, res) => {
 
     } catch (error) {
         console.error('Error connecting to MongoDB (Database 1):', error);
-        res.status(500).send('Error connecting to MongoDB (Database 1)');
+        res.render('error');
     }
 });
 
@@ -377,7 +442,7 @@ app.get('/client_departure', async (req, res) => {
 
     } catch (error) {
         console.error('Error connecting to MongoDB (Database 2):', error);
-        res.status(500).send('Error connecting to MongoDB (Database 1)');
+        res.render('error');
     }
 });
 

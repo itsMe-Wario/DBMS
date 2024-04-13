@@ -14,12 +14,12 @@
     </div>
     <div class="search-box">
       <span>Flight.No</span>
-      <form action="/search" method="GET">
+      <form action="/client_search" method="GET">
         <input type="text"  id="query" name="query" placeholder="Search">
         <button type="submit">Search</button>
       </form>
       <form action="/" method="GET">
-        <button class="button-2" type="submit">Log-out</button>
+        <button class="button-2" type="submit"><h4><%= clientFlightDetails.email %></h4>Log-out</button>
       </form>
     </div>
   </div>
@@ -28,7 +28,7 @@
   <div class="header_container">
     <a href="#" id="client_acc_page_link"><div class="highlight">Home</div></a>
     <a href="#" id="client_arrival_link">Arrival</a>
-    <a href="http://localhost:3000/database2">Departure</a>
+    <a href="#" id="client_departure_link">Departure</a>
     <a href="#">Cargo</a>
   </div>
   <form id="client_acc_page_form" action="/client_acc_page" method="GET">
@@ -37,35 +37,69 @@
   <form id="client_arrival_form" action="/client_arrival" method="GET">
     <button class="button-2" type="submit" style="display: none;">Arrival</button>
   </form>
+  <form id="client_departure_form" action="/client_departure" method="GET">
+    <button class="button-2" type="submit" style="display: none;">Departure</button>
+  </form>
 </nav>
+<div class="container_2">
 <% if ( clientFlightDetails.hasOwnProperty('flightNumber')) { %>
-  <div class="background_client"><img src="/images/today2.png" height="650" width="1550" alt="arrival_background"></div>
-<div class="from_box"><p><b><%= arrivalDetails.origin %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Date:</b> <%= departureDetails.date %></p></div>
+  <% if (arrivalDetails.remarks == "None") { %>
+  <div class="background_client"><img src="/images/today3.png" height="650" width="1550" alt="arrival_background"></div>
+  <div class="delay_box_2">
+    <p> : Due to weather conditions</p>
+  </div>
+  <% } else { %>
+    <div class="background_client"><img src="/images/today2.png" height="650" width="1550" alt="arrival_background"></div>
+    <div class="delay_box">
+    <p>: <%= departureDetails.remarks %></p>
+  </div>
+    <% } %>
+  <div class="logo_from">
+    <% if (departureDetails.airline) { %>
+      <img src="/images/airline_logo/<%= arrivalDetails.airline %>.png" alt="Logo">
+    <% } else { %>
+      <p>No airline logo available</p>
+    <% } %>
+  </div>
+  <div class="logo_to">
+    <% if (departureDetails.airline) { %>
+      <img src="/images/airline_logo/<%= arrivalDetails.airline %>.png" alt="Logo">
+    <% } else { %>
+      <p>No airline logo available</p>
+    <% } %>
+  </div>
+</div>
+  <div class="container_2">
+<div class="from_box"><p><b><%= arrivalDetails.origin %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Date:</b> <%= departureDetails.date %></p></div>
+<div class="to_box"><p><b><%= departureDetails.destination %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Date:</b> <%= arrivalDetails.date %></p></div>
+  </div>
+  <div class="container_2">
 <div class="transparent_box">
   <p><b>Ticket Holder Name:</b>&nbsp;<%= clientFlightDetails.name %></p>
   <p>(<%= clientFlightDetails.email %>)</p><br>
   <p><b>Flight Number:</b> <%= clientFlightDetails.flightNumber %><b>&nbsp;&nbsp;&nbsp;&nbsp;Status:</b> <%= departureDetails.status %></p><br>
   <p><b>Gate:</b> <%=  departureDetails.gate %> (<%=  departureDetails.terminal %>)</p>
   <% if ( departureDetails.status !== "Delayed") { %>
-    <h5>Departure Time:</h5> <%= departureDetails['departure Time'] %>
+    <br><p style="font-size: 12px;"><b>Departure Time:</p></b>
+    <p><%=  departureDetails['departure Time'] %></p>
   <% } else { %>
  <br><p style="font-size: 12px;"><b>Scheduled Departure Time:&nbsp;&nbsp;&nbsp;&nbsp;Estimated Departure Time:</p></b>
  <p><%=  departureDetails['departure Time'] %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=  departureDetails['estimated Departure Time'] %></p>
   <% } %>
 </div>
-
-<div class="to_box"><p><b><%= departureDetails.destination %></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Date:</b> <%= arrivalDetails.date %></p></div>
 <div class="transparent_box_2">
   <p><b>Ticket Holder Name:</b>&nbsp;<%= clientFlightDetails.name %></p>
   <p>(<%= clientFlightDetails.email %>)</p><br>
   <p><b>Flight Number:</b> <%= clientFlightDetails.flightNumber %><b>&nbsp;&nbsp;&nbsp;&nbsp;Status:</b> <%= arrivalDetails.status %></p><br>
   <p><b>Gate:</b> <%= arrivalDetails.gate %> (<%= arrivalDetails.terminal %>)&nbsp;&nbsp;&nbsp;&nbsp;<b>Baggage Belt:</b> <%= arrivalDetails['baggage Claim Belt'] %></p>
   <% if (arrivalDetails.status == "Landed") { %>
-    <h5>Arrival Time:</h5> <%= arrivalDetails['estimated Arrival Time'] %>
+    <br><p style="font-size: 12px;"><b>Arrival Time:</p></b>
+    <p><%= arrivalDetails['arrival Time'] %></p>
   <% } else { %>
  <br><p style="font-size: 12px;"><b>Scheduled Arrival Time:&nbsp;&nbsp;&nbsp;&nbsp;Estimated Arrival Time:</p></b>
  <p><%= arrivalDetails['arrival Time'] %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= arrivalDetails['estimated Arrival Time'] %></p>
   <% } %>
+</div>
 </div>
 <% } else { %>
   <div class="background_client"><img src="/images/no_flight.png" height="650" width="1550" alt="arrival_background"></div>
@@ -80,6 +114,11 @@
     document.getElementById("client_arrival_link").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent the default behavior of the link
     document.getElementById("client_arrival_form").submit(); // Submit the form
+  });
+
+    document.getElementById("client_departure_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_departure_form").submit(); // Submit the form
   });
 </script>
 </body>

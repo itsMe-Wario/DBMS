@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <title>Departure Search</title>
   <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -21,26 +21,26 @@
     </div>
   </div>
 </header>
-<nav> 
+<nav>
   <div class="header_container">
-    <a href="http://localhost:3000/"><div class="highlight">Home</div></a>
+    <a href="http://localhost:3000/">Home</a>
     <a href="http://localhost:3000/database1">Arrival</a>
     <a href="http://localhost:3000/database2">Departure</a>
     <a href="http://localhost:3000/cargo">Cargo</a>
   </div>
 </nav>
-<div class="background_home"><img src="/images/home_page_2.png" height="620" width="1536" alt="home_page"></div>
+<ul id="data-list"></ul>
+<div class="background_cargo"><img src="/images/cargo_login.png" height="665" width="1650" alt="background"></div>
 <div class="container">
+  <div class="content">
     <div class="login_position">
-    <form action="/login" method="POST">
-    <input type="email"  id="email" name="email" placeholder="Email">
-    <input type="password"  id="password" name="password" placeholder="Password">
-    <button type="submit">Log-in</button>
+    <form action="/cargo_search" method="GET">
+        <input type="email" id="email" name="email" placeholder="Email" required><br>
+        <input type="text" id="cargo_id" name="cargo_id" placeholder="Cargo Id" required><br><br>
+        <button type="submit">Search</button>
     </form>
-    <form action="/signup" method="GET">
-    <button class="button-2" type="submit">No Account?Sign-up.</button>
-  </form>
-  </div>
+</div>
+</div>
 </div>
 </body>
 </html>

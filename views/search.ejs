@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arrivals Search</title>
+  <title>Search</title>
   <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -29,7 +29,7 @@
     <a href="http://localhost:3000/">Home</a>
     <a href="http://localhost:3000/database1">Arrival</a>
     <a href="http://localhost:3000/database2">Departure</a>
-    <a href="#">Cargo</a>
+    <a href="http://localhost:3000/cargo">Cargo</a>
   </div>
 </nav>
 <ul id="data-list"></ul>
@@ -50,7 +50,7 @@
                 </div>
             </li>
         <% }); %>
-    <% } else { %>
+    <% } else { %> 
         <div class="high">No Flights found.</div>
     <% } %>
     </ul>

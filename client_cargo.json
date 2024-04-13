@@ -1,0 +1,41 @@
+[
+    {
+      "email": "john@gmail.com",
+      "name": "John Doe",
+      "cargo_id": "CGO1234-ABCD5678-EFGH9012",
+      "ordered_on": "2024-04-02",
+      "total_amount": 250.00,
+      "paid_amount": 100.00,
+      "to_be_paid": 150.00,
+      "payment_method": "Credit Card",
+      "address": "Air Gold Appartments, 123 Main St,Delhi,India",
+      "zipcode": "110001"
+
+    },
+    {
+      "email": "jane@yahoo.com",
+      "name": "Jane Smith",
+      "cargo_id": "CGO3456-KLMN9012-QRST5678",
+      "ordered_on": "2024-04-01",
+      "total_amount": 300.00,
+      "paid_amount": 300.00,
+      "to_be_paid": 0.00,
+      "payment_method": "PayPal",
+      "address": "Smith Residency, 456 Elm St,Delhi,India",
+      "zipcode": "110002"
+    },
+    {
+      "email": "bob@gmail.com",
+      "name": "Bob Jackson",
+      "cargo_id": "CGO5678-LMNO1234-PQRS5678",
+      "ordered_on": "2024-03-31",
+      "total_amount": 1000.00,
+      "paid_amount": 500.00,
+      "to_be_paid": 500.00,
+      "payment_method": "Cash on Delivery",
+      "address": "Abort Appartment, 789 Oak St,Delhi,India",
+      "zipcode": "110003"
+    }
+  ]
+  
+  

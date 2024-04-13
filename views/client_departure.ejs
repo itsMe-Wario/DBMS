@@ -14,12 +14,12 @@
     </div>
     <div class="search-box">
       <span>Flight.No</span>
-      <form action="/search" method="GET">
+      <form action="/client_search" method="GET">
         <input type="text"  id="query" name="query" placeholder="Search">
         <button type="submit">Search</button>
       </form>
       <form action="/" method="GET">
-        <button class="button-2" type="submit">Log-out</button>
+        <button class="button-2" type="submit"><h4><%= data.user.email %></h4>Log-out</button>
       </form>
     </div>
   </div>
@@ -45,7 +45,6 @@
 <div class="background"><img src="/images/departure_background.jpeg" height="1000" width="1800" alt="departure_background"></div>
 <div class="container">
 <div class="content">
-  <div class="largeletter"><p>Hey, <%= data.user.name %>, Flights Departing Delhi are :</p></div><br>
   <ul class="dta-list">
     <% data.departureData.sort((a, b) => new Date(a['estimated Departure Time']) - new Date(b['estimated Departure Time'])); %>
     <% data.departureData.forEach(item => { %>

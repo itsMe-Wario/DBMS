@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arrivals</title>
+  <title>Search</title>
   <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -19,7 +19,7 @@
         <button type="submit">Search</button>
       </form>
       <form action="/" method="GET">
-        <button class="button-2" type="submit"><h4><%= data.user.email %></h4>Log-out</button>
+        <button class="button-2" type="submit">Log-out</button>
       </form>
     </div>
   </div>
@@ -41,45 +41,45 @@
     <button class="button-2" type="submit" style="display: none;">Departure</button>
   </form>
 </nav>
+<div class="background"><img src="/images/search_view.jpg" height="950" width="1600" alt="arrival_background"></div>
 <ul id="data-list"></ul>
-<div class="background"><img src="/images/arrival_background.jpg" height="950" width="1600" alt="arrival_background"></div>
 <div class="container">
   <div class="content">
     <ul class="data-list">
-        <% data.arrivalData.forEach(item => { %>
-            <li class="data-item">
+      <% if (data && data.length > 0) { %>
+        <% data.forEach((item) => { %>
+            <li class="data-box">
                 <div class="item-title">Flight Number: <%= item.flightNumber %></div>
                 <div class="item-info">
-                    <p>Origin: <%= item.origin %></p>
-                    <p>Scheduled Arrival Time: <%= item['scheduled Arrival Time'] %></p>
-                    <p>Estimated Arrival Time: <%= item['estimated Arrival Time'] %></p>
-                    <p>Status: <%= item.status %></p>
-                    <p>Gate: <%= item.gate %></p>
-                    <p>Baggage Claim: <%= item['baggage Claim'] %></p>
-                    <p>Airline: <%= item.airline %></p>
-                    <p>Terminal: <%= item.terminal %></p>
-                    <p>Remarks: <%= item.remarks %></p>
+                    <% for (const key in item) { %>
+                        <% if (item.hasOwnProperty(key) && key !== '_id' && key !== 'flightNumber' && item[key]) { %>
+                            <p><%= key.charAt(0).toUpperCase() + key.slice(1) %>: <%= item[key] %></p>
+                        <% } %>
+                    <% } %>
                 </div>
             </li>
         <% }); %>
+    <% } else { %> 
+        <div class="high">No Flights found.</div>
+    <% } %>
     </ul>
-</div>
+    </div>      
 </div>
 <script>
-  document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    document.getElementById("client_acc_page_form").submit(); // Submit the form
-  });
-
-    document.getElementById("client_arrival_link").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    document.getElementById("client_arrival_form").submit(); // Submit the form
-  });
-
-  document.getElementById("client_departure_link").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    document.getElementById("client_departure_form").submit(); // Submit the form
-  });
-</script>
-</body>
-</html>
+    document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent the default behavior of the link
+      document.getElementById("client_acc_page_form").submit(); // Submit the form
+    });
+  
+      document.getElementById("client_arrival_link").addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent the default behavior of the link
+      document.getElementById("client_arrival_form").submit(); // Submit the form
+    });
+  
+    document.getElementById("client_departure_link").addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent the default behavior of the link
+      document.getElementById("client_departure_form").submit(); // Submit the form
+    });
+  </script>
+  </body>
+  </html>
