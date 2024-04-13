@@ -46,6 +46,10 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+app.get('/book', (req, res) => {
+    res.render('book_page');
+});
+
 app.use(session({
     secret: secretKey,
     resave: false,
@@ -112,6 +116,51 @@ app.get('/search', async (req, res) => {
 
         // Render the arrival.ejs template with the search results
         res.render('search', { data });
+
+    } catch (error) {
+        console.error('Error searching in MongoDB:', error);
+        res.render('error');
+    }
+});
+
+app.get('/search_flight', async (req, res) => {
+    const to = req.query.to;
+    const from = req.query.from;
+    const date = req.query.date;
+    try {
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use specific collections
+        const ticketCollection = database.collection('flight_tickets');
+
+        // Perform search queries on both collections
+        const ticketData = await ticketCollection.find({
+            $and: [
+                {
+                    $or: [
+                        { departure_airport: { $regex: from, $options: 'i' } },
+                        { departure_name: { $regex: from, $options: 'i' } },
+                        { departure_location: { $regex: from, $options: 'i' } }
+                    ]
+                },
+                {
+                    $or: [
+                        { destination_airport: { $regex: to, $options: 'i' } },
+                        { destination_name: { $regex: to, $options: 'i' } },
+                        { destination_location: { $regex: to, $options: 'i' } }
+                    ]
+                }
+            ]
+        }).toArray();
+        
+
+        // Render the arrival.ejs template with the search results
+        res.render('flight_search', { ticketData , date });
 
     } catch (error) {
         console.error('Error searching in MongoDB:', error);

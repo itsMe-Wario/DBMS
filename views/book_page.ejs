@@ -23,23 +23,24 @@
 </header>
 <nav> 
   <div class="header_container">
-    <a href="http://localhost:3000/"><div class="highlight">Home</div></a>
+    <a href="http://localhost:3000/">Home</a>
     <a href="http://localhost:3000/database1">Arrival</a>
     <a href="http://localhost:3000/database2">Departure</a>
-    <a href="http://localhost:3000/book">Book</a>
+    <a href="http://localhost:3000/book"><div class="highlight">Book</div></a>
     <a href="http://localhost:3000/cargo">Cargo</a>
   </div>
 </nav>
 <div class="background_home"><img src="/images/home_page_2.png" height="620" width="1536" alt="home_page"></div>
 <div class="container">
     <div class="login_position">
-    <form action="/login" method="POST">
-    <input type="email"  id="email" name="email" placeholder="Email">
-    <input type="password"  id="password" name="password" placeholder="Password">
-    <button type="submit">Log-in</button>
+    <form action="/search_flight" method="GET">
+    <input type="text"  id="from" name="from" placeholder="From">
+    <input type="text"  id="to" name="to" placeholder="To">
+    <input type="date"  id="date" name="date">
+    <button type="submit">Search</button>
     </form>
     <form action="/signup" method="GET">
-    <button class="button-2" type="submit">No Account?Sign-up.</button>
+    <button class="button-2" type="submit">Have a Account?Sign-in.</button>
   </form>
   </div>
 </div>

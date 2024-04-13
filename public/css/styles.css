@@ -181,6 +181,7 @@ margin-top: -75px;
 .login_position input[type="email"],
 .login_position input[type="text"],
 .login_position input[type="password"],
+.login_position input[type="date"],
 .login_position input[type="cargo_id"]
 {
     margin-bottom: 10px;

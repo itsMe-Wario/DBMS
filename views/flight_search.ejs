@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cargo</title>
+  <link href="/css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+  <div class="header_container">
+    <div class="logo">
+      <img src="/images/logo_main.png" alt="Logo">
+    </div>
+    <div class="search-box">
+      <span>Flight.No</span>
+      <form action="/search" method="GET">
+        <input type="text"  id="query" name="query" placeholder="Search">
+        <button type="submit">Search</button>
+      </form>
+      <form action="/" method="GET">
+        <button class="button-2" type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="header_container">
+    <a href="http://localhost:3000/">Home</a>
+    <a href="http://localhost:3000/database1">Arrival</a>
+    <a href="http://localhost:3000/database2">Departure</a>
+    <a href="http://localhost:3000/cargo">Cargo</a>
+  </div>
+</nav>
+<div class="background_client"><img src="/images/cargo_bg.png" height="650" width="1600" alt="arrival_background"></div>
+<div class="container">
+  <div class="content">
+    <div class="cargo_detail">
+        <ul class="data-list">
+            <% if (ticketData && ticketData.length > 0) { %>
+                <% ticketData.forEach(item => { %>
+                    <li class="data-box">
+                        <div class="item-title">Flight Number: <%= item.flightNumber %></div>
+                        <div class="item-info">
+                            <% for (const key in item) { %>
+                                <% if (item.hasOwnProperty(key) && key !== '_id' && key !== 'flightNumber' && item[key]) { %>
+                                    <p><%= key.charAt(0).toUpperCase() + key.slice(1) %>: <%= item[key] %></p>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <div class="high">No Flights found.</div>
+            <% } %>
+            
+      </ul>   
+</div>
+</div>
+</body>
+</html>
