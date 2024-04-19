@@ -1,73 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cargo</title>
-  <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargo</title>
+    <link rel="stylesheet" href="/css/styles_2.css">
 </head>
+
 <body>
-<header>
-  <div class="header_container">
-    <div class="logo">
-      <img src="/images/logo_main.png" alt="Logo">
+    <header>
+        <div class="header_container">
+            <div class="logo">
+                <img src="/images/logo_main.png" alt="Logo">
+            </div>
+            <div class="search-box">
+                <span>Flight.No</span>
+                <form action="/search" method="GET">
+                    <input type="text" id="query" name="query" placeholder="Search">
+                    <button type="submit">Search</button>
+                </form>
+                <form action="/" method="GET">
+                    <button class="button-2" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="header_container">
+            <a href="http://localhost:3000/">Home</a>
+            <a href="http://localhost:3000/database1">Arrival</a>
+            <a href="http://localhost:3000/database2">Departure</a>
+            <a href="http://localhost:3000/cargo">Cargo</a>
+        </div>
+    </nav>
+
+    <div class="background_client">
+        <img src="/images/cargo_bg.png" height="650" width="1600" alt="arrival_background">
     </div>
-    <div class="search-box">
-      <span>Flight.No</span>
-      <form action="/client_search" method="GET">
-        <input type="text"  id="query" name="query" placeholder="Search">
-        <button type="submit">Search</button>
-      </form>
-      <form action="/" method="GET">
-        <button class="button-2" type="submit">Login</button>
-      </form>
+
+    
+        <div class="login-client">
+            Hey, <h1><%= clientData.name %></h1>
+            <%= clientData.email %>
+            <%= clientData.cargo_id %>
+        </div>
+
+        <div class="cargo-status">
+            <% if (cargoData.currently_at === cargoData.destination) { %>
+            Delivered
+            <% } else { %>
+            On Route
+            <% } %>
+        </div>
     </div>
-  </div>
-</header>
-<nav>
-  <div class="header_container">
-    <a href="http://localhost:3000/">Home</a>
-    <a href="http://localhost:3000/database1">Arrival</a>
-    <a href="http://localhost:3000/database2">Departure</a>
-    <a href="http://localhost:3000/book">Book</a>
-    <a href="http://localhost:3000/cargo">Cargo</a>
-  </div>
-</nav>
-<div class="background_client"><img src="/images/cargo_bg.png" height="650" width="1600" alt="arrival_background"></div>
-<div class="container">
-  <div class="content">
-    <div class="cargo_detail">
-      <% if ( clientData.hasOwnProperty('email')) { %>
-          <%= clientData.email %>
-          <%= clientData.name %>
-          <%= clientData.cargo_id %>
-          <%= clientData.ordered_on %>
-          <%= clientData.total_amount %>
-          <%= clientData.paid_amount %>
-          <%= clientData.to_be_paid %>
-          <%= clientData.payment_medthod %>
-          <%= clientData.address %>
-          <%= clientData.zipcode %>
-          <%= cargoData.cargo_type %>
-          <%= cargoData.description %>
-          <%= cargoData.quantity %>
-          <%= cargoData.weight_kg %>
-          <%= cargoData.from %>
-          <%= cargoData.destination %>
+
+    <div class="cargo-container">
+         
+       <div class="cargo-arrival">
+        To <h3><%= cargoData.destination %></h3>
+        <%= cargoData.arrival_date %>
+       </div>
+
+        <div class="cargo-during">
+            In <h3><%= cargoData.currently_at %></h3>
+        </div>
+
+        <div class="cargo-origin">
+          From <h3><%= cargoData.from %></h3>
           <%= cargoData.departure_date %>
-          <%= cargoData.arrival_date %>
-          <%= cargoData.currently_at %>
-          <%= cargoData.left_from %>
-          <% } else { %>
-              <p>No info available</p>
-              <% } %>
-</div>   
-    <div class="login_position">
-      Hey,<h1><%= clientData.name %></h1>
-      <%= clientData.email %>
-      <%= clientData.cargo_id %>
-    </div>   
-</div>
-</div>
+       </div>
+
+        
+    </div>
 </body>
+
 </html>
+

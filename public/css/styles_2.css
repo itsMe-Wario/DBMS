@@ -1,0 +1,457 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .container {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    height: 83vh; /* Set the height of the container to fill the viewport */
+    overflow-y: auto; /* Allow content to scroll */
+  }
+  
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Ensure the background image stays behind the content */
+  }
+
+  .background_client {
+    position: fixed;
+    margin-top: 100;
+    left:0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Ensure the background image stays behind the content */
+  }
+
+  .background_home {
+    position: fixed;
+    margin-top: 50;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Ensure the background image stays behind the content */
+  }
+
+  .background_cargo {
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1; /* Ensure the background image stays behind the content */
+  }
+
+  /* Style for header */
+  header {
+    background-color: #0D2137;
+    color: #fff;
+    padding: 5px 0;
+  }
+  
+  .header_container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .text1{
+    text-align: center; /* Center the text */
+    padding-right: 50%; /* Take up remaining space */
+  }
+
+  .title {
+    width: 30%;
+    margin-top: 10px;
+    margin-left: 10px;
+    align-items: center;
+    background-color: #0D2137;
+    color: #fff;
+  }
+  
+  /* Style for logo */
+  .logo img {
+    margin-left:10px;
+    max-width: 200px;
+  }
+  
+  /* Style for search box */
+
+  .search-box form {
+    display: inline-block; /* Ensure forms are inline */
+  }
+  .search-box input[type="text"] {
+    padding: 8px;
+    border: 1px solid black; /* Adding a black border */
+    border-radius: 4px;
+  }
+
+  .search-box span{
+    display: inline-block; 
+    padding: 5px;
+  }
+  
+  .search-box button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .search-box .button-2 {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: transparent;
+    color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .login_position{
+    position: sticky;
+    width: 250px;
+    height: 167px;
+    background-color: transparent;
+    border: 0px solid #ffffff;
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 200px;
+    margin-left: 50px;
+  }
+
+  .login_position2 {
+    margin-left:700px;
+    margin-top: -50px;
+}
+
+.login_position3 {
+  margin-left:900px;
+  margin-top: -162px;
+}
+
+.login_position4 {
+  margin-left:1100px;
+  margin-top: -75px;
+}
+
+.login_position5 {
+  margin-left:700px;
+  margin-top: -20px;
+}
+
+.login_position6 {
+margin-left:900px;
+margin-top: -462px;
+}
+
+.login_position7 {
+margin-left:1100px;
+margin-top: -75px;
+}
+
+.login_position input[type="flightNumber"],
+.login_position input[type="origin"],
+.login_position input[type="scheduledArrivalTime"],
+.login_position input[type="estimatedArrivalTime"],
+.login_position input[type="status"],
+.login_position input[type="gate"],
+.login_position input[type="baggageClaim"],
+.login_position input[type="airline"],
+.login_position input[type="terminal"],
+.login_position input[type="remarks"],
+.login_position input[type="email"],
+.login_position input[type="text"],
+.login_position input[type="password"],
+.login_position input[type="date"],
+.login_position input[type="cargo_id"]
+{
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid black; /* Adding a black border */
+    border-radius: 4px;
+}
+
+  .login_position button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  .login_position .button-2 {
+    font-size: 8;
+    padding: 0px 0px;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin-top: 9px;
+  }
+
+  /* Navigation styles */
+  nav {
+    background-color: rgb(180, 180, 236);
+    color: #fff;
+  }
+  
+  nav a {
+    display: inline-block;
+    padding: 10px 100px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  nav a:hover {
+    background-color: #3b3baf;
+  }
+
+  .highlight{
+    color:#000000 ;
+  }
+
+  .high {
+    color: #ffffff;
+    font-family: 'Courier New', sans-serif;
+    font-size: larger;
+  }
+  
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8); 
+}
+.item-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.item-info {
+  margin-left: 20px;
+  font-size: 0.9em;
+}
+.data-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.data-item {
+  display: inline-block;
+  width: 30%; /* Adjust as needed */
+  vertical-align: top; /* Align items to the top */
+  margin-right: 10px; /* Add some space between items */
+  background-color: rgba(255, 255, 255, 0.8); 
+}
+.content {
+  position: absolute;
+  top: 0; /* Threshold position */
+  z-index: 1; /* Set the z-index of the content container to 1 to ensure it's above the background */
+  padding: 20px;
+  color: #000000;
+  text-align: center;
+  height: auto;
+  width: auto;
+}
+
+.data_box{
+  display: inline-block;
+  width: 100px;
+  vertical-align: top; /* Align items to the top */
+  margin-right: 10px; /* Add some space between items */
+}
+
+.footer {
+  width: 100%;
+  height: 85px; /* Adjust height as needed */
+  background-color: #331A53;
+  bottom: 0; /* Align to the bottom */
+  z-index: 10009; /* Ensure the footer stays above the sidebar */
+}
+
+.delay_box {
+  margin-left: 100px;
+  margin-top: 148px;
+  white-space: nowrap;
+}
+
+.delay_box_2 {
+  margin-left: 100px;
+  margin-top: 148px;
+  color: transparent;
+  white-space: nowrap;
+}
+
+.transparent {
+  color: transparent;
+}
+
+
+.container_2 {
+  display: flex;
+  align-items: flex-start;
+}
+
+.from_box,
+.to_box {
+  flex: 0 0 auto;
+  margin-top: -183px;
+  height: 50px;
+  background-color: rgba(42, 155, 86, 0); /* Transparent background */
+}
+
+.from_box {
+  width: 500px;
+  margin-left: 150px;
+}
+
+.to_box {
+  width: 500px;
+  margin-left: 365px;
+}
+
+.transparent_box,
+.transparent_box_2 {
+  flex: 0 0 auto;
+  margin-top: -125px;
+  height: 100px;
+  background-color: rgba(42, 155, 86, 0); /* Transparent background */
+}
+
+.transparent_box{
+  width: 650px;
+  margin-left: 50px;
+}
+
+.transparent_box_2{
+  width: 580px;
+  margin-left: 255px;
+}
+
+.logo_from img,
+.logo_to img {
+  height: auto; /* Preserve aspect ratio */
+  width: 90px; /* Set width */
+}
+
+.logo_from img {
+  margin-top: 335px; /* Adjust vertical position as needed */
+  margin-left: 170px; /* Adjust horizontal position as needed */
+}
+
+.logo_to img {
+  margin-top: 335px; /* Adjust vertical position as needed */
+  margin-left: 810px; /* Adjust horizontal position as needed */
+}
+
+
+.colourwhite {
+  color: rgb(0, 0, 0);
+}
+
+.largeletter {
+  font-family: cursive; /* Set the font-family to cursive */
+  font-size: 50px; /* Adjust the font-size as needed */
+  color: white; /* Set the color to white */
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+
+.cargo-status {
+    font-size: 1.2rem; /* Adjust the font size as needed */
+    font-weight: bold; /* Set the font weight to bold */
+    color: rgb(26, 8, 81); /* Set the text color to green for delivered status */
+    padding: 5px; /* Add padding around the text */
+    font-size: large;
+   
+   margin-left: 50px;
+    text-align: left; /* Center the text */
+    margin-top: 210px;
+    
+    border: 3px solid #000; /* 5px wide solid black border */
+    padding: 5px; /* Add some padding inside the border */
+    margin-right: 1270px;
+    background-color: #f4d890;
+    border-radius: 10px;
+}
+
+
+.login-client {
+    margin-top: 100px;
+    color: #0D2137;
+    margin-left: 50px;
+}
+
+
+
+
+.cargo-origin {
+    /* Styles for cargo-origin */
+    background-color: lightblue; /* Set background color to light blue */
+    margin-bottom: 10px; /* Space between the divs */
+    margin-left: 900px;
+    margin-top: -220px;
+    font-size: larger;
+    text-size-adjust: 30px;
+    padding-inline: 160px;
+    border: 3px solid #000; /* 5px wide solid black border */
+    padding: 10px; /* Add some padding inside the border */
+    border-radius: 10px; /* Rounded corners */
+    margin-right: 150px;
+}
+
+.cargo-during {
+    /* Styles for cargo-during */
+    background-color: lightgreen; /* Set background color to light green */
+    margin-bottom: 10px;
+    margin-left: 900px;
+    margin-top: -235px;
+    font-size: larger;
+    text-size-adjust: 30px;
+    padding-inline: 200px;
+    border: 3px solid #000; /* 5px wide solid black border */
+    padding: 10px; /* Add some padding inside the border */
+    border-radius: 10px; /* Rounded corners */
+    margin-right: 150px;
+}
+
+.cargo-arrival {
+    /* Styles for cargo-arrival */
+    background-color: lightcoral; /* Set background color to light coral */
+    margin-bottom: 30px;
+    margin-left: 900px;
+    margin-top: -110px;
+    font-size: larger;
+    text-size-adjust: 30px;
+    padding-inline: 160px;
+    border: 3px solid #000; /* 5px wide solid black border */
+    padding: 10px; /* Add some padding inside the border */
+    border-radius: 10px; /* Rounded corners */
+    margin-right: 150px;
+}
