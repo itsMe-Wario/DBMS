@@ -189,7 +189,7 @@ app.get('/cargo_search', async (req, res) => {
         const cargoData = await cargo.findOne({ cargo_id });
 
         // Render the arrival.ejs template with the search results
-        res.render('client_cargo', {clientData, cargoData });
+        res.render('search_cargo', {clientData, cargoData });
 
     } catch (error) {
         console.error('Error searching in MongoDB:', error);
