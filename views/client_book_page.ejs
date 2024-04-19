@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arrivals</title>
+  <title>Search Flight</title>
   <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -12,7 +12,6 @@
     <div class="logo">
       <img src="/images/logo_main.png" alt="Logo">
     </div>
-    <h1>Delhi</h1>
     <div class="search-box">
       <span>Flight.No</span>
       <form action="/client_search" method="POST">
@@ -20,7 +19,7 @@
         <button type="submit">Search</button>
       </form>
       <div class="dropdown">
-        <button class="button-2" type="submit"><h4><%= data.user.email %></h4>Drop Down</button>
+        <button class="button-2" type="submit">Drop Down</button>
         <div class="dropdown-content">
           <form action="/" method="GET">
             <button class="button-2" type="submit">Log-Out</button>
@@ -36,9 +35,9 @@
 <nav>
   <div class="header_container">
     <a href="#" id="client_acc_page_link">Home</a>
-    <a href="#" id="client_arrival_link"><div class="highlight">Arrival</div></a>
+    <a href="#" id="client_arrival_link">Arrival</a>
     <a href="#" id="client_departure_link">Departure</a>
-    <a href="http://localhost:3000/client_book_page">Book</a>
+    <a href="http://localhost:3000/client_book_page"><div class="highlight">Book</div></a>
     <a href="http://localhost:3000/cargo">Cargo</a>
   </div>
   <form id="client_acc_page_form" action="/client_acc_page" method="GET">
@@ -51,29 +50,19 @@
     <button class="button-2" type="submit" style="display: none;">Departure</button>
   </form>
 </nav>
-<ul id="data-list"></ul>
-<div class="background"><img src="/images/arrival_background.jpg" height="950" width="1600" alt="arrival_background"></div>
+<div class="background"><img src="/images/book.png" height="950" width="1600" alt="background"></div>
 <div class="container">
-  <div class="content">
-    <ul class="data-list">
-        <% data.arrivalData.forEach(item => { %>
-            <li class="data-item">
-                <div class="item-title">Flight Number: <%= item.flightNumber %></div>
-                <div class="item-info">
-                    <p>Origin: <%= item.origin %></p>
-                    <p>Scheduled Arrival Time: <%= item['scheduled Arrival Time'] %></p>
-                    <p>Estimated Arrival Time: <%= item['estimated Arrival Time'] %></p>
-                    <p>Status: <%= item.status %></p>
-                    <p>Gate: <%= item.gate %></p>
-                    <p>Baggage Claim: <%= item['baggage Claim'] %></p>
-                    <p>Airline: <%= item.airline %></p>
-                    <p>Terminal: <%= item.terminal %></p>
-                    <p>Remarks: <%= item.remarks %></p>
-                </div>
-            </li>
-        <% }); %>
-    </ul>
-</div>
+    <div class="login_position">
+    <form action="/client_flight_search" method="GET">
+    <input type="text"  id="from" name="from" placeholder="From">
+    <input type="text"  id="to" name="to" placeholder="To">
+    <input type="date"  id="date" name="date">
+    <button type="submit">Search</button>
+    </form>
+    <form action="/signup" method="GET">
+    <button class="button-2" type="submit">Have a Account?Sign-in.</button>
+  </form>
+  </div>
 </div>
 <script>
   document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
@@ -86,7 +75,7 @@
     document.getElementById("client_arrival_form").submit(); // Submit the form
   });
 
-  document.getElementById("client_departure_link").addEventListener("click", function(event) {
+    document.getElementById("client_departure_link").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent the default behavior of the link
     document.getElementById("client_departure_form").submit(); // Submit the form
   });

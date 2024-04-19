@@ -12,6 +12,16 @@
     height: 83vh; /* Set the height of the container to fill the viewport */
     overflow-y: auto; /* Allow content to scroll */
   }
+
+  .container button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
   
   .background {
     position: fixed;
@@ -123,7 +133,7 @@
     cursor: pointer;
     margin-right: 10px;
   }
-
+  /* For home page*/
   .login_position{
     position: sticky;
     width: 250px;
@@ -138,6 +148,7 @@
     margin-left: 50px;
   }
 
+  /* For admin */
   .login_position2 {
     margin-left:700px;
     margin-top: -50px;
@@ -167,6 +178,12 @@ margin-top: -462px;
 margin-left:1100px;
 margin-top: -75px;
 }
+
+.login_position8 {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  }
 
 .login_position input[type="flightNumber"],
 .login_position input[type="origin"],
@@ -208,6 +225,20 @@ margin-top: -75px;
     cursor: pointer;
     margin-top: 9px;
   }
+  /* Admin ends here */
+
+  .next_search {
+    margin-top: 10px;
+    }
+
+    .next_search input[type="date"],
+    .next_search input[type="text"]
+{
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid black; /* Adding a black border */
+    border-radius: 4px;
+}
 
   /* Navigation styles */
   nav {
@@ -267,6 +298,15 @@ li {
   margin-right: 10px; /* Add some space between items */
   background-color: rgba(255, 255, 255, 0.8); 
 }
+
+.data-item_2 {
+  display:flex;
+  min-width: 1490px;
+  vertical-align: top; /* Align items to the top */
+  background-color: rgba(255, 255, 255, 0.8); 
+  margin-top: 20px;
+}
+
 .content {
   position: absolute;
   top: 0; /* Threshold position */
@@ -368,11 +408,10 @@ li {
   margin-left: 810px; /* Adjust horizontal position as needed */
 }
 
-
 .colourwhite {
   color: rgb(0, 0, 0);
 }
-
+  /* For no_booking */
 .largeletter {
   font-family: cursive; /* Set the font-family to cursive */
   font-size: 50px; /* Adjust the font-size as needed */
@@ -380,4 +419,90 @@ li {
   font-weight: bold;
   margin-top: 20px;
   margin-left: 10px;
+}
+
+.airline_info {
+  margin-left: 30px;
+  margin-top: 5px;
+}
+
+.departure_info,
+.flight_time_info,
+.destination_info,
+.price_info {
+  margin-left: 210px;
+}
+
+.price_info{
+  margin-top: 10px;
+  margin-right: 50px;
+}
+
+.logo_ticket img {
+  height: auto; /* Preserve aspect ratio */
+  width: 50px; /* Set width */
+}
+
+.login-container {
+  display: none; /* Initially hide the login container */
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.login-form input {
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 200px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.login-form button {
+  padding: 8px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  align-items: center;
+}
+
+/* Style the dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #0D2137;
+  max-width: 90%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Style the links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
 }

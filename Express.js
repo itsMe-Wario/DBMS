@@ -159,7 +159,6 @@ app.get('/search_flight', async (req, res) => {
         }).toArray();
         
 
-        // Render the arrival.ejs template with the search results
         res.render('flight_search', { ticketData , date });
 
     } catch (error) {
@@ -357,6 +356,115 @@ app.post('/login', async (req, res) => {
     }
 });
 
+app.post('/login_2', async (req, res) => {
+    const { email, password, to, from, date } = req.body;
+
+    
+    try {
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use a specific collection
+        const collection = database.collection('client_account');
+
+        // Find user with the given email
+        const user = await collection.findOne({ email: email });
+
+        // Check if user exists
+        if (!user) {
+            // Render no_account.ejs if user doesn't exist
+            res.render('no_account');
+            return;
+        }
+
+        // Compare passwords
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        if (passwordMatch) {
+            // Store user information in session
+            req.session.user = user;
+
+            // Redirect to client account page
+            res.redirect(`/client_flight_search?from=${from}&to=${to}&date=${date}`);
+        } else {
+            // Render no_account.ejs if passwords don't match
+            res.render('no_account');
+        }
+    } catch (error) {
+        console.error('Error searching in MongoDB:', error);
+        res.render('error');
+    }
+});
+
+app.get('/client_book_page',  async (req, res) => {
+    // Retrieve user information from session
+    const user = req.session.user;
+
+    if (!user) {
+        // If user is not in session, redirect to login page
+        res.render('home');
+        return;
+    }
+    res.render('client_book_page');
+
+});
+
+app.get('/client_flight_search',  async (req, res) => {
+    // Retrieve user information from session
+    const user = req.session.user;
+
+    if (!user) {
+        // If user is not in session, redirect to login page
+        res.redirect('/login');
+        return;
+    }
+
+    const to = req.query.to;
+    const from = req.query.from;
+    const date = req.query.date;
+    try {
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use specific collections
+        const ticketCollection = database.collection('flight_tickets');
+
+        // Perform search queries on both collections
+        const ticketData = await ticketCollection.find({
+            $and: [
+                {
+                    $or: [
+                        { departure_airport: { $regex: from, $options: 'i' } },
+                        { departure_name: { $regex: from, $options: 'i' } },
+                        { departure_location: { $regex: from, $options: 'i' } }
+                    ]
+                },
+                {
+                    $or: [
+                        { destination_airport: { $regex: to, $options: 'i' } },
+                        { destination_name: { $regex: to, $options: 'i' } },
+                        { destination_location: { $regex: to, $options: 'i' } }
+                    ]
+                }
+            ]
+        }).toArray();
+        
+        res.render('client_flight_search', { ticketData , date });
+
+    } catch (error) {
+        console.error('Error searching in MongoDB:', error);
+        res.render('error');
+    }
+});
+
 app.get('/client_acc_page',  async (req, res) => {
     // Retrieve user information from session
     const user = req.session.user;
@@ -508,7 +616,7 @@ app.post('/register', async (req, res) => {
         // Insert the user data into the collection
         const result = await collection.insertOne({ name, email, password: hashedPassword });
         
-        res.render('home');
+        res.render('home' ,{result});
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).send('Error registering user');
@@ -528,7 +636,7 @@ app.post('/client_add', async (req, res) => {
         // Insert the user data into the collection
         const result = await collection.insertOne({ name, email, password: hashedPassword, flightNumber });
         
-        res.redirect('/admin');
+        res.redirect('/admin', {result});
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(500).send('Error registering user');
@@ -606,7 +714,7 @@ app.post('/arrival_add', async (req, res) => {
         const result = await collection.insertOne({ flightNumber, origin, scheduledArrivalTime, estimatedArrivalTime,
             status, gate, baggageClaim, airline, terminal, remarks });
 
-        res.redirect('/admin');
+        res.redirect('/admin', {result});
     } catch (error) {
         console.error('Error adding arrival:', error);
         res.status(500).send('Error adding arrival');

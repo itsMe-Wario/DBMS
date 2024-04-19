@@ -12,15 +12,24 @@
     <div class="logo">
       <img src="/images/logo_main.png" alt="Logo">
     </div>
+    <h1>Delhi</h1>
     <div class="search-box">
       <span>Flight.No</span>
-      <form action="/client_search" method="GET">
+      <form action="/client_search" method="POST">
         <input type="text"  id="query" name="query" placeholder="Search">
         <button type="submit">Search</button>
       </form>
-      <form action="/" method="GET">
-        <button class="button-2" type="submit"><h4><%= data.user.email %></h4>Log-out</button>
-      </form>
+      <div class="dropdown">
+        <button class="button-2" type="submit"><h4><%= data.user.email %></h4>Drop Down</button>
+        <div class="dropdown-content">
+          <form action="/" method="GET">
+            <button class="button-2" type="submit">Log-Out</button>
+          </form>
+          <form action="/tickets" method="GET">
+            <button class="button-2" type="submit">Other Tickets</button>
+          </form>
+        </div>
+    </div>
     </div>
   </div>
 </header>
@@ -28,8 +37,9 @@
   <div class="header_container">
     <a href="#" id="client_acc_page_link">Home</a>
     <a href="#" id="client_arrival_link">Arrival</a>
-    <a href="#" id="client_departure_link">Departure</a>
-    <a href="#">Cargo</a>
+    <a href="#" id="client_departure_link"><div class="highlight">Departure</div></a>
+    <a href="http://localhost:3000/client_book_page">Book</a>
+    <a href="http://localhost:3000/cargo">Cargo</a>
   </div>
   <form id="client_acc_page_form" action="/client_acc_page" method="GET">
     <button class="button-2" type="submit" style="display: none;">Home</button>
