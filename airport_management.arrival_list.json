@@ -42,7 +42,7 @@
   "status": "Delayed",
   "gate": "C2",
   "baggage Claim Belt": 7,
-  "airline": "United Airlines",
+  "airline": "Air India",
   "terminal": "Terminal 3",
   "remarks": "Technical issues"
 },
@@ -194,7 +194,7 @@
   "_id": {
     "$oid": "660697c914366356afb716f8"
   },
-  "flightNumber": "KLM010",
+  "flightNumber": "UND010",
   "origin": "Madrid",
   "date": "2024-03-18",
   "arrival Time": "01:10",
@@ -202,7 +202,7 @@
   "status": "Landed",
   "gate": "M13",
   "baggage Claim Belt": 27,
-  "airline": "Iberia",
+  "airline": "United Airlines",
   "terminal": "Terminal 10",
   "remarks": "None"
 },

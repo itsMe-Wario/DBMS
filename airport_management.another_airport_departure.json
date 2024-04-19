@@ -1,0 +1,30 @@
+[{
+  "_id": {
+    "$oid": "660870c279b4fe5f0b7af57c"
+  },
+  "flightNumber": "DEF789",
+  "destination": "Delhi",
+  "date": "2024-03-16",
+  "departure Time": "1:45",
+  "estimated Departure Time": "2:00",
+  "status": "Delayed",
+  "gate": "B2",
+  "airline": "Air India",
+  "terminal": "Terminal 9",
+  "remarks": "Due to weather conditions"
+},
+{
+  "_id": {
+    "$oid": "660b03399e09b0728d7b7f71"
+  },
+  "flightNumber": "UND010",
+  "destination": "Delhi",
+  "date": "2024-03-17",
+  "departure Time": "12:00",
+  "estimated Departure Time": "12:00",
+  "status": "Departed",
+  "gate": "B2",
+  "airline": "United Airlines",
+  "terminal": "Terminal 9",
+  "remarks": "None"
+}]

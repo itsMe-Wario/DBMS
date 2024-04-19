@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "66086f4479b4fe5f0b7af576"
+  },
+  "flightNumber": "TDB123",
+  "origin": "Delhi",
+  "date": "2024-03-19",
+  "arrival Time": "12:00",
+  "estimated Arrival Time": "13:15",
+  "status": "Delayed",
+  "gate": "C1",
+  "airline": "Delta",
+  "baggage Claim Belt": 3,
+  "terminal": "Terminal 7",
+  "remarks": "Due to weather conditions"
+}]

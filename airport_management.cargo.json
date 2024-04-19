@@ -1,0 +1,224 @@
+[{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f7b"
+  },
+  "cargo_id": "CGO1234-ABCD5678-EFGH9012",
+  "cargo_type": "Electronics",
+  "description": "Smartphones and accessories",
+  "quantity": 1,
+  "weight_kg": 5,
+  "from": "San Francisco",
+  "destination": "Delhi",
+  "departure_date": "2024-04-10",
+  "arrival_date": "2024-04-15",
+  "currently_at": "Singapore",
+  "left_from": "Hong Kong"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f7c"
+  },
+  "cargo_id": "CGO5678-WXYZ1234-IJKL5678",
+  "cargo_type": "Clothing",
+  "description": "Men's and women's fashion",
+  "quantity": 3,
+  "weight_kg": 10,
+  "from": "Shanghai",
+  "destination": "Delhi",
+  "departure_date": "2024-04-12",
+  "arrival_date": "2024-04-18",
+  "currently_at": "Dubai",
+  "left_from": "Doha"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f7d"
+  },
+  "cargo_id": "CGO9012-UVWX3456-MNOP7890",
+  "cargo_type": "Food",
+  "description": "Fresh fruits and vegetables",
+  "quantity": 2,
+  "weight_kg": 8,
+  "from": "London",
+  "destination": "Delhi",
+  "departure_date": "2024-04-14",
+  "arrival_date": "2024-04-20",
+  "currently_at": "Mumbai",
+  "left_from": "Abu Dhabi"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f7e"
+  },
+  "cargo_id": "CGO3456-KLMN9012-QRST5678",
+  "cargo_type": "Books",
+  "description": "Various genres",
+  "quantity": 4,
+  "weight_kg": 15,
+  "from": "Delhi",
+  "destination": "Paris",
+  "departure_date": "2024-04-16",
+  "arrival_date": "2024-04-22",
+  "currently_at": "Rome",
+  "left_from": "Barcelona"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f7f"
+  },
+  "cargo_id": "CGO1234-DEFG5678-HIJK9012",
+  "cargo_type": "Toys",
+  "description": "Assorted toys for kids",
+  "quantity": 2,
+  "weight_kg": 7,
+  "from": "Tokyo",
+  "destination": "Delhi",
+  "departure_date": "2024-04-10",
+  "arrival_date": "2024-04-15",
+  "currently_at": "Hong Kong",
+  "left_from": "Shanghai"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f80"
+  },
+  "cargo_id": "CGO5678-LMNO1234-PQRS5678",
+  "cargo_type": "Furniture",
+  "description": "Wooden chairs and tables",
+  "quantity": 1,
+  "weight_kg": 30,
+  "from": "Los Angeles",
+  "destination": "Delhi",
+  "departure_date": "2024-04-12",
+  "arrival_date": "2024-04-18",
+  "currently_at": "Dubai",
+  "left_from": "San Francisco"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f81"
+  },
+  "cargo_id": "CGO9012-TUVW3456-XYZA7890",
+  "cargo_type": "Appliances",
+  "description": "Household electronics",
+  "quantity": 3,
+  "weight_kg": 25,
+  "from": "Berlin",
+  "destination": "Delhi",
+  "departure_date": "2024-04-14",
+  "arrival_date": "2024-04-20",
+  "currently_at": "Abu Dhabi",
+  "left_from": "London"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f82"
+  },
+  "cargo_id": "CGO3456-BCDE9012-FGHI5678",
+  "cargo_type": "Cosmetics",
+  "description": "Skincare and beauty products",
+  "quantity": 4,
+  "weight_kg": 6,
+  "from": "Seoul",
+  "destination": "Delhi",
+  "departure_date": "2024-04-16",
+  "arrival_date": "2024-04-22",
+  "currently_at": "Singapore",
+  "left_from": "Tokyo"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f83"
+  },
+  "cargo_id": "CGO6789-JKLM1234-NOPQ5678",
+  "cargo_type": "Sports Equipment",
+  "description": "Exercise gear and accessories",
+  "quantity": 2,
+  "weight_kg": 12,
+  "from": "Sydney",
+  "destination": "Delhi",
+  "departure_date": "2024-04-18",
+  "arrival_date": "2024-04-24",
+  "currently_at": "Mumbai",
+  "left_from": "Dubai"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f84"
+  },
+  "cargo_id": "CGO2345-RSTU6789-VWXY1234",
+  "cargo_type": "Stationery",
+  "description": "Office and school supplies",
+  "quantity": 5,
+  "weight_kg": 4,
+  "from": "Singapore",
+  "destination": "Delhi",
+  "departure_date": "2024-04-20",
+  "arrival_date": "2024-04-26",
+  "currently_at": "Delhi",
+  "left_from": "Mumbai"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f85"
+  },
+  "cargo_id": "CGO7890-ABCD2345-EFGH6789",
+  "cargo_type": "Musical Instruments",
+  "description": "Guitars, keyboards, etc.",
+  "quantity": 1,
+  "weight_kg": 8,
+  "from": "New York",
+  "destination": "Delhi",
+  "departure_date": "2024-04-22",
+  "arrival_date": "2024-04-28",
+  "currently_at": "Delhi",
+  "left_from": "Singapore"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f86"
+  },
+  "cargo_id": "CGO2345-EFGH6789-IJKL2345",
+  "cargo_type": "Jewelry",
+  "description": "Fashionable accessories",
+  "quantity": 2,
+  "weight_kg": 2,
+  "from": "Dubai",
+  "destination": "Delhi",
+  "departure_date": "2024-04-24",
+  "arrival_date": "2024-04-30",
+  "currently_at": "Doha",
+  "left_from": "Sydney"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f87"
+  },
+  "cargo_id": "CGO6789-IJKL2345-MNOP6789",
+  "cargo_type": "Tools",
+  "description": "DIY and construction tools",
+  "quantity": 3,
+  "weight_kg": 20,
+  "from": "Mumbai",
+  "destination": "Delhi",
+  "departure_date": "2024-04-26",
+  "arrival_date": "2024-05-02",
+  "currently_at": "Hong Kong",
+  "left_from": "Los Angeles"
+},
+{
+  "_id": {
+    "$oid": "660b13189e09b0728d7b7f88"
+  },
+  "cargo_id": "CGO1234-MNOP6789-QRST1234",
+  "cargo_type": "Pets",
+  "description": "Pet supplies and accessories",
+  "quantity": 2,
+  "weight_kg": 5,
+  "from": "Delhi",
+  "destination": "New York",
+  "departure_date": "2024-04-28",
+  "arrival_date": "2024-05-04",
+  "currently_at": "San Francisco",
+  "left_from": "Hong Kong"
+}]

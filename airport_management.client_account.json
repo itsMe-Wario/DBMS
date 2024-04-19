@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "65fdc2d13ce69db767d0b878"
+  },
+  "name": "Shashanka Niraula",
+  "email": "niraulabashanta@gmail.com",
+  "password": "$2b$10$osY5d9RdKs4xZoDNSY.O6u9C6obbnBoj1KgKVuA/bfSqx9KKY9Pce",
+  "flightNumber": "TDB123"
+},
+{
+  "_id": {
+    "$oid": "66066fb5d8877450b6d7234e"
+  },
+  "name": "Anu Shree VS",
+  "email": "anu@gmail.com",
+  "password": "$2b$10$jznohpATiF8FfngtCr1iTuU6JcTpsbsV/oGLo2IUNhEZCllW6jGVa",
+  "flightNumber": "DEF789"
+},
+{
+  "_id": {
+    "$oid": "660880f2ff0b421b070e8fc3"
+  },
+  "name": "Bhaswat",
+  "email": "lenka@gmail.com",
+  "password": "$2b$10$AJd2ZKxbxb9QE.c9JZCa/OcdhHWQZEs7C/wFYfuaKcP.hqTjkH65e"
+},
+{
+  "_id": {
+    "$oid": "660afe43dccf2d28863bb403"
+  },
+  "name": "Pandit",
+  "email": "pandit@gmail.com",
+  "password": "$2b$10$/5lQbKIjQhQltntZCrjFaurxqQ364z1GnLepC32b5/esFSITJNpGm",
+  "flightNumber": "UND010",
+  "flightNumber_2": "AI432"
+}]
