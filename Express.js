@@ -198,7 +198,7 @@ app.get('/cargo_search', async (req, res) => {
 });
 
 
-app.post('/client_search', async (req, res) => {
+app.get('/client_search', async (req, res) => {
     const query = req.query.query;
     const capitalizedQuery = query.toUpperCase();
     try {
