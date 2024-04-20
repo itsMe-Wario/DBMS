@@ -56,36 +56,38 @@
 <div class="container">
   <div class="content">
     <ul class="data-list">
-        <% data.arrivalData.forEach(item => { %>
-            <li class="data-item">
-                <div class="item-title">Flight Number: <%= item.flightNumber %></div>
-                <div class="logo_ticket_2">
-                  <% if (item.airline) { %>
-                    <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
-                  <% } else { %>
-                    <img src="/images/airline_logo/No_Logo.png" alt="Logo">
-                  <% } %>
-                </div>
-                <div class="item-info">
-                  <p>Origin: <%= item.origin %></p>
-                  <p>Airline: <%= item.airline %></p>
-                  <p>Status: <%= item.status %></p>
-                  <p>Date: <%= item['date'] %></p>
+      <% data.arrivalData.forEach(item => { %>
+          <li class="data-item">
+            <% if (item.status == "Delayed") { %>
+              <div class="status_box_red"><%= item.status %></div>
+          <% } else { %>
+              <div class="status_box_blue"><%= item.status %></div>
+          <% } %>
+            <div class="status"><h5> <%= item['date'] %></h5></div>
+              <div class="logo_ticket_2">
+                  <h6>Flight No:</h6>
+                  <h3><%= item.flightNumber %></h3>
+                  <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
+              </div>
+              <div class="item-info">
+                  <p>Origin: <span style="font-weight: bold;"><%= item.origin %></span></p>
+                  <p>Airline:<%= item.airline %></p>
                   <% if (item.status == "Landed") { %>
-                    <p>Arrival Time: <%= item['estimated Arrival Time'] %></p>
+                    <p>Arrival Time:<span style="font-weight: bold;"><%= item['estimated Arrival Time'] %></span> </p>
                   <% } %>
                   <% if (item.status !== "Landed") { %>
-                  <p>Scheduled Arrival Time: <%= item['arrival Time'] %></p>
-                  <p>Estimated Arrival Time: <%= item['estimated Arrival Time'] %></p>
+                  <p>Scheduled Arrival Time: <span style="font-weight: bold;"> <%= item['arrival Time'] %></span></p>
+                  <p>Estimated Arrival Time: <span style="font-weight: bold;"><%= item['estimated Arrival Time'] %></span></p>
                   <% } %>
-                  <p>Terminal: <%= item.terminal %></p>
-                  <p>Gate: <%= item.gate %></p>
-                  <p>Baggage Claim: Belt <%= item['baggage Claim Belt'] %></p>
-                  <p>Remarks: <%= item.remarks %></p>
+                  <p><%= item.terminal %></p>
+                  <p>Baggage Claim: Belt <%= item['baggage Claim Belt'] %> </p>
+                  <p>Gate: <%= item.gate %></p>                  
+                  <p>Remarks:<%= item.remarks %></p>
+                  
               </div>
-            </li>
-        <% }); %>
-    </ul>
+          </li>
+      <% }); %>
+  </ul>
 </div>
 </div>
 <script>

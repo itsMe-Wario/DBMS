@@ -56,25 +56,26 @@
 <div class="container">
 <div class="content">
   <ul class="dta-list">
-    <% data.departureData.sort((a, b) => new Date(a['estimated Departure Time']) - new Date(b['estimated Departure Time'])); %>
-    <% data.departureData.forEach(item => { %>
+      <% data.departureData.sort((a, b) => new Date(a['estimated Departure Time']) - new Date(b['estimated Departure Time'])); %>
+      <% data.departureData.forEach(item => { %>
       <% if (item.status !== "Departed") { %>
         <li class="data-item">
-            <div class="item-title">Flight Number: <%= item.flightNumber %></div>
+          <% if (item.status == "Delayed") { %>
+            <div class="status_box_red"><%= item.status %></div>
+        <% } else { %>
+            <div class="status_box_blue"><%= item.status %></div>
+        <% } %>
+          <div class="status"><h5> <%= item['date'] %></h5></div>
             <div class="logo_ticket_2">
-              <% if (item.airline) { %>
+              <h6>Flight No:</h6>
+              <h3><%= item.flightNumber %></h3>
                 <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
-              <% } else { %>
-                <p>No airline logo available</p>
-              <% } %>
             </div>
             <div class="item-info">
               <p>Airline: <%= item.airline %></p>
-              <p>Destination: <%= item.destination %></p>
-              <p>Date: <%= item.date %></p>
-              <p>Status: <%= item.status %></p>
-              <p>Departure Time: <%= item['departure Time'] %></p>
-              <p>Estimated Departure Time: <%= item['estimated Departure Time'] %></p>
+              <p>Destination:<span style="font-weight: bold;"> <%= item.destination %></span></p>
+              <p>Departure Time:<span style="font-weight: bold;"> <%= item['departure Time'] %></span></p>
+              <p>Estimated Departure Time:<span style="font-weight: bold;"> <%= item['estimated Departure Time'] %></span></p>
               <p>Terminal: <%= item.terminal %></p>
               <p>Gate: <%= item.gate %></p>
               <p>Remarks: <%= item.remarks %></p>
@@ -84,23 +85,20 @@
     <% }); %>
 </ul>
     <ul class="dta-list">
-      <% data.departureData.forEach(item => { %>
+        <% data.departureData.forEach(item => { %>
         <% if (item.status == "Departed") { %>
           <li class="data-item">
-              <div class="item-title">Flight Number: <%= item.flightNumber %></div>
-              <div class="logo_ticket_3">
-                <% if (item.airline) { %>
-                  <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
-                <% } else { %>
-                  <p>No airline logo available</p>
-                <% } %>
-              </div>
+            <div class="status_box_green"><%= item.status %></div>
+            <div class="status"><h5> <%= item['date'] %></h5></div>
+            <div class="logo_ticket_2">
+              <h6>Flight No:</h6>
+              <h3><%= item.flightNumber %></h3>
+                <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
+            </div>
               <div class="item-info">
                 <p>Airline: <%= item.airline %></p>
-                <p>Destination: <%= item.destination %></p>
-                <p>Date: <%= item.date %></p>
-                <p>Status: <%= item.status %></p>
-                <p>Departure Time: <%= item['estimated Departure Time'] %></p>
+                <p>Destination:<span style="font-weight: bold;"> <%= item.destination %></span></p>
+                <p>Departure Time:<span style="font-weight: bold;"> <%= item['estimated Departure Time'] %></span></p>
               </div>
           </li>
           <% } %>

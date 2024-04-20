@@ -280,14 +280,25 @@ li {
 }
 .item-title {
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 .item-info {
   margin-left: 180px;
   font-size: 0.9em;
   text-align: left;
-  margin-top:-130px ;
+  margin-top:-135px ;
+  line-height: 1.2;
 }
+
+.item-info_2 {
+  margin-left: 180px;
+  font-size: 0.9em;
+  text-align: left;
+  margin-top:-135px ;
+  line-height: 1.2;
+  margin-right: -80px;
+}
+
 .data-list {
   list-style-type: none;
   padding: 0;
@@ -296,6 +307,7 @@ li {
 .data-item {
   display: inline-block;
   width: 30%; /* Adjust as needed */
+  height: 200px;
   vertical-align: top; /* Align items to the top */
   margin-right: 10px; /* Add some space between items */
   background-color: rgba(255, 255, 255, 0.8); 
@@ -322,9 +334,9 @@ li {
 
 .data_box{
   display: inline-block;
-  width: 100px;
+  width: 5px;
   vertical-align: top; /* Align items to the top */
-  margin-right: 10px; /* Add some space between items */
+  margin-right: -100px; /* Add some space between items */
 }
 
 .footer {
@@ -509,11 +521,23 @@ li {
   display: block;
 }
 
+.logo_ticket_2  {
+  margin-right: 280px;
+  text-align: left;
+  margin-top: -15px;
+}
+
 .logo_ticket_2 img {
   height: auto; /* Preserve aspect ratio */
   width: 100px; /* Set width */
-  margin-right: 280px;
+  margin-right: 250px;
   margin-top: 30px;
+  margin-left: 20px;
+}
+
+.logo_ticket_3  {
+  text-align: left;
+  margin-top: -15px;
 }
 
 .logo_ticket_3 img {
@@ -521,4 +545,47 @@ li {
   width: 100px; /* Set width */
   margin-right: 280px;
   margin-bottom: 30px;
+}
+
+.status {
+  width:200px;
+  text-align: right;
+  margin-left: 215px;
+
+}
+
+.status_box_blue {
+  width: 80px;
+  height: auto;
+  text-align: center;
+  background-color: #3498db; /* Blue background color */
+  border: 2px solid #2980b9; /* Darker blue border */
+  margin-left: 340px;
+  margin-top: -18px;
+  border-radius: 10px;
+  color: #f9f9f9;
+}
+
+.status_box_red {
+  width: 80px;
+  height: auto;
+  text-align: center;
+  background-color: #db3434; /* Blue background color */
+  border: 2px solid #b92929; /* Darker blue border */
+  margin-left: 340px;
+  margin-top: -18px;
+  border-radius: 10px;
+  color: #f9f9f9;
+}
+
+.status_box_green{
+  width: 80px;
+  height: auto;
+  text-align: center;
+  background-color: #29b952; /* Blue background color */
+  border: 2px solid #58db34; /* Darker blue border */
+  margin-left: 340px;
+  margin-top: -18px;
+  border-radius: 10px;
+  color: #f9f9f9;
 }
