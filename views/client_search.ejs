@@ -49,27 +49,32 @@
     <ul class="data-list">
       <% if (data && data.length > 0) { %>
         <% data.forEach((item) => { %>
-            <li class="data-box">
-                <div class="item-title">Flight Number: <%= item.flightNumber %></div>
-                <div class="logo_ticket_2">
-                  <% if (item.airline) { %>
-                    <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
-                  <% } else { %>
-                    <p>No airline logo available</p>
-                  <% } %>
-                </div>
-                <div class="item-info">
-                    <% for (const key in item) { %>
-                        <% if (item.hasOwnProperty(key) && key !== '_id' && key !== 'flightNumber' && item[key]) { %>
-                            <p><%= key.charAt(0).toUpperCase() + key.slice(1) %>: <%= item[key] %></p>
-                        <% } %>
-                    <% } %>
-                </div>
-            </li>
+          <li class="data-box">
+            <% if (item.status == "Delayed") { %>
+              <div class="status_box_red"><%= item.status %></div>
+            <% } else if (item.status == "Departed") { %>
+              <div class="status_box_blue"><%= item.status %></div>
+            <% } else { %> <!-- Added opening brace here -->
+              <div class="status_box_blue"><%= item.status %></div>
+            <% } %> <!-- Added closing brace here -->
+            <div class="status"><h5> <%= item['date'] %></h5></div>
+            <div class="logo_ticket_3">
+              <h6>Flight No:</h6>
+              <h3><%= item.flightNumber %></h3>
+              <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
+            </div>
+            <div class="item-info_2">
+              <% for (const key in item) { %>
+                <% if (item.hasOwnProperty(key) && key !== '_id' && key !== 'flightNumber' && item[key]) { %>
+                  <p><%= key.charAt(0).toUpperCase() + key.slice(1) %>: <%= item[key] %></p>
+                <% } %>
+              <% } %>
+            </div>
+          </li>
         <% }); %>
-    <% } else { %> 
+      <% } else { %> 
         <div class="high">No Flights found.</div>
-    <% } %>
+      <% } %>
     </ul>
     </div>      
 </div>
