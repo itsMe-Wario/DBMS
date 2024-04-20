@@ -283,8 +283,10 @@ li {
   margin-bottom: 5px;
 }
 .item-info {
-  margin-left: 20px;
+  margin-left: 180px;
   font-size: 0.9em;
+  text-align: left;
+  margin-top:-130px ;
 }
 .data-list {
   list-style-type: none;
@@ -505,4 +507,18 @@ li {
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.logo_ticket_2 img {
+  height: auto; /* Preserve aspect ratio */
+  width: 100px; /* Set width */
+  margin-right: 280px;
+  margin-top: 30px;
+}
+
+.logo_ticket_3 img {
+  height: auto; /* Preserve aspect ratio */
+  width: 100px; /* Set width */
+  margin-right: 280px;
+  margin-bottom: 30px;
 }

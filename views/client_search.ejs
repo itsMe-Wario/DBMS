@@ -51,6 +51,13 @@
         <% data.forEach((item) => { %>
             <li class="data-box">
                 <div class="item-title">Flight Number: <%= item.flightNumber %></div>
+                <div class="logo_ticket_2">
+                  <% if (item.airline) { %>
+                    <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
+                  <% } else { %>
+                    <p>No airline logo available</p>
+                  <% } %>
+                </div>
                 <div class="item-info">
                     <% for (const key in item) { %>
                         <% if (item.hasOwnProperty(key) && key !== '_id' && key !== 'flightNumber' && item[key]) { %>

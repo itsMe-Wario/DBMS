@@ -41,6 +41,13 @@
         <% data.forEach(item => { %>
             <li class="data-item">
                 <div class="item-title">Flight Number: <%= item.flightNumber %></div>
+                <div class="logo_ticket_2">
+                  <% if (item.airline) { %>
+                    <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
+                  <% } else { %>
+                    <img src="/images/airline_logo/No_Logo.png" alt="Logo">
+                  <% } %>
+                </div>
                 <div class="item-info">
                     <p>Origin: <%= item.origin %></p>
                     <p>Airline: <%= item.airline %></p>

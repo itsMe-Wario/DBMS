@@ -61,6 +61,13 @@
       <% if (item.status !== "Departed") { %>
         <li class="data-item">
             <div class="item-title">Flight Number: <%= item.flightNumber %></div>
+            <div class="logo_ticket_2">
+              <% if (item.airline) { %>
+                <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
+              <% } else { %>
+                <p>No airline logo available</p>
+              <% } %>
+            </div>
             <div class="item-info">
               <p>Airline: <%= item.airline %></p>
               <p>Destination: <%= item.destination %></p>
@@ -81,6 +88,13 @@
         <% if (item.status == "Departed") { %>
           <li class="data-item">
               <div class="item-title">Flight Number: <%= item.flightNumber %></div>
+              <div class="logo_ticket_3">
+                <% if (item.airline) { %>
+                  <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
+                <% } else { %>
+                  <p>No airline logo available</p>
+                <% } %>
+              </div>
               <div class="item-info">
                 <p>Airline: <%= item.airline %></p>
                 <p>Destination: <%= item.destination %></p>

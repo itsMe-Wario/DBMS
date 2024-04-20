@@ -12,16 +12,23 @@
     <div class="logo">
       <img src="/images/logo_main.png" alt="Logo">
     </div>
-    <h1>Delhi</h1>
     <div class="search-box">
       <span>Flight.No</span>
       <form action="/client_search" method="GET">
         <input type="text"  id="query" name="query" placeholder="Search">
         <button type="submit">Search</button>
       </form>
-      <form action="/" method="GET">
-        <button class="button-2" type="submit">Log-out</button>
-      </form>
+      <div class="dropdown">
+        <button class="button-2" type="submit"><h4>Drop Down</h4></button>
+        <div class="dropdown-content">
+          <form action="/" method="GET">
+            <button class="button-2" type="submit">Log-Out</button>
+          </form>
+          <form action="/tickets" method="GET">
+            <button class="button-2" type="submit">Other Tickets</button>
+          </form>
+        </div>
+    </div>
     </div>
   </div>
 </header>
@@ -47,7 +54,7 @@
 <div class="container">
   <ul class="content">
     <div class="next_search">
-      <form action="/search_flight" method="GET">
+      <form action="/client_flight_search" method="GET">
       <input type="text"  id="from" name="from" placeholder="From">
       <input type="text"  id="to" name="to" placeholder="To">
       <input type="date"  id="date" name="date">
