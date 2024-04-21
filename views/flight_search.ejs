@@ -35,6 +35,7 @@
 </nav>
 <div class="background_client"><img src="/images/view.jpg" height="900" width="1600" alt="arrival_background"></div>
 <div class="container">
+<div class="overlay"></div>
   <ul class="content">
     <div class="next_search">
       <form action="/search_flight" method="GET">
@@ -47,11 +48,7 @@
           <% ticketData.forEach(item => { %>
             <li class="data-item_2">
               <div class="logo_ticket">
-                <% if (item.airline) { %>
                   <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
-                <% } else { %>
-                  <p>No airline logo available</p>
-                <% } %>
               </div>
             <div class="airline_info">
             <h3><%= item.airline %></h3>
@@ -76,67 +73,70 @@
             <div class="price_info">
             <h2> ₹<%= item.price %></h2>
             </div>
+              <button class="showLogin">Book</button>
+            </li>
             <% }); %>
-            <button id="showLoginFormBtn">Book</button>
-          </li>
-          <div class="login-container" id="loginContainer">
-            <div class="login_position">
-              <form action="/login_2" method="POST">
-                <input type="email" id="email" name="email" placeholder="Email">
-                <input type="password" id="password" name="password" placeholder="Password">
-                <input type="hidden" id="to" name="to" value="<%= ticketData[0].destination_airport %>">
-                <input type="hidden" id="from" name="from" value="<%= ticketData[0].departure_airport %>">
-                <input type="hidden" id="date" name="date" value="<%= date %>">           
-                <button type="submit">Log-in</button>
-            </form>
-              <form action="/signup" method="GET">
-              <button class="button-2" type="submit">No Account?Sign-up.</button>
-            </form>
-            </div>
-          </div>
         </ul>
+          <div class="loginContainer">
+            <form action="/login_2" method="POST">
+              <b><samp style="color: white;">Log-In to Continue<br><br></samp></b>
+              <input type="email" id="email" name="email" placeholder="Email">
+              <input type="password" id="password" name="password" placeholder="Password">
+              <input type="hidden" id="to" name="to" value="<%= ticketData[0].destination_airport %>">
+              <input type="hidden" id="from" name="from" value="<%= ticketData[0].departure_airport %>">
+              <input type="hidden" id="date" name="date" value="<%= date %>">           
+              <button type="submit">Log-in</button>
+            </form>
+            <form action="/signup" method="GET">
+            <button class="button-2" type="submit">No Account?Sign-up.</button>
+            </form>
+      </div>
   </div>
-<script>
-        document.getElementById('showLoginFormBtn').addEventListener('click', function() {
-    var loginContainer = document.getElementById('loginContainer');
-    loginContainer.style.display = 'flex'; // Show the login container
-  });
-  // Function to calculate flight time
-  function calculateFlightTime(departureDateTime, arrivalDateTime) {
-    // Parse departure and arrival times & dates
-    const departureTime = new Date(departureDateTime);
-    const arrivalTime = new Date(arrivalDateTime);
-
-    // Calculate difference in milliseconds
-    const timeDifference = arrivalTime.getTime() - departureTime.getTime();
-
-    // Convert milliseconds to hours, minutes, and seconds
-    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-    // Format the time string
-    const formattedTime = `${hours}h ${minutes}m `;
-
-    return formattedTime;
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    // Get all elements with class 'flight-time'
-    const flightTimeElements = document.querySelectorAll('.flight-time');
-
-    // Loop through each element and calculate flight time
-    flightTimeElements.forEach(element => {
-      const departureDateTime = element.dataset.departureDateTime;
-      const arrivalDateTime = element.dataset.arrivalDateTime;
-
-      const flightTime = calculateFlightTime(departureDateTime, arrivalDateTime);
-
-      // Update the text content of the element with the calculated flight time
-      element.textContent = flightTime;
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookButtons = document.querySelectorAll('.showLogin');
+    
+        // Add click event listener to each "Book" button 
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Find the corresponding login container
+                const loginContainer = document.querySelector('.loginContainer');
+                const overlay = document.querySelector('.overlay');
+                loginContainer.style.display = 'flex';
+                overlay.style.display = 'block';
+            });
+        });
+    
+        // Function to calculate flight time
+        function calculateFlightTime(departureDateTime, arrivalDateTime) {
+            const departureTime = new Date(departureDateTime);
+            const arrivalTime = new Date(arrivalDateTime);
+    
+            const timeDifference = arrivalTime.getTime() - departureTime.getTime();
+    
+            const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    
+            const formattedTime = `${hours}h ${minutes}m`;
+    
+            return formattedTime;
+        }
+    
+        // Get all elements with class 'flight-time'
+        const flightTimeElements = document.querySelectorAll('.flight-time');
+    
+        // Loop through each element and calculate flight time
+        flightTimeElements.forEach(element => {
+            const departureDateTime = element.dataset.departureDateTime;
+            const arrivalDateTime = element.dataset.arrivalDateTime;
+    
+            const flightTime = calculateFlightTime(departureDateTime, arrivalDateTime);
+    
+            // Update the text content of the element with the calculated flight time
+            element.textContent = flightTime;
+        });
     });
-  });
-</script>
-
+    </script>
 </body>
 </html>
