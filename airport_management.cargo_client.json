@@ -2,8 +2,8 @@
   "_id": {
     "$oid": "660bc8cd27b92ea682cc192a"
   },
-  "email": "john@gmail.com",
-  "name": "John Doe",
+  "email": "niraulabashanta@gmail.com",
+  "name": "Shashanka Niraula",
   "cargo_id": "CGO1234-ABCD5678-EFGH9012",
   "ordered_on": "2024-04-02",
   "total_amount": 250,
@@ -32,8 +32,8 @@
   "_id": {
     "$oid": "660bc8cd27b92ea682cc192c"
   },
-  "email": "bob@gmail.com",
-  "name": "Bob Jackson",
+  "email": "lenka@gmail.com",
+  "name": "Bhaswat",
   "cargo_id": "CGO5678-LMNO1234-PQRS5678",
   "ordered_on": "2024-03-31",
   "total_amount": 1000,
