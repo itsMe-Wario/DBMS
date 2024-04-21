@@ -184,7 +184,7 @@ app.get('/cargo_search', async (req, res) => {
 
         const clientData = await cargo_client.findOne({ cargo_id, email });
         if (!clientData) {
-            return res.status(404).render('error', { error: 'Email/Cargo not found' });
+            return res.status(404).render('no_account', { error: 'Email/Cargo not found' });
         }
         const cargoData = await cargo.findOne({ cargo_id });
 
@@ -193,10 +193,39 @@ app.get('/cargo_search', async (req, res) => {
 
     } catch (error) {
         console.error('Error searching in MongoDB:', error);
-        res.render('error');
+        res.render('no_account');
     }
 });
 
+app.get('/client_search_cargo', async (req, res) => {
+    const { email} = req.query; // Change req.body to req.query
+
+    try {
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use specific collections
+        const cargo = database.collection('cargo');
+        const cargo_client = database.collection('cargo_client');
+
+        const clientData = await cargo_client.findOne({ email });
+        if (!clientData) {
+            return res.status(404).render('client_cargo', {email});
+        }
+        const cargoData = await cargo.findOne({ cargo_id: clientData.cargo_id });
+
+        // Render the arrival.ejs template with the search results
+        res.render('client_search_cargo', {clientData, cargoData });
+
+    } catch (error) {
+        console.error('Error searching in MongoDB:', error);
+        res.render('client_cargo');
+    }
+});
 
 app.get('/client_search', async (req, res) => {
     const query = req.query.query;

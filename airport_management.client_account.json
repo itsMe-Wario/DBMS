@@ -5,7 +5,8 @@
   "name": "Shashanka Niraula",
   "email": "niraulabashanta@gmail.com",
   "password": "$2b$10$osY5d9RdKs4xZoDNSY.O6u9C6obbnBoj1KgKVuA/bfSqx9KKY9Pce",
-  "flightNumber": "TDB123"
+  "flightNumber": "TDB123",
+  "cargo_email": "bob@gmail.com"
 },
 {
   "_id": {
@@ -22,7 +23,8 @@
   },
   "name": "Bhaswat",
   "email": "lenka@gmail.com",
-  "password": "$2b$10$AJd2ZKxbxb9QE.c9JZCa/OcdhHWQZEs7C/wFYfuaKcP.hqTjkH65e"
+  "password": "$2b$10$AJd2ZKxbxb9QE.c9JZCa/OcdhHWQZEs7C/wFYfuaKcP.hqTjkH65e",
+  "cargo_email": "jane@yahoo.com"
 },
 {
   "_id": {
