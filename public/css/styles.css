@@ -493,6 +493,15 @@ li {
   margin-top: 9px;
 }
 
+.loginContainer .closeBtn {
+  font-size: 8;
+  padding: 0px 0px;
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  margin-top: 9px;
+}
+
 .overlay {
   position: relative; 
   top: 0;

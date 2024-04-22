@@ -78,8 +78,8 @@
             <% }); %>
         </ul>
           <div class="loginContainer">
-            <form action="/login_2" method="POST">
-              <b><samp style="color: white;">Log-In to Continue<br><br></samp></b>
+              <b><samp style="color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Log-In to Continue</samp>&nbsp;&nbsp;&nbsp;&nbsp;<button class="closeBtn" style="color : gray;" >X</button><br><br></b>
+              <form action="/login_2" method="POST">
               <input type="email" id="email" name="email" placeholder="Email">
               <input type="password" id="password" name="password" placeholder="Password">
               <input type="hidden" id="to" name="to" value="<%= ticketData[0].destination_airport %>">
@@ -95,6 +95,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
         const bookButtons = document.querySelectorAll('.showLogin');
+        const closeButtons = document.querySelectorAll('.closeBtn');
     
         // Add click event listener to each "Book" button 
         bookButtons.forEach(button => {
@@ -104,6 +105,15 @@
                 const overlay = document.querySelector('.overlay');
                 loginContainer.style.display = 'flex';
                 overlay.style.display = 'block';
+            });
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const loginContainer = document.querySelector('.loginContainer');
+                const overlay = document.querySelector('.overlay');
+                loginContainer.style.display = 'none';
+                overlay.style.display = 'none';
             });
         });
     
