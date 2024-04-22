@@ -73,12 +73,14 @@
             <div class="price_info">
             <h2> ₹<%= item.price %></h2>
             </div>
+            <div>
               <button class="showLogin">Book</button>
+            </div>
             </li>
             <% }); %>
         </ul>
           <div class="loginContainer">
-              <b><samp style="color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Log-In to Continue</samp>&nbsp;&nbsp;&nbsp;&nbsp;<button class="closeBtn" style="color : gray;" >X</button><br><br></b>
+              <b><samp style="color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Log-In to Continue</samp>&nbsp;&nbsp;&nbsp;&nbsp;<button class="closeBtn" style="color : gray;" >&times;</button><br><br></b>
               <form action="/login_2" method="POST">
               <input type="email" id="email" name="email" placeholder="Email">
               <input type="password" id="password" name="password" placeholder="Password">
@@ -102,18 +104,22 @@
             button.addEventListener('click', function() {
                 // Find the corresponding login container
                 const loginContainer = document.querySelector('.loginContainer');
+                const overFlow = document.querySelector('.container');
                 const overlay = document.querySelector('.overlay');
-                loginContainer.style.display = 'flex';
+                loginContainer.style.display = 'block';
                 overlay.style.display = 'block';
+                overFlow.style.overflow = 'hidden';
             });
         });
 
         closeButtons.forEach(button => {
             button.addEventListener('click', function() {
                 const loginContainer = document.querySelector('.loginContainer');
+                const overFlow = document.querySelector('.container');
                 const overlay = document.querySelector('.overlay');
                 loginContainer.style.display = 'none';
                 overlay.style.display = 'none';
+                overFlow.style.overflow = 'auto';
             });
         });
     

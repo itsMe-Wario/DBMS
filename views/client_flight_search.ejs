@@ -52,6 +52,7 @@
 </nav>
 <div class="background_client"><img src="/images/view.jpg" height="900" width="1600" alt="arrival_background"></div>
 <div class="container">
+  <div class="overlay"></div>
   <ul class="content">
     <div class="next_search">
       <form action="/client_flight_search" method="GET">
@@ -61,46 +62,85 @@
       <button type="submit">Search</button>
       </form>
     </div>
-          <% ticketData.forEach(item => { %>
-            <li class="data-item_2">
-              <div class="logo_ticket">
-                <% if (item.airline) { %>
-                  <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
-                <% } else { %>
-                  <p>No airline logo available</p>
-                <% } %>
-              </div>
-            <div class="airline_info">
-            <h3><%= item.airline %></h3>
-            <sub><%= item.flight_number %></sub>
-            </div>
-            <div class="departure_info">
-            <h3><%= item.departure_time %></h3>
-            <h6><%= item.departure_date %></h6>
-            <sub>(<%= item.departure_name %>
-            <%= item.departure_airport %>)
-            </sub>
-            </div>
-            <div class="flight_time_info">
-            <p><h4> Flight Time:</h4> <span class="flight-time" data-departure-date-time="<%= item.departure_date %> <%= item.departure_time %>" data-arrival-date-time="<%= item.arrival_date %> <%= item.arrival_time %>"></span></p>
-            </div>
-            <div class="destination_info">
-            <h3><%= item.arrival_time %></h3>
-            <h6><%= item.arrival_date %></h6>
-            <sub>(<%= item.destination_name %>
-              <%= item.destination_airport %>)</sub>           
-            </div>
-            <div class="price_info">
-            <h2> ₹<%= item.price %></h2>
-            </div>
-            <% }); %>
-            <form action="/buy" method="GET">
-              <button type="submit">Book</button>
-            </form>
-          </li>
-        </ul>
-  </div>
+     <% ticketData.forEach(item => { %>
+      <li class="data-item_2">
+        <div class="logo_ticket">
+            <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
+        </div>
+      <div class="airline_info">
+      <h3><%= item.airline %></h3>
+      <sub><%= item.flight_number %></sub>
+      </div>
+      <div class="departure_info">
+      <h3><%= item.departure_time %></h3>
+      <h6><%= item.departure_date %></h6>
+      <sub>(<%= item.departure_name %>
+      <%= item.departure_airport %>)
+      </sub>
+      </div>
+      <div class="flight_time_info">
+      <p><h4> Flight Time:</h4> <span class="flight-time" data-departure-date-time="<%= item.departure_date %> <%= item.departure_time %>" data-arrival-date-time="<%= item.arrival_date %> <%= item.arrival_time %>"></span></p>
+      </div>
+      <div class="destination_info">
+      <h3><%= item.arrival_time %></h3>
+      <h6><%= item.arrival_date %></h6>
+      <sub>(<%= item.destination_name %>
+        <%= item.destination_airport %>)</sub>           
+      </div>
+      <div class="price_info">
+      <h2> ₹<%= item.price %></h2>
+      </div>
+      <div>
+        <button class="showLogin">Book</button>
+      </div>
+      </li>
+      <% }); %>
+  </ul>
+    <div class="loginContainer">
+        <b><samp style="color: white;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Log-In to Continue</samp>&nbsp;&nbsp;&nbsp;&nbsp;<button class="closeBtn" style="color : gray;" >&times;</button><br><br></b>
+        <form action="/login_2" method="POST">
+        <input type="email" id="email" name="email" placeholder="Email">
+        <input type="password" id="password" name="password" placeholder="Password">
+        <input type="hidden" id="to" name="to" value="<%= ticketData[0].destination_airport %>">
+        <input type="hidden" id="from" name="from" value="<%= ticketData[0].departure_airport %>">
+        <input type="hidden" id="date" name="date" value="<%= date %>">           
+        <button type="submit">Log-in</button>
+      </form>
+      <form action="/signup" method="GET">
+      <button class="button-2" type="submit">No Account?Sign-up.</button>
+      </form>
+</div>
+</div>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const bookButtons = document.querySelectorAll('.showLogin');
+        const closeButtons = document.querySelectorAll('.closeBtn');
+    
+        // Add click event listener to each "Book" button 
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Find the corresponding login container
+                const loginContainer = document.querySelector('.loginContainer');
+                const overFlow = document.querySelector('.container');
+                const overlay = document.querySelector('.overlay');
+                loginContainer.style.display = 'block';
+                overlay.style.display = 'block';
+                overFlow.style.overflow = 'hidden';
+            });
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const loginContainer = document.querySelector('.loginContainer');
+                const overFlow = document.querySelector('.container');
+                const overlay = document.querySelector('.overlay');
+                loginContainer.style.display = 'none';
+                overlay.style.display = 'none';
+                overFlow.style.overflow = 'auto';
+            });
+        });
+      });
+
       document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent the default behavior of the link
     document.getElementById("client_acc_page_form").submit(); // Submit the form

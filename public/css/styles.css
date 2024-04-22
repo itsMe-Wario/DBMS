@@ -10,7 +10,7 @@
     margin: 0;
     padding: 0;
     height: 83vh; /* Set the height of the container to fill the viewport */
-    overflow-y: auto; /* Allow content to scroll */
+    overflow-y:auto; /* Allow content to scroll */
   }
 
   .container button {
@@ -315,7 +315,8 @@ li {
 
 .data-item_2 {
   display:flex;
-  min-width: 1460px;
+  min-width: 1479px;
+  max-width: 1479px;
   vertical-align: top; /* Align items to the top */
   background-color: rgba(255, 255, 255, 0.8); 
   margin-top: 20px;
@@ -438,13 +439,16 @@ li {
 .airline_info {
   margin-left: 25px;
   margin-top: 5px;
+  max-width: 80px;
+  min-width: 80px;
 }
 
 .departure_info,
 .flight_time_info,
 .destination_info,
 .price_info {
-  margin-left: 205px;
+  margin-left: 145px;
+  min-width: 150px;
 }
 
 .price_info{
