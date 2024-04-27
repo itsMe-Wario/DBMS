@@ -1,0 +1,202 @@
+app.get('/admin', async (req, res) => {
+    try {
+        // Create a new MongoClient for the second database
+        const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
+        
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use a specific collection
+        const collection = database.collection('client_account');
+
+        // Fetch data from the collection
+        const data = await collection.find().toArray();
+
+        // Render the arrival2.ejs template with the fetched data
+        res.render('admin_client', { data });
+
+    } catch (error) {
+        console.error('Error connecting to MongoDB (Database 2):', error);
+        res.render('error');
+    }
+});
+
+app.get('/admin_arrival', async (req, res) => {
+    try {
+        // Create a new MongoClient for the second database
+        const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
+        
+        // Connect to the MongoDB server
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        // Use a specific database
+        const database = client.db('airport_management');
+        
+        // Use a specific collection
+        const collection = database.collection('arrival_list');
+
+        // Fetch data from the collection
+        const data = await collection.find().toArray();
+
+        // Render the arrival2.ejs template with the fetched data
+        res.render('admin_arrival', { data });
+
+    } catch (error) {
+        console.error('Error connecting to MongoDB (Database 2):', error);
+        res.render('error');
+    }
+});
+
+
+app.post('/client_add', async (req, res) => {
+    const { name, email, password, flightNumber } = req.body;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('client_account');
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Insert the user data into the collection
+        const result = await collection.insertOne({ name, email, password: hashedPassword, flightNumber });
+        
+        res.redirect('/admin', {result});
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).send('Error registering user');
+    }
+});
+
+app.post('/client_delete', async (req, res) => {
+    const { email } = req.body;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('client_account');
+
+        // Delete the client account based on the email
+        const result = await collection.deleteOne({ email });
+        
+        if (result.deletedCount === 1) {
+            res.redirect('/admin');
+        } else {
+            res.status(404).send('Client account not found');
+        }
+    } catch (error) {
+        console.error('Error deleting client account:', error);
+        res.status(500).send('Error deleting client account');
+    }
+});
+
+app.post('/client_edit', async (req, res) => {
+    const { email, newName, newPassword } = req.body;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('client_account');
+
+        // Check if the email exists in the collection
+        const existingUser = await collection.findOne({ email });
+        if (!existingUser) {
+            return res.status(404).send('Client account not found');
+        }
+
+        // Prepare update fields
+        const updateFields = {};
+        if (newName) {
+            updateFields.name = newName;
+        }
+        if (newPassword) {
+            // Hash the new password
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            updateFields.password = hashedPassword;
+        }
+
+        // Update the client account
+        const result = await collection.updateOne({ email }, { $set: updateFields });
+        
+        if (result.modifiedCount === 1) {
+            res.redirect('/admin');
+        } else {
+            res.status(500).send('Error updating client account');
+        }
+    } catch (error) {
+        console.error('Error editing client account:', error);
+        res.status(500).send('Error editing client account');
+    }
+});
+
+app.post('/arrival_add', async (req, res) => {
+    const { flightNumber, origin, "scheduled Arrival Time": scheduledArrivalTime, "estimated Arrival Time": estimatedArrivalTime,
+        status, gate, "baggage Claim": baggageClaim, airline, terminal, remarks } = req.body;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('arrival_list');
+
+        // Insert the user data into the collection
+        const result = await collection.insertOne({ flightNumber, origin, scheduledArrivalTime, estimatedArrivalTime,
+            status, gate, baggageClaim, airline, terminal, remarks });
+
+        res.redirect('/admin', {result});
+    } catch (error) {
+        console.error('Error adding arrival:', error);
+        res.status(500).send('Error adding arrival');
+    }
+});
+
+app.post('/arrival_delete', async (req, res) => {
+    const { flightNumber } = req.body;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('arrival_list');
+
+
+        const result = await collection.deleteOne({ flightNumber });
+        
+        if (result.deletedCount === 1) {
+            res.redirect('/admin');
+        } else {
+            res.status(404).send('Flight not found');
+        }
+    } catch (error) {
+        console.error('Error deleting client account:', error);
+        res.status(500).send('Error deleting flight');
+    }
+});
+
+app.post('/arrival_edit/:flightNumber', async (req, res) => {
+    const { origin, scheduledArrivalTime, estimatedArrivalTime, status, gate, baggageClaim, airline, terminal, remarks } = req.body;
+    const { flightNumber } = req.params;
+
+    try {
+        const db = client.db('airport_management');
+        const collection = db.collection('arrival_list');
+
+        // Update the arrival entry
+        const result = await collection.updateOne({ flightNumber }, { $set: { origin, scheduledArrivalTime, estimatedArrivalTime, status, gate, baggageClaim, airline, terminal, remarks } });
+
+        if (result.modifiedCount === 1) {
+            res.redirect('/admin');
+        } else {
+            res.status(404).send('Arrival entry not found');
+        }
+    } catch (error) {
+        console.error('Error editing arrival:', error);
+        res.status(500).send('Error editing arrival');
+    }
+
+    app.use(function(err, req, res, next) {
+        console.error(err);
+    
+        res.status(500).render('error');
+    });
+
+});

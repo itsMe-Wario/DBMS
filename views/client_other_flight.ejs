@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booked Flights</title>
+  <link href="/css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header>
+  <div class="header_container">
+    <div class="logo">
+      <img src="/images/logo_main.png" alt="Logo">
+    </div>
+    <div class="search-box">
+      <span>Flight.No</span>
+      <form action="/client_search" method="GET">
+        <input type="text"  id="query" name="query" placeholder="Search">
+        <button type="submit">Search</button>
+      </form>
+      <div class="dropdown">
+        <button class="button-2" type="submit"><h4><%= email %></h4>Drop Down</button>
+        <div class="dropdown-content">
+          <form action="/" method="GET">
+            <button class="button-2" type="submit">Log-Out</button>
+          </form>
+          <form action="/tickets" method="GET">
+            <button class="button-2" type="submit">Other Tickets</button>
+          </form>
+        </div>
+    </div>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="header_container">
+    <a href="#" id="client_acc_page_link"><div class="highlight">Home</div></a>
+    <a href="#" id="client_arrival_link">Arrival</a>
+    <a href="#" id="client_departure_link">Departure</a>
+    <a href="http://localhost:3000/client_book_page">Book</a>
+    <a href="#" id="client_cargo_link">Cargo</a>
+  </div>
+  <form id="client_acc_page_form" action="/client_acc_page" method="GET">
+    <button class="button-2" type="submit" style="display: none;">Home</button>
+  </form>
+  <form id="client_arrival_form" action="/client_arrival" method="GET">
+    <button class="button-2" type="submit" style="display: none;">Arrival</button>
+  </form>
+  <form id="client_departure_form" action="/client_departure" method="GET">
+    <button class="button-2" type="submit" style="display: none;">Departure</button>
+  </form>
+  <form id="client_cargo_form" action="/client_search_cargo" method="GET">
+    <input type="hidden" id="email" name="email" value="<%= email %>">
+    <button class="button-2" type="submit" style="display: none;">Cargo</button>
+  </form>
+</nav>
+<div class="background_client"><img src="/images/backdrop2.png" height="900" width="1550" alt="arrival_background"></div>
+<div class="container">
+    <ul class="content">
+      <div class="largeletter"><p>Booked Flights :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p></div>
+        <% if (ticketData === false) { %>
+            <p>No Flights Found</p>
+        <% } else { %>  
+                <% ticketData.forEach(item => { %>
+                    <li class="data-item_2">
+              <div class="logo_ticket">
+                  <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
+              </div>
+            <div class="airline_info">
+            <h3><%= item.airline %></h3>
+            <sub><%= item.flight_number %></sub>
+            </div>
+            <div class="departure_info">
+            <h3><%= item.departure_time %></h3>
+            <h6><%= item.departure_date %></h6>
+            <sub><%= item.departure_name %>
+            <%= item.departure_airport %>
+            </sub>
+            </div>
+            <div class="flight_time_info">
+            <p><h4> Flight Time:</h4> <span class="flight-time" data-departure-date-time="<%= item.departure_date %> <%= item.departure_time %>" data-arrival-date-time="<%= item.arrival_date %> <%= item.arrival_time %>"></span></p>
+            </div>
+            <div class="destination_info">
+            <h3><%= item.arrival_time %></h3>
+            <h6><%= item.arrival_date %></h6>
+            <sub>(<%= item.destination_name %>
+              <%= item.destination_airport %>)</sub>           
+            </div>
+            <div class="price_info">
+            <h2> ₹<%= item.price %></h2>
+            </div>
+            <div class="booked">
+                <button class="button-2"><h5>Booked Successfully</h5></button>
+          </div >
+            </li>
+            <% }); %>
+            <% } %>  
+        </ul>
+        </div>
+<script>
+    document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_acc_page_form").submit(); // Submit the form
+  });
+
+    document.getElementById("client_arrival_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_arrival_form").submit(); // Submit the form
+  });
+
+    document.getElementById("client_departure_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_departure_form").submit(); // Submit the form
+  });
+  document.getElementById("client_cargo_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_cargo_form").submit(); // Submit the form
+  });
+  // Function to calculate flight time
+  function calculateFlightTime(departureDateTime, arrivalDateTime) {
+    // Parse departure and arrival times & dates
+    const departureTime = new Date(departureDateTime);
+    const arrivalTime = new Date(arrivalDateTime);
+
+    // Calculate difference in milliseconds
+    const timeDifference = arrivalTime.getTime() - departureTime.getTime();
+
+    // Convert milliseconds to hours, minutes, and seconds
+    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+    // Format the time string
+    const formattedTime = `${hours}h ${minutes}m `;
+
+    return formattedTime;
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // Get all elements with class 'flight-time'
+    const flightTimeElements = document.querySelectorAll('.flight-time');
+
+    // Loop through each element and calculate flight time
+    flightTimeElements.forEach(element => {
+      const departureDateTime = element.dataset.departureDateTime;
+      const arrivalDateTime = element.dataset.arrivalDateTime;
+
+      const flightTime = calculateFlightTime(departureDateTime, arrivalDateTime);
+
+      // Update the text content of the element with the calculated flight time
+      element.textContent = flightTime;
+    });
+  });
+</script>
+</body>
+</html>

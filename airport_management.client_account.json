@@ -5,7 +5,9 @@
   "name": "Shashanka Niraula",
   "email": "niraulabashanta@gmail.com",
   "password": "$2b$10$osY5d9RdKs4xZoDNSY.O6u9C6obbnBoj1KgKVuA/bfSqx9KKY9Pce",
+  "numberof": 1,
   "flightNumber": "TDB123"
+
 },
 {
   "_id": {
@@ -14,6 +16,7 @@
   "name": "Anu Shree VS",
   "email": "anu@gmail.com",
   "password": "$2b$10$jznohpATiF8FfngtCr1iTuU6JcTpsbsV/oGLo2IUNhEZCllW6jGVa",
+  "numberof": 1,
   "flightNumber": "DEF789"
 },
 {
@@ -22,7 +25,8 @@
   },
   "name": "Bhaswat",
   "email": "lenka@gmail.com",
-  "password": "$2b$10$AJd2ZKxbxb9QE.c9JZCa/OcdhHWQZEs7C/wFYfuaKcP.hqTjkH65e"
+  "password": "$2b$10$AJd2ZKxbxb9QE.c9JZCa/OcdhHWQZEs7C/wFYfuaKcP.hqTjkH65e",
+  "numberof": 0
 },
 {
   "_id": {
@@ -30,7 +34,8 @@
   },
   "name": "Pandit",
   "email": "pandit@gmail.com",
-  "password": "$2b$10$/5lQbKIjQhQltntZCrjFaurxqQ364z1GnLepC32b5/esFSITJNpGm",
+  "password": "$2b$10$osY5d9RdKs4xZoDNSY.O6u9C6obbnBoj1KgKVuA/bfSqx9KKY9Pce",
+  "numberof": 2,
   "flightNumber": "UND010",
-  "flightNumber_2": "AI432"
+  "flightNumber1": "AIF101"
 }]

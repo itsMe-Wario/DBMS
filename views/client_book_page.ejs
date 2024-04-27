@@ -19,7 +19,7 @@
         <button type="submit">Search</button>
       </form>
       <div class="dropdown">
-        <button class="button-2" type="submit">Drop Down</button>
+        <button class="button-2" type="submit"><h4><%= email %></h4>Drop Down</button>
         <div class="dropdown-content">
           <form action="/" method="GET">
             <button class="button-2" type="submit">Log-Out</button>
@@ -57,11 +57,9 @@
     <input type="text"  id="from" name="from" placeholder="From">
     <input type="text"  id="to" name="to" placeholder="To">
     <input type="date"  id="date" name="date">
+    <input type="hidden" id="email" name="email" value="<%= email %>">
     <button type="submit">Search</button>
     </form>
-    <form action="/signup" method="GET">
-    <button class="button-2" type="submit">Have a Account?Sign-in.</button>
-  </form>
   </div>
 </div>
 <script>

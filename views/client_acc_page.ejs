@@ -37,7 +37,7 @@
     <a href="#" id="client_acc_page_link"><div class="highlight">Home</div></a>
     <a href="#" id="client_arrival_link">Arrival</a>
     <a href="#" id="client_departure_link">Departure</a>
-    <a href="http://localhost:3000/client_book_page">Book</a>
+    <a href="#" id="client_book_link">Book</a>
     <a href="#" id="client_cargo_link">Cargo</a>
   </div>
   <form id="client_acc_page_form" action="/client_acc_page" method="GET">
@@ -48,6 +48,10 @@
   </form>
   <form id="client_departure_form" action="/client_departure" method="GET">
     <button class="button-2" type="submit" style="display: none;">Departure</button>
+  </form>
+  <form id="client_book_form" action="/client_book_page" method="GET">
+    <input type="hidden" id="email" name="email" value="<%= clientFlightDetails.email %>">
+    <button class="button-2" type="submit" style="display: none;">Book</button>
   </form>
   <form id="client_cargo_form" action="/client_search_cargo" method="GET">
     <input type="hidden" id="email" name="email" value="<%= clientFlightDetails.email %>">
@@ -112,6 +116,18 @@
  <br><p style="font-size: 12px;"><b>Scheduled Arrival Time:&nbsp;&nbsp;&nbsp;&nbsp;Estimated Arrival Time:</p></b>
  <p><%= arrivalDetails['arrival Time'] %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= arrivalDetails['estimated Arrival Time'] %></p>
   <% } %>
+  <% if (clientFlightDetails.numberof !== 0) { %>
+  <form action="/client_other_flight" method="GET">
+    <% 
+    const x = clientFlightDetails.numberof;
+    const userDataArray = Object.entries(clientFlightDetails);
+    const bottomFields = userDataArray.slice(-x);
+    bottomFields.forEach(([key, value]) => { %>
+        <input type="hidden" name="flightNumber" value="<%= value %>">
+    <% }); %>
+    <button class="button" type="submit">Your Other Fights </button>
+  </form>
+  <% } %>
 </div>
 </div>
 <% } else { %>
@@ -122,6 +138,11 @@
   document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent the default behavior of the link
     document.getElementById("client_acc_page_form").submit(); // Submit the form
+  });
+
+  document.getElementById("client_book_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_book_form").submit(); // Submit the form
   });
 
     document.getElementById("client_arrival_link").addEventListener("click", function(event) {

@@ -371,6 +371,20 @@ li {
   align-items: flex-start;
 }
 
+.container_2 button {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 3px solid #3498db; 
+  font-size: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-left: -920px;
+  margin-top: 40px;
+  text-decoration: underline;
+}
+
 .from_box,
 .to_box {
   flex: 0 0 auto;
@@ -441,6 +455,10 @@ li {
   margin-top: 5px;
   max-width: 80px;
   min-width: 80px;
+}
+
+.booked{
+margin-left: -60px;
 }
 
 .departure_info,
@@ -545,6 +563,7 @@ li {
   position: relative;
   display: inline-block;
   align-items: center;
+  z-index: 99999;
 }
 
 /* Style the dropdown content (hidden by default) */

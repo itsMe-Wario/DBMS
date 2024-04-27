@@ -45,6 +45,9 @@
       <button type="submit">Search</button>
       </form>
     </div>
+    <% if (ticketData === false) { %>
+      <p>No Flights Found</p>
+  <% } else { %>  
           <% ticketData.forEach(item => { %>
             <li class="data-item_2">
               <div class="logo_ticket">
@@ -92,6 +95,7 @@
             <form action="/signup" method="GET">
             <button class="button-2" type="submit">No Account?Sign-up.</button>
             </form>
+            <% } %>
       </div>
   </div>
   <script>
