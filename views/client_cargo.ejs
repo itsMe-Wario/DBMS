@@ -20,7 +20,7 @@
         <button type="submit">Search</button>
       </form>
       <div class="dropdown">
-        <button class="button-2" type="submit"><h4>Drop Down</h4></button>
+        <button class="button-2" type="submit"><h4><p><%= logedinemail.email %></p>Drop Down</h4></button>
         <div class="dropdown-content">
           <form action="/" method="GET">
             <button class="button-2" type="submit">Log-Out</button>
@@ -38,7 +38,7 @@
     <a href="#" id="client_acc_page_link">Home</a>
     <a href="#" id="client_arrival_link">Arrival</a>
     <a href="#" id="client_departure_link">Departure</a>
-    <a href="http://localhost:3000/client_book_page">Book</a>
+    <a href="#" id="client_book_link">Book</a>
     <a href="#" id="client_cargo_link"><div class="highlight">Cargo</div></a>
   </div>
   <form id="client_acc_page_form" action="/client_acc_page" method="GET">
@@ -49,6 +49,9 @@
   </form>
   <form id="client_departure_form" action="/client_departure" method="GET">
     <button class="button-2" type="submit" style="display: none;">Departure</button>
+  </form>
+  <form id="client_book_form" action="/client_book_page" method="GET">
+    <button class="button-2" type="submit" style="display: none;">Book</button>
   </form>
   <form id="client_cargo_form" action="/client_search_cargo" method="GET">
     <button class="button-2" type="submit" style="display: none;">Cargo</button>
@@ -61,8 +64,8 @@
     <h4>We couldn't find any Cargo ID in your name</h4><br>
     <h3>Search For Different Cargo</h3>
     <div class="login_position">
-    <form action="/client_search_cargo" method="GET">
-      <input type="hidden" id="from" name="from" value="<%= email%>" >
+    <form action="/client_cargo_id_search" method="GET">
+      <input type="hidden" id="from" name="from" value="<%= logedinemail.email%>" >
         <input type="text" id="cargo_id" name="cargo_id" placeholder="Cargo Id" required><br><br>
         <button type="submit">Search</button>
     </form>
@@ -70,9 +73,14 @@
 </div>
 </div>
 <script>
-  document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
+document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent the default behavior of the link
     document.getElementById("client_acc_page_form").submit(); // Submit the form
+  });
+
+  document.getElementById("client_book_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_book_form").submit(); // Submit the form
   });
 
     document.getElementById("client_arrival_link").addEventListener("click", function(event) {

@@ -38,8 +38,8 @@
     <a href="#" id="client_acc_page_link">Home</a>
     <a href="#" id="client_arrival_link"><div class="highlight">Arrival</div></a>
     <a href="#" id="client_departure_link">Departure</a>
-    <a href="http://localhost:3000/client_book_page">Book</a>
-    <a href="http://localhost:3000/cargo">Cargo</a>
+    <a href="#" id="client_book_link">Book</a>
+    <a href="#" id="client_cargo_link">Cargo</a>
   </div>
   <form id="client_acc_page_form" action="/client_acc_page" method="GET">
     <button class="button-2" type="submit" style="display: none;">Home</button>
@@ -49,6 +49,12 @@
   </form>
   <form id="client_departure_form" action="/client_departure" method="GET">
     <button class="button-2" type="submit" style="display: none;">Departure</button>
+  </form>
+  <form id="client_book_form" action="/client_book_page" method="GET">
+    <button class="button-2" type="submit" style="display: none;">Book</button>
+  </form>
+  <form id="client_cargo_form" action="/client_search_cargo" method="GET">
+    <button class="button-2" type="submit" style="display: none;">Cargo</button>
   </form>
 </nav>
 <ul id="data-list"></ul>
@@ -91,9 +97,14 @@
 </div>
 </div>
 <script>
-  document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
+document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent the default behavior of the link
     document.getElementById("client_acc_page_form").submit(); // Submit the form
+  });
+
+  document.getElementById("client_book_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_book_form").submit(); // Submit the form
   });
 
     document.getElementById("client_arrival_link").addEventListener("click", function(event) {
@@ -101,9 +112,13 @@
     document.getElementById("client_arrival_form").submit(); // Submit the form
   });
 
-  document.getElementById("client_departure_link").addEventListener("click", function(event) {
+    document.getElementById("client_departure_link").addEventListener("click", function(event) {
     event.preventDefault(); // Prevent the default behavior of the link
     document.getElementById("client_departure_form").submit(); // Submit the form
+  });
+  document.getElementById("client_cargo_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_cargo_form").submit(); // Submit the form
   });
 </script>
 </body>

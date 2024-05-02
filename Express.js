@@ -193,15 +193,8 @@ app.get('/search_flight', async (req, res) => {
 });
 
 app.get('/cargo_search', async (req, res) => {
-    const user = req.session.user;
 
-    if (!user) {
-        // If user is not in session, redirect to login page
-        res.redirect('/login');
-        return;
-    }
-    const {cargo_id } = req.query; // Change req.body to req.query
-    const email = user.email;
+    const {cargo_id , email} = req.query;
 
     try {
         // Connect to the MongoDB server
@@ -230,6 +223,40 @@ app.get('/cargo_search', async (req, res) => {
     }
 });
 
+app.get('/client_cargo_id_search', async (req, res) => {
+    const user = req.session.user;
+
+    if (!user) {
+        res.redirect('/login');
+        return;
+    }
+    const {cargo_id } = req.query;
+    const logedinemail = user.email;
+
+    try {
+        await client.connect();
+        console.log('Connected to MongoDB');
+
+        const database = client.db('airport_management');
+        
+        const cargo = database.collection('cargo');
+        const cargo_client = database.collection('cargo_client');
+
+        const cargoData = await cargo.findOne({ cargo_id });
+        if (!cargoData) {
+            return res.status(404).render('no_account', { error: 'Email/Cargo not found' });
+        }
+        const clientData = await cargo_client.findOne({ cargo_id });
+
+        res.render('client_search_cargo', {clientData, cargoData, logedinemail });
+
+    } catch (error) {
+        console.error('Error searching in MongoDB:', error);
+        res.render('no_account');
+    }
+});
+
+
 app.get('/client_search_cargo', async (req, res) => {
     const user = req.session.user;
 
@@ -238,7 +265,7 @@ app.get('/client_search_cargo', async (req, res) => {
         res.redirect('/login');
         return;
     }
-    const email = user.email;
+    const logedinemail = user.email;
 
     try {
         // Connect to the MongoDB server
@@ -260,11 +287,11 @@ app.get('/client_search_cargo', async (req, res) => {
 
         await req.session.save();
 
-        res.render('client_search_cargo', {clientData, cargoData });
+        res.render('client_search_cargo', {clientData, cargoData, logedinemail });
 
     } catch (error) {
         console.error('Error searching in MongoDB:', error);
-        res.render('client_cargo');
+        res.render('client_cargo', {logedinemail});
     }
 });
 

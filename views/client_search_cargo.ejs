@@ -8,7 +8,6 @@
     <title>Cargo</title>
     <link rel="stylesheet" href="/css/styles_2.css">
 </head>
-
 <body>
     <header>
         <div class="header_container">
@@ -22,7 +21,7 @@
                     <button type="submit">Search</button>
                 </form>
                 <div class="dropdown">
-                    <button class="button-2" type="submit"><h4><%= clientData.email %></h4>Drop Down</button>
+                    <button class="button-2" type="submit"><h4><%= logedinemail.email %></h4>Drop Down</button>
                     <div class="dropdown-content">
                       <form action="/" method="GET">
                         <button class="button-2" type="submit">Log-Out</button>
@@ -36,27 +35,29 @@
         </div>
     </header>
     <nav>
-        <div class="header_container">
-          <a href="#" id="client_acc_page_link">Home</a>
-          <a href="#" id="client_arrival_link">Arrival</a>
-          <a href="#" id="client_departure_link">Departure</a>
-          <a href="http://localhost:3000/client_book_page">Book</a>
-          <a href="#" id="client_cargo_link"><div class="highlight">Cargo</div></a>
-        </div>
-        <form id="client_acc_page_form" action="/client_acc_page" method="GET">
-          <button class="button-2" type="submit" style="display: none;">Home</button>
-        </form>
-        <form id="client_arrival_form" action="/client_arrival" method="GET">
-          <button class="button-2" type="submit" style="display: none;">Arrival</button>
-        </form>
-        <form id="client_departure_form" action="/client_departure" method="GET">
-          <button class="button-2" type="submit" style="display: none;">Departure</button>
-        </form>
-        <form id="client_cargo_form" action="/client_cargo" method="GET">
-          <input type="hidden" id="email" name="email" value="<%= clientData.email %>">
-          <button class="button-2" type="submit" style="display: none;">Cargo</button>
-        </form>
-      </nav>
+      <div class="header_container">
+        <a href="#" id="client_acc_page_link">Home</a>
+        <a href="#" id="client_arrival_link">Arrival</a>
+        <a href="#" id="client_departure_link">Departure</a>
+        <a href="#" id="client_book_link">Book</a>
+        <a href="#" id="client_cargo_link"><div class="highlight">Cargo</div></a>
+      </div>
+      <form id="client_acc_page_form" action="/client_acc_page" method="GET">
+        <button class="button-2" type="submit" style="display: none;">Home</button>
+      </form>
+      <form id="client_arrival_form" action="/client_arrival" method="GET">
+        <button class="button-2" type="submit" style="display: none;">Arrival</button>
+      </form>
+      <form id="client_departure_form" action="/client_departure" method="GET">
+        <button class="button-2" type="submit" style="display: none;">Departure</button>
+      </form>
+      <form id="client_book_form" action="/client_book_page" method="GET">
+        <button class="button-2" type="submit" style="display: none;">Book</button>
+      </form>
+      <form id="client_cargo_form" action="/client_search_cargo" method="GET">
+        <button class="button-2" type="submit" style="display: none;">Cargo</button>
+      </form>
+    </nav>
     <div class="background_client">
         <img src="/images/cargo_bg.png" height="650" width="1600" alt="arrival_background">
     </div>
@@ -94,24 +95,29 @@
        </div>  
     </div>
     <script>
-        document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
-          event.preventDefault(); // Prevent the default behavior of the link
-          document.getElementById("client_acc_page_form").submit(); // Submit the form
-        });
-      
-          document.getElementById("client_arrival_link").addEventListener("click", function(event) {
-          event.preventDefault(); // Prevent the default behavior of the link
-          document.getElementById("client_arrival_form").submit(); // Submit the form
-        });
-      
-          document.getElementById("client_departure_link").addEventListener("click", function(event) {
-          event.preventDefault(); // Prevent the default behavior of the link
-          document.getElementById("client_departure_form").submit(); // Submit the form
-        });
-        document.getElementById("client_cargo_link").addEventListener("click", function(event) {
-          event.preventDefault(); // Prevent the default behavior of the link
-          document.getElementById("client_cargo_form").submit(); // Submit the form
-        });
+document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_acc_page_form").submit(); // Submit the form
+  });
+
+  document.getElementById("client_book_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_book_form").submit(); // Submit the form
+  });
+
+    document.getElementById("client_arrival_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_arrival_form").submit(); // Submit the form
+  });
+
+    document.getElementById("client_departure_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_departure_form").submit(); // Submit the form
+  });
+  document.getElementById("client_cargo_link").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default behavior of the link
+    document.getElementById("client_cargo_form").submit(); // Submit the form
+  });
       </script>
 </body>
 </html>
