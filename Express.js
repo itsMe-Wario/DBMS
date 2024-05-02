@@ -595,8 +595,7 @@ app.get('/client_other_flight', async (req, res) => {
     }
 });
 
-
-app.get('/client_book_flight', async (req, res) => {
+app.get('/client_book_password', async (req, res) => {
     // Retrieve user information from session
     const user = req.session.user;
 
@@ -605,46 +604,68 @@ app.get('/client_book_flight', async (req, res) => {
         res.redirect('/login');
         return;
     }
-    
-    const { flightNumber, reqpassword } = req.query;
-    const email = user.email;
-    const correctpassword = user.password;
-    const noFlights = user.numberof;
-    console.log('update:', noFlights );
 
-    if ( reqpassword == correctpassword ) {
+    const {from ,flightNumber, to} =req.query;
+    const email = user.email;
+
+    res.render('client_book_password', {from ,flightNumber, to, email });
+});
+
+
+app.get('/client_book_flight', async (req, res) => {
+    // Retrieve user information from session
+    const user = req.session.user;
+
+    if (!user) {
+        // If user is not in session, redirect to login page
+        return res.redirect('/login');
+    }
+    
+    const { flightNumber, password } = req.query;
+    const email = user.email;
+    const hashedPassword = user.password; // Assuming you stored the hashed password in user.password
+    const noFlights = user.numberof;
 
     try {
+        // Verify password
+        const passwordMatch = await bcrypt.compare(password, hashedPassword);
+        if (!passwordMatch) {
+            return res.render('error');
+        }
+
+        // Connect to MongoDB
         await client.connect();
         console.log('Connected to MongoDB');
         const database = client.db('airport_management');
         const clientCollection = database.collection('client_account');
+
+        // Find available flight number
         const availableFlightNumber = await findAvailableFlightNumber(clientCollection, email);
+
+        // Update user document
         const query = { email: email };
         const flightCount = noFlights + 1;
         const update = { 
             $set: { 
-                [availableFlightNumber]:flightNumber, 
+                [availableFlightNumber]: flightNumber, 
                 numberof: flightCount
             } 
         };
         const options = { returnOriginal: false };
-
         const updatedUser = await clientCollection.findOneAndUpdate(query, update, options);
 
-        console.log('update:', flightCount );
-        console.log('update:', updatedUser );
+        console.log('Update:', flightCount);
+        console.log('Updated User:', updatedUser);
 
         await req.session.save();
 
         res.redirect('/client_acc_page');
-
     } catch (error) {
         console.error('Error connecting to MongoDB (Database 1):', error);
         res.render('error');
-    } 
-    } else {
-        res.redirect('/login'); 
+    } finally {
+        // Close MongoDB connection
+        await client.close();
     }
 });
 

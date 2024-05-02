@@ -94,9 +94,10 @@
       <h2> ₹<%= item.price %></h2>
       </div>
       <div>
-          <form action="/client_book_flight" method="GET">
-            <input type="hidden" id="email" name="email" value="<%= email%>" >
+          <form action="/client_book_password" method="GET">
             <input type="hidden" id="flightNumber" name="flightNumber" value="<%= item.flight_number%>" >         
+            <input type="hidden" id="from" name="from" value="<%= item.departure_name %>" > 
+            <input type="hidden" id="to" name="to" value="<%= item.destination_name %>" > 
             <button class="button-2" type="submit">Book</button>
           </form>
       </div>
