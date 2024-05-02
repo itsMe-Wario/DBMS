@@ -457,6 +457,7 @@ app.get('/client_flight_search',  async (req, res) => {
     const from = req.query.from;
     const date = req.query.date;
     const email = user.email;
+    const password = user.password;
 
     try {
         // Connect to the MongoDB server
@@ -494,7 +495,7 @@ app.get('/client_flight_search',  async (req, res) => {
         if (ticketData.length === 0) {
             res.render('client_flight_search', { ticketData: false, date });
         } else {
-            res.render('client_flight_search', { ticketData, date, email });
+            res.render('client_flight_search', { ticketData, date, email, password });
         }
 
     } catch (error) {
@@ -605,27 +606,22 @@ app.get('/client_book_flight', async (req, res) => {
         return;
     }
     
-    const { email, flightNumber } = req.query;
+    const { flightNumber, reqpassword } = req.query;
+    const email = user.email;
+    const correctpassword = user.password;
     const noFlights = user.numberof;
     console.log('update:', noFlights );
 
+    if ( reqpassword == correctpassword ) {
+
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
-
-        // Use a specific database
         const database = client.db('airport_management');
-        
-        // Use specific collections
         const clientCollection = database.collection('client_account');
-
-        // Find the lowest available flightNumber field
         const availableFlightNumber = await findAvailableFlightNumber(clientCollection, email);
-
-        // Update the user document with the available flightNumber field
         const query = { email: email };
-        const flightCount = noFlights + 1; // Increment the flight count
+        const flightCount = noFlights + 1;
         const update = { 
             $set: { 
                 [availableFlightNumber]:flightNumber, 
@@ -646,6 +642,9 @@ app.get('/client_book_flight', async (req, res) => {
     } catch (error) {
         console.error('Error connecting to MongoDB (Database 1):', error);
         res.render('error');
+    } 
+    } else {
+        res.redirect('/login'); 
     }
 });
 
