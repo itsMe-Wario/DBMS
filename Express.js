@@ -249,9 +249,9 @@ app.get('/client_search_cargo', async (req, res) => {
         const cargo = database.collection('cargo');
         const cargo_client = database.collection('cargo_client');
 
-        const clientData = await cargo_client.findOne({ email });
+        const clientData = await cargo_client.findOne({ email:logedinemail });
         if (!clientData) {
-            return res.status(404).render('client_cargo', {email});
+            return res.status(404).render('error', {logedinemail});
         }
         const cargoData = await cargo.findOne({ cargo_id: clientData.cargo_id });
 
