@@ -251,7 +251,7 @@ app.get('/client_search_cargo', async (req, res) => {
 
         const clientData = await cargo_client.findOne({ email:logedinemail });
         if (!clientData) {
-            return res.status(404).render('error', {logedinemail});
+            return res.status(404).render('client_cargo', {logedinemail});
         }
         const cargoData = await cargo.findOne({ cargo_id: clientData.cargo_id });
 
