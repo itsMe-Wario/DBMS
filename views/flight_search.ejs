@@ -102,11 +102,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         const bookButtons = document.querySelectorAll('.showLogin');
         const closeButtons = document.querySelectorAll('.closeBtn');
-    
-        // Add click event listener to each "Book" button 
+
         bookButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Find the corresponding login container
                 const loginContainer = document.querySelector('.loginContainer');
                 const overFlow = document.querySelector('.container');
                 const overlay = document.querySelector('.overlay');
@@ -126,8 +124,7 @@
                 overFlow.style.overflow = 'auto';
             });
         });
-    
-        // Function to calculate flight time
+
         function calculateFlightTime(departureDateTime, arrivalDateTime) {
             const departureTime = new Date(departureDateTime);
             const arrivalTime = new Date(arrivalDateTime);
@@ -142,18 +139,14 @@
     
             return formattedTime;
         }
-    
-        // Get all elements with class 'flight-time'
         const flightTimeElements = document.querySelectorAll('.flight-time');
     
-        // Loop through each element and calculate flight time
         flightTimeElements.forEach(element => {
             const departureDateTime = element.dataset.departureDateTime;
             const arrivalDateTime = element.dataset.arrivalDateTime;
     
             const flightTime = calculateFlightTime(departureDateTime, arrivalDateTime);
     
-            // Update the text content of the element with the calculated flight time
             element.textContent = flightTime;
         });
     });

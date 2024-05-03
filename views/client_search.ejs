@@ -60,9 +60,9 @@
               <div class="status_box_red"><%= item.status %></div>
             <% } else if (item.status == "Departed") { %>
               <div class="status_box_blue"><%= item.status %></div>
-            <% } else { %> <!-- Added opening brace here -->
+            <% } else { %> 
               <div class="status_box_blue"><%= item.status %></div>
-            <% } %> <!-- Added closing brace here -->
+            <% } %>
             <div class="status"><h5> <%= item['date'] %></h5></div>
             <div class="logo_ticket_3">
               <h6>Flight No:</h6>
@@ -85,28 +85,28 @@
     </div>      
 </div>
 <script>
-   document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    document.getElementById("client_acc_page_form").submit(); // Submit the form
+document.getElementById("client_acc_page_link").addEventListener("click", function(event) {
+    event.preventDefault();
+    document.getElementById("client_acc_page_form").submit(); 
   });
 
   document.getElementById("client_book_link").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    document.getElementById("client_book_form").submit(); // Submit the form
+    event.preventDefault(); 
+    document.getElementById("client_book_form").submit(); 
   });
 
     document.getElementById("client_arrival_link").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    document.getElementById("client_arrival_form").submit(); // Submit the form
+    event.preventDefault();
+    document.getElementById("client_arrival_form").submit(); 
   });
 
     document.getElementById("client_departure_link").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    document.getElementById("client_departure_form").submit(); // Submit the form
+    event.preventDefault();
+    document.getElementById("client_departure_form").submit();
   });
   document.getElementById("client_cargo_link").addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default behavior of the link
-    document.getElementById("client_cargo_form").submit(); // Submit the form
+    event.preventDefault();
+    document.getElementById("client_cargo_form").submit();
   });
   </script>
   </body>

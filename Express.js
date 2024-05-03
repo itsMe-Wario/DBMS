@@ -1,29 +1,27 @@
 const express = require('express');
 const path = require('path');
 const { MongoClient } = require('mongodb');
-const ejs = require('ejs'); // Import the ejs module
+const ejs = require('ejs');
 const serveStatic = require('serve-static');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 
-// Generate a random secret key
 const secretKey = crypto.randomBytes(32).toString('hex');
 console.log('Secret Key:', secretKey);
 
-// Create Express app
 const app = express();
 const port = 3000;
 
-// MongoDB connection URIs
+
 
 async function findAvailableFlightNumber(clientCollection, email) {
     let i = 0;
     let availableFlightNumber = '';
     while (true) {
-        const flightNumberField = 'flightNumber' + (i === 0 ? '' : i); // Construct field name (flightNumber, flightNumber1, flightNumber2, ...)
-        const query = { email: email, [flightNumberField]: { $exists: false } }; // Check if the field exists
+        const flightNumberField = 'flightNumber' + (i === 0 ? '' : i); 
+        const query = { email: email, [flightNumberField]: { $exists: false } }; 
         const userDoc = await clientCollection.findOne(query);
         if (userDoc) {
             availableFlightNumber = flightNumberField;
@@ -38,10 +36,8 @@ const uri1 = 'mongodb://localhost:27017/airport_management';
 
 const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Set the view engine to EJS
 app.set('view engine', 'ejs');
 
-// Serve static files from the 'public' directory
 app.use(serveStatic(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
@@ -84,26 +80,19 @@ app.get('/cargo', (req, res) => {
     res.render('cargo');
 });
 
-// Define route handler for the first database
 app.get('/database1', async (req, res) => {
     try {
-        // Create a new MongoClient for the first database
         const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
         
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB (Database 1)');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use a specific collection
         const collection = database.collection('arrival_list');
 
-        // Fetch data from the collection
         const data = await collection.find().toArray();
 
-        // Render the arrival.ejs template with the fetched data
         res.render('arrival', { data });
 
     } catch (error) {
@@ -116,25 +105,20 @@ app.get('/search', async (req, res) => {
     const query = req.query.query;
     const capitalizedQuery = query.toUpperCase();
     try {
-        // Connect to the MongoDB server
+
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use specific collections
         const arrivalCollection = database.collection('arrival_list');
         const departureCollection = database.collection('departure_list');
 
-        // Perform search queries on both collections
         const arrivalData = await arrivalCollection.find({ flightNumber: capitalizedQuery }).toArray();
         const departureData = await departureCollection.find({ flightNumber: capitalizedQuery }).toArray();
 
-        // Combine search results from both collections
         const data = arrivalData.concat(departureData);
 
-        // Render the arrival.ejs template with the search results
         res.render('search', { data });
 
     } catch (error) {
@@ -148,17 +132,13 @@ app.get('/search_flight', async (req, res) => {
     const from = req.query.from;
     const date = req.query.date;
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use specific collections
         const ticketCollection = database.collection('flight_tickets');
 
-        // Perform search queries on both collections
         const ticketData = await ticketCollection.find({
             $and: [
                 {
@@ -179,10 +159,8 @@ app.get('/search_flight', async (req, res) => {
         }).toArray();
         
         if (ticketData.length === 0) {
-            // If no ticket data found, set ticketData to false
             res.render('flight_search', { ticketData: false, date });
         } else {
-            // If ticket data found, render the flight_search template with ticketData
             res.render('flight_search', { ticketData, date });
         }
 
@@ -197,14 +175,11 @@ app.get('/cargo_search', async (req, res) => {
     const {cargo_id , email} = req.query;
 
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use specific collections
         const cargo = database.collection('cargo');
         const cargo_client = database.collection('cargo_client');
 
@@ -214,7 +189,6 @@ app.get('/cargo_search', async (req, res) => {
         }
         const cargoData = await cargo.findOne({ cargo_id });
 
-        // Render the arrival.ejs template with the search results
         res.render('search_cargo', {clientData, cargoData });
 
     } catch (error) {
@@ -261,21 +235,17 @@ app.get('/client_search_cargo', async (req, res) => {
     const user = req.session.user;
 
     if (!user) {
-        // If user is not in session, redirect to login page
         res.redirect('/login');
         return;
     }
     const logedinemail = user.email;
 
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use specific collections
         const cargo = database.collection('cargo');
         const cargo_client = database.collection('cargo_client');
 
@@ -299,7 +269,6 @@ app.get('/client_search', async (req, res) => {
     const user = req.session.user;
 
     if (!user) {
-        // If user is not in session, redirect to login page
         res.redirect('/login');
         return;
     }
@@ -307,22 +276,17 @@ app.get('/client_search', async (req, res) => {
     const query = req.query.query;
     const capitalizedQuery = query.toUpperCase();
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use specific collections
         const arrivalCollection = database.collection('arrival_list');
         const departureCollection = database.collection('departure_list');
 
-        // Perform search queries on both collections
         const arrivalData = await arrivalCollection.find({ flightNumber: capitalizedQuery }).toArray();
         const departureData = await departureCollection.find({ flightNumber: capitalizedQuery }).toArray();
 
-        // Combine search results from both collections
         const data = arrivalData.concat(departureData);
 
         await req.session.save();
@@ -335,26 +299,19 @@ app.get('/client_search', async (req, res) => {
     }
 });
 
-// Define route handler for the second database
 app.get('/database2', async (req, res) => {
     try {
-        // Create a new MongoClient for the second database
         const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
         
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB (Database 2)');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use a specific collection
         const collection = database.collection('departure_list');
 
-        // Fetch data from the collection
         const data = await collection.find().toArray();
 
-        // Render the arrival2.ejs template with the fetched data
         res.render('departure', { data });
 
     } catch (error) {
@@ -367,40 +324,30 @@ app.post('/login', async (req, res) => {
     const { email, password } = req.body;
     
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use a specific collection
         const collection = database.collection('client_account');
 
-        // Find user with the given email
         const user = await collection.findOne({ email: email });
 
-        // Check if user exists
         if (!user) {
-            // Render no_account.ejs if user doesn't exist
             res.render('no_account');
             return;
         }
 
-        // Compare passwords
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
-            // Store user information in session
             req.session.user = user;
 
-            // Redirect to client account page
             res.redirect('/client_acc_page');
 
             await req.session.save();
 
         } else {
-            // Render no_account.ejs if passwords don't match
             res.render('no_account');
         }
     } catch (error) {
@@ -414,40 +361,30 @@ app.post('/login_2', async (req, res) => {
 
     
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use a specific collection
         const collection = database.collection('client_account');
 
-        // Find user with the given email
         const user = await collection.findOne({ email: email });
 
-        // Check if user exists
         if (!user) {
-            // Render no_account.ejs if user doesn't exist
             res.render('no_account');
             return;
         }
 
-        // Compare passwords
         const passwordMatch = await bcrypt.compare(password, user.password);
 
         if (passwordMatch) {
-            // Store user information in session
             req.session.user = user;
 
-            // Redirect to client account page
             res.redirect(`/client_flight_search?from=${from}&to=${to}&date=${date}`);
 
             await req.session.save();
 
         } else {
-            // Render no_account.ejs if passwords don't match
             res.render('no_account');
         }
     } catch (error) {
@@ -457,7 +394,6 @@ app.post('/login_2', async (req, res) => {
 });
 
 app.get('/client_book_page',  async (req, res) => {
-    // Retrieve user information from session
     const user = req.session.user;
 
     if (user) {
@@ -471,11 +407,9 @@ app.get('/client_book_page',  async (req, res) => {
 });
 
 app.get('/client_flight_search',  async (req, res) => {
-    // Retrieve user information from session
     const user = req.session.user;
 
     if (!user) {
-        // If user is not in session, redirect to login page
         res.redirect('/login');
         return;
     }
@@ -487,17 +421,13 @@ app.get('/client_flight_search',  async (req, res) => {
     const password = user.password;
 
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use specific collections
         const ticketCollection = database.collection('flight_tickets');
 
-        // Perform search queries on both collections
         const ticketData = await ticketCollection.find({
             $and: [
                 {
@@ -532,35 +462,28 @@ app.get('/client_flight_search',  async (req, res) => {
 });
 
 app.get('/client_acc_page',  async (req, res) => {
-    // Retrieve user information from session
     const user = req.session.user;
 
     if (!user) {
-        // If user is not in session, redirect to login page
         res.redirect('/login');
         return;
     }
 
-    // Retrieve flightNumber from user's information
     const flightNumber = user.flightNumber;
     const email = user.email;
 
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use specific collections
         const departureCollection = database.collection('departure_list');
         const anotherdepartureCollection = database.collection('another_airport_departure');
         const anotherarrivalCollection = database.collection('another_airport_arrival');
         const arrivalCollection = database.collection('arrival_list');
         const clientCollection = database.collection('client_account');
 
-        // Find client flight details from client_account collection
         const clientFlightDetails = await clientCollection.findOne({ flightNumber, email });
 
         if (!clientFlightDetails) {
@@ -589,7 +512,6 @@ app.get('/client_other_flight', async (req, res) => {
     const user = req.session.user;
 
     if (!user) {
-        // If user is not in session, redirect to login page
         res.redirect('/login');
         return;
     }
@@ -597,13 +519,11 @@ app.get('/client_other_flight', async (req, res) => {
     const email = user.email;
     let { flightNumber } = req.query;
 
-    // If flightNumber is a single value, convert it to an array
     if (!Array.isArray(flightNumber)) {
         flightNumber = [flightNumber];
     }
 
     try {
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
         const database = client.db('airport_management');
@@ -623,11 +543,9 @@ app.get('/client_other_flight', async (req, res) => {
 });
 
 app.get('/client_book_password', async (req, res) => {
-    // Retrieve user information from session
     const user = req.session.user;
 
     if (!user) {
-        // If user is not in session, redirect to login page
         res.redirect('/login');
         return;
     }
@@ -640,17 +558,15 @@ app.get('/client_book_password', async (req, res) => {
 
 
 app.get('/client_book_flight', async (req, res) => {
-    // Retrieve user information from session
     const user = req.session.user;
 
     if (!user) {
-        // If user is not in session, redirect to login page
         return res.redirect('/login');
     }
     
     const { flightNumber, password } = req.query;
     const email = user.email;
-    const hashedPassword = user.password; // Assuming you stored the hashed password in user.password
+    const hashedPassword = user.password;
     const noFlights = user.numberof;
 
     try {
@@ -660,16 +576,13 @@ app.get('/client_book_flight', async (req, res) => {
             return res.render('error');
         }
 
-        // Connect to MongoDB
         await client.connect();
         console.log('Connected to MongoDB');
         const database = client.db('airport_management');
         const clientCollection = database.collection('client_account');
 
-        // Find available flight number
         const availableFlightNumber = await findAvailableFlightNumber(clientCollection, email);
 
-        // Update user document
         const query = { email: email };
         const flightCount = noFlights + 1;
         const update = { 
@@ -691,45 +604,36 @@ app.get('/client_book_flight', async (req, res) => {
         console.error('Error connecting to MongoDB (Database 1):', error);
         res.render('error');
     } finally {
-        // Close MongoDB connection
         await client.close();
     }
 });
 
 
 app.get('/client_arrival', async (req, res) => {
-    // Retrieve user information from session
     const user = req.session.user;
 
     if (!user) {
-        // If user is not in session, redirect to login page
         res.redirect('/login');
         return;
     }
 
     try {
-        // Create a new MongoClient for the first database
         const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
-        
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use a specific collection
         const arrivalcollection = database.collection('arrival_list');
         const usercollection = database.collection('client_account');
-        // Fetch data from the collection
+
         const arrivalData = await arrivalcollection.find().toArray();
         const userData = await usercollection.find().toArray();
 
-        // Combine arrival data and user data
         const data = {
             arrivalData: arrivalData,
             userData: userData,
-            user: user  // Include user information
+            user: user
         };
 
         res.render('client_arrival', { data });
@@ -741,38 +645,30 @@ app.get('/client_arrival', async (req, res) => {
 });
 
 app.get('/client_departure', async (req, res) => {
-    // Retrieve user information from session
     const user = req.session.user;
 
     if (!user) {
-        // If user is not in session, redirect to login page
         res.redirect('/login');
         return;
     }
 
     try {
-        // Create a new MongoClient for the first database
         const client = new MongoClient(uri1, { useNewUrlParser: true, useUnifiedTopology: true });
         
-        // Connect to the MongoDB server
         await client.connect();
         console.log('Connected to MongoDB');
 
-        // Use a specific database
         const database = client.db('airport_management');
         
-        // Use a specific collection
         const departurecollection = database.collection('departure_list');
         const usercollection = database.collection('client_account');
-        // Fetch data from the collection
         const departureData = await departurecollection.find().toArray();
         const userData = await usercollection.find().toArray();
 
-        // Combine arrival data and user data
         const data = {
             departureData: departureData,
             userData: userData,
-            user: user  // Include user information
+            user: user
         };
 
         res.render('client_departure', { data });
@@ -790,10 +686,8 @@ app.post('/register', async (req, res) => {
         const db = client.db('airport_management');
         const collection = db.collection('client_account');
 
-        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Insert the user data into the collection
         const result = await collection.insertOne({ name, email, password: hashedPassword });
 
         await req.session.save();
