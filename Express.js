@@ -468,28 +468,31 @@ app.get('/client_acc_page',  async (req, res) => {
         res.redirect('/login');
         return;
     }
-
-    const flightNumber = user.flightNumber;
+    await req.session.save();
+   
     const email = user.email;
 
     try {
+        await req.session.save();
         await client.connect();
         console.log('Connected to MongoDB');
 
         const database = client.db('airport_management');
-        
+        await req.session.save();
         const departureCollection = database.collection('departure_list');
         const anotherdepartureCollection = database.collection('another_airport_departure');
         const anotherarrivalCollection = database.collection('another_airport_arrival');
         const arrivalCollection = database.collection('arrival_list');
         const clientCollection = database.collection('client_account');
 
-        const clientFlightDetails = await clientCollection.findOne({ flightNumber, email });
+        const clientFlightDetails = await clientCollection.findOne({ email });
 
         if (!clientFlightDetails) {
             return res.status(404).render('error', { error: 'Flight not found' });
         }
-
+        await req.session.save();
+        const flightNumber = clientFlightDetails.flightNumber;
+        console.log('Flight Number:', flightNumber);
         const arrivalDetails_1 = await arrivalCollection.findOne({ flightNumber });
         const arrivalDetails_2 = await anotherarrivalCollection.findOne({ flightNumber });
 
@@ -570,7 +573,6 @@ app.get('/client_book_flight', async (req, res) => {
     const noFlights = user.numberof;
 
     try {
-        // Verify password
         const passwordMatch = await bcrypt.compare(password, hashedPassword);
         if (!passwordMatch) {
             return res.render('error');
@@ -688,7 +690,7 @@ app.post('/register', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const result = await collection.insertOne({ name, email, password: hashedPassword });
+        const result = await collection.insertOne({ name, email, password: hashedPassword , numberof: -1});
 
         await req.session.save();
         

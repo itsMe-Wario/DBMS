@@ -61,9 +61,9 @@
 <div class="background_cargo"><img src="/images/cargo_login.png" height="665" width="1650" alt="background"></div>
 <div class="container">
   <div class="content">
-    <h4>We couldn't find any Cargo ID in your name</h4><br>
-    <h3>Search For Different Cargo</h3>
-    <div class="login_position">
+    <div class="login_position" style="background-color: #0D2137;">
+      <spam style="color:white; font-size: 10px; "> <h4>We couldn't find any Cargo ID in your name</h4>
+      <h3>Search For Different Cargo</h3><br></spam>
     <form action="/client_cargo_id_search" method="GET">
       <input type="hidden" id="from" name="from" value="<%= logedinemail.email%>" >
         <input type="text" id="cargo_id" name="cargo_id" placeholder="Cargo Id" required><br><br>
