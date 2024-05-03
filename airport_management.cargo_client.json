@@ -32,8 +32,8 @@
   "_id": {
     "$oid": "660bc8cd27b92ea682cc192c"
   },
-  "email": "lenka@gmail.com",
-  "name": "Bhaswat",
+  "email": "kunal@gmail.com",
+  "name": "Kunal",
   "cargo_id": "CGO5678-LMNO1234-PQRS5678",
   "ordered_on": "2024-03-31",
   "total_amount": 1000,

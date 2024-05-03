@@ -23,8 +23,8 @@
   "_id": {
     "$oid": "660880f2ff0b421b070e8fc3"
   },
-  "name": "Bhaswat",
-  "email": "lenka@gmail.com",
+  "name": "Kunal",
+  "email": "kunal@gmail.com",
   "password": "$2b$10$AJd2ZKxbxb9QE.c9JZCa/OcdhHWQZEs7C/wFYfuaKcP.hqTjkH65e",
   "numberof": -1
 },
