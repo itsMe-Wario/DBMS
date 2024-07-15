@@ -492,10 +492,10 @@ app.get('/client_acc_page',  async (req, res) => {
         }
         await req.session.save();
         const flightNumber = clientFlightDetails.flightNumber;
-        console.log('Flight Number:', flightNumber);
+        console.log('Number:', flightNumber);
         const arrivalDetails_1 = await arrivalCollection.findOne({ flightNumber });
         const arrivalDetails_2 = await anotherarrivalCollection.findOne({ flightNumber });
-
+        console.log('Arrival:', arrivalDetails_1);
         const departureDetails_1 = await departureCollection.findOne({ flightNumber });
         const departureDetails_2 = await anotherdepartureCollection.findOne({ flightNumber });
 
