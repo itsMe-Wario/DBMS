@@ -7,4 +7,4 @@ The collection name are given in the file name iself. (for airport_management.ar
 
 Finally run, "node Express.js" in your terminal 
 
-There also a video to view how the website is. Thankyou :)
+I've also uploaded a video to view how the website is. Thankyou :)
