@@ -6,3 +6,5 @@ To run the project make sure Node and MongoDB dependencies are installed then im
 The collection name are given in the file name iself. (for airport_management.arrival_list.json, collection name is arrival_list) 
 
 Finally run, "node Express.js" in your terminal 
+
+There also a video to view how the website is. Thankyou :)
