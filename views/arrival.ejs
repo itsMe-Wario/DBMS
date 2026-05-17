@@ -1,76 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arrivals</title>
   <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-<header>
-  <div class="header_container">
-    <div class="logo">
-      <img src="/images/logo_main.png" alt="Logo">
+  <header>
+    <div class="header_container">
+      <div class="logo">
+        <img src="/images/logo_main.png" alt="Logo">
+      </div>
+      <h1>Delhi</h1>
+      <div class="search-box">
+        <span>Flight.No</span>
+        <form action="/search" method="GET">
+          <input type="text" id="query" name="query" placeholder="Search">
+          <button type="submit">Search</button>
+        </form>
+        <form action="/" method="GET">
+          <button class="button-2" type="submit">Login</button>
+        </form>
+      </div>
     </div>
-    <h1>Delhi</h1>
-    <div class="search-box">
-      <span>Flight.No</span>
-      <form action="/search" method="GET">
-        <input type="text"  id="query" name="query" placeholder="Search">
-        <button type="submit">Search</button>
-      </form>
-      <form action="/" method="GET">
-        <button class="button-2" type="submit">Login</button>
-      </form>
+  </header>
+  <nav>
+    <div class="header_container">
+      <a href="http://localhost:3000/">Home</a>
+      <a href="http://localhost:3000/database1">
+        <div class="highlight">Arrival</div>
+      </a>
+      <a href="http://localhost:3000/database2">Departure</a>
+      <a href="http://localhost:3000/book">Book</a>
+      <a href="http://localhost:3000/cargo">Cargo</a>
     </div>
-  </div>
-</header>
-<nav>
-  <div class="header_container">
-    <a href="http://localhost:3000/">Home</a>
-    <a href="http://localhost:3000/database1"><div class="highlight">Arrival</div></a>
-    <a href="http://localhost:3000/database2">Departure</a>
-    <a href="http://localhost:3000/book">Book</a>
-    <a href="http://localhost:3000/cargo">Cargo</a>
-  </div>
-</nav>
-<div class="background"><img src="/images/arrival_background.jpg" height="950" width="1600" alt="arrival_background"></div>
-<div class="container">
-  <div class="content">
-    <ul class="data-list">
-        <% data.forEach(item => { %>
-            <li class="data-item">
-              <% if (item.status == "Delayed") { %>
-                <div class="status_box_red"><%= item.status %></div>
-            <% } else { %>
-                <div class="status_box_blue"><%= item.status %></div>
-            <% } %>
-              <div class="status"><h5> <%= item['date'] %></h5></div>
-                <div class="logo_ticket_2">
+  </nav>
+  <div class="background"><img src="/images/arrival_background.jpg" alt="arrival_background"></div>
+  <div class="container">
+    <div class="content">
+      <ul class="data-list">
+        <% data.forEach(item=> { %>
+          <li class="data-item">
+            <% if (item.status=="Delayed" ) { %>
+              <div class="status_box_red">
+                <%= item.status %>
+              </div>
+              <% } else { %>
+                <div class="status_box_blue">
+                  <%= item.status %>
+                </div>
+                <% } %>
+                  <div class="status">
+                    <h5>
+                      <%= item['date'] %>
+                    </h5>
+                  </div>
+                  <div class="logo_ticket_2">
                     <h6>Flight No:</h6>
-                    <h3><%= item.flightNumber %></h3>
+                    <h3>
+                      <%= item.flightNumber %>
+                    </h3>
                     <img src="/images/airline_logo/<%= item.airline %>.png" alt="Logo">
-                </div>
-                <div class="item-info">
-                    <p>Origin: <span style="font-weight: bold;"><%= item.origin %></span></p>
-                    <p>Airline:<%= item.airline %></p>
-                    <% if (item.status == "Landed") { %>
-                      <p>Arrival Time:<span style="font-weight: bold;"><%= item['estimated Arrival Time'] %></span> </p>
-                    <% } %>
-                    <% if (item.status !== "Landed") { %>
-                    <p>Scheduled Arrival Time: <span style="font-weight: bold;"> <%= item['arrival Time'] %></span></p>
-                    <p>Estimated Arrival Time: <span style="font-weight: bold;"><%= item['estimated Arrival Time'] %></span></p>
-                    <% } %>
-                    <p><%= item.terminal %></p>
-                    <p>Baggage Claim: Belt <%= item['baggage Claim Belt'] %> </p>
-                    <p>Gate: <%= item.gate %></p>                  
-                    <p>Remarks:<%= item.remarks %></p>
-                    
-                </div>
-            </li>
-        <% }); %>
-    </ul>
-</div>
-</div>
+                  </div>
+                  <div class="item-info">
+                    <p>Origin: <span style="font-weight: bold;">
+                        <%= item.origin %>
+                      </span></p>
+                    <p>Airline:<%= item.airline %>
+                    </p>
+                    <% if (item.status=="Landed" ) { %>
+                      <p>Arrival Time:<span style="font-weight: bold;">
+                          <%= item['estimated Arrival Time'] %>
+                        </span> </p>
+                      <% } %>
+                        <% if (item.status !=="Landed" ) { %>
+                          <p>Scheduled Arrival Time: <span style="font-weight: bold;">
+                              <%= item['arrival Time'] %>
+                            </span></p>
+                          <p>Estimated Arrival Time: <span style="font-weight: bold;">
+                              <%= item['estimated Arrival Time'] %>
+                            </span></p>
+                          <% } %>
+                            <p>
+                              <%= item.terminal %>
+                            </p>
+                            <p>Baggage Claim: Belt <%= item['baggage Claim Belt'] %>
+                            </p>
+                            <p>Gate: <%= item.gate %>
+                            </p>
+                            <p>Remarks:<%= item.remarks %>
+                            </p>
+
+                  </div>
+          </li>
+          <% }); %>
+      </ul>
+    </div>
+  </div>
 </body>
+
 </html>

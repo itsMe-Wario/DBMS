@@ -27,31 +27,54 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-size: cover;
+    width: 100%;
+    /*background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1; /* Ensure the background image stays behind the content */
+    background-repeat: no-repeat; */
+    z-index: -1;  
+  }
+
+  .background img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This is the magic property */
   }
 
   .background_client {
     position: fixed;
     margin-top: 100;
     left: 0;
-    background-size: cover;
+    width: 100%;
+    /*background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1; /* Ensure the background image stays behind the content */
+    background-repeat: no-repeat; */
+    z-index: -1; 
+  }
+
+  .background_client img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This is the magic property */
   }
 
   .background_home {
     position: fixed;
     margin-top: 50;
+    width: 100%;
+    height: calc(100vh - 50px); 
+    overflow: hidden;
     left: 0;
-    background-size: cover;
+    /*background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1; /* Ensure the background image stays behind the content */
+    background-repeat: no-repeat;*/
+    z-index: -1;
   }
+
+  .background_home img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This is the magic property */
+}
 
   .background_cargo {
     position: fixed;
@@ -388,19 +411,19 @@ li {
 .from_box,
 .to_box {
   flex: 0 0 auto;
-  margin-top: -183px;
+  margin-top: -177px;
   height: 50px;
   background-color: rgba(42, 155, 86, 0); /* Transparent background */
 }
 
 .from_box {
   width: 500px;
-  margin-left: 150px;
+  margin-left: 155px;
 }
 
 .to_box {
   width: 500px;
-  margin-left: 365px;
+  margin-left: 430px;
 }
 
 .transparent_box,
@@ -418,7 +441,7 @@ li {
 
 .transparent_box_2{
   width: 580px;
-  margin-left: 255px;
+  margin-left: 300px;
 }
 
 .logo_from img,
@@ -434,7 +457,7 @@ li {
 
 .logo_to img {
   margin-top: 335px; /* Adjust vertical position as needed */
-  margin-left: 810px; /* Adjust horizontal position as needed */
+  margin-left: 910px; /* Adjust horizontal position as needed */
 }
 
 .colourwhite {

@@ -1,47 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
   <link href="/css/styles.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
-<header>
-  <div class="header_container">
-    <div class="logo">
-      <img src="/images/logo_main.png" alt="Logo">
+  <header>
+    <div class="header_container">
+      <div class="logo">
+        <img src="/images/logo_main.png" alt="Logo">
+      </div>
+      <div class="search-box">
+        <span>Flight.No</span>
+        <form action="/search" method="GET">
+          <input type="text" id="query" name="query" placeholder="Search">
+          <button type="submit">Search</button>
+        </form>
+      </div>
     </div>
-    <div class="search-box">
-      <span>Flight.No</span>
-      <form action="/search" method="GET">
-        <input type="text"  id="query" name="query" placeholder="Search">
-        <button type="submit">Search</button>
+  </header>
+  <nav>
+    <div class="header_container">
+      <a href="http://localhost:3000/">
+        <div class="highlight">Home</div>
+      </a>
+      <a href="http://localhost:3000/database1">Arrival</a>
+      <a href="http://localhost:3000/database2">Departure</a>
+      <a href="http://localhost:3000/book">Book</a>
+      <a href="http://localhost:3000/cargo">Cargo</a>
+    </div>
+  </nav>
+  <div class="background_home"><img src="/images/home_page_2.png" alt="home_page"></div>
+  <div class="container">
+    <div class="login_position">
+      <form action="/login" method="POST">
+        <input type="email" id="email" name="email" placeholder="Email">
+        <input type="password" id="password" name="password" placeholder="Password">
+        <button type="submit">Log-in</button>
+      </form>
+      <form action="/signup" method="GET">
+        <button class="button-2" type="submit">No Account?Sign-up.</button>
       </form>
     </div>
   </div>
-</header>
-<nav> 
-  <div class="header_container">
-    <a href="http://localhost:3000/"><div class="highlight">Home</div></a>
-    <a href="http://localhost:3000/database1">Arrival</a>
-    <a href="http://localhost:3000/database2">Departure</a>
-    <a href="http://localhost:3000/book">Book</a>
-    <a href="http://localhost:3000/cargo">Cargo</a>
-  </div>
-</nav>
-<div class="background_home"><img src="/images/home_page_2.png" height="620" width="1536" alt="home_page"></div>
-<div class="container">
-    <div class="login_position">
-    <form action="/login" method="POST">
-    <input type="email"  id="email" name="email" placeholder="Email">
-    <input type="password"  id="password" name="password" placeholder="Password">
-    <button type="submit">Log-in</button>
-    </form>
-    <form action="/signup" method="GET">
-    <button class="button-2" type="submit">No Account?Sign-up.</button>
-  </form>
-  </div>
-</div>
 </body>
+
 </html>
