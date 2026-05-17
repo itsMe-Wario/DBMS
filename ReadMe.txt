@@ -1,4 +1,4 @@
-Hey Viewr,
+Hey Viewer,
 
 This is a project for flight booking and airport management. It uses MongoDB for database and runs on Node. 
 
